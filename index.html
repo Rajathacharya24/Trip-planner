@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trip Planner</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">DreamPlanner</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#explore">Explore</a></li>
+        <li class="nav-item"><a class="nav-link" href="#destinations">Destinations</a></li>
+        <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
+        <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#location-tracker-content" role="button" aria-expanded="false" aria-controls="location-tracker-content">Location</a></li>
+        <li class="nav-item"><a class="nav-link" href="booking.html">Booking</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="text-center p-5 bg-light">
+  <h1>Find Your Destination</h1>
+  <p>Plan your dream vacation with ease!</p>
+  <a href="explore.html" class="btn btn-primary">Explore Now</a>
+</section>
+
+<!-- Location Tracker -->
+<section class="container my-5">
+  <div class="collapse" id="location-tracker-content">
+    <h2 class="text-center mb-4">Live Location Tracker</h2>
+    <div class="d-flex justify-content-center align-items-center flex-wrap gap-3">
+      <button id="track-btn" class="btn btn-primary">Show My Location</button>
+      <div id="location-display"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Fab Favourite -->
+<section id="destinations" class="container my-5">
+  <h2 class="text-center mb-4">Fab Favourite</h2>
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <img src="pexels-lina-12238221.jpg" class="card-img-top" alt="Dubai">
+        <div class="card-body">
+          <h5 class="card-title">Dubai,UAE</h5>
+          <p class="card-text">Where tradition meets towering luxury.</p>
+          <a href="explore.html#dubai" class="btn btn-outline-primary">View Details</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <img src="pexels-manjose-19872.jpg" class="card-img-top" alt="Northern China">
+        <div class="card-body">
+          <h5 class="card-title">Northern, China</h5>
+          <p class="card-text">Land of emperors and ancient wonders.</p>
+          <a href="explore.html#china" class="btn btn-outline-primary">View Details</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <img src="pexels-swastikarora-19743480.jpg" class="card-img-top" alt="Kerala">
+        <div class="card-body">
+          <h5 class="card-title">Kerala,India</h5>
+          <p class="card-text">God's own country.</p>
+          <a href="explore.html#kerala" class="btn btn-outline-primary">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Packages -->
+<section id="packages" class="container my-5">
+  <h2 class="text-center mb-4">Packages</h2>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <div class="card package-card" onclick="openPackageModal('simple')" style="cursor: pointer;">
+        <div class="card-body">
+          <h5 class="card-title">Ordinary Package</h5>
+          <ul>
+            <li>Hotel Stay</li>
+            <li>Basic Transport</li>
+            <li>2 Meals Daily</li>
+          </ul>
+          <p><strong>₹15,000</strong></p>
+          <button class="btn btn-outline-primary">View Details</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="card package-card" onclick="openPackageModal('luxury')" style="cursor: pointer;">
+        <div class="card-body">
+          <h5 class="card-title">Luxury Package</h5>
+          <ul>
+            <li>5-Star Hotel</li>
+            <li>Private Cab</li>
+            <li>All Meals Included</li>
+          </ul>
+          <p><strong>₹35,000</strong></p>
+          <button class="btn btn-outline-primary">View Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Simple Package Modal -->
+<div class="modal fade" id="simplePackageModal" tabindex="-1" aria-labelledby="simplePackageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="simplePackageModalLabel">Simple Package Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h6 class="text-primary">What's Included:</h6>
+            <ul class="package-features">
+              <li>✅ 3-Star Hotel Accommodation</li>
+              <li>✅ Daily Breakfast & Dinner</li>
+              <li>✅ Airport Transfers</li>
+              <li>✅ Local Sightseeing</li>
+              <li>✅ Basic Travel Insurance</li>
+              <li>✅ 24/7 Support</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h6 class="text-primary">Package Highlights:</h6>
+            <ul class="package-highlights">
+              <li>🏨 Comfortable hotel stay</li>
+              <li>🚗 Shared transportation</li>
+              <li>🍽️ 2 meals per day</li>
+              <li>📱 Mobile app access</li>
+              <li>🎫 Entry to major attractions</li>
+              <li>📞 Emergency contact</li>
+            </ul>
+          </div>
+        </div>
+        <div class="package-price mt-4">
+          <h4 class="text-center">Total Price: <span class="text-success">₹15,000</span></h4>
+          <p class="text-center text-muted">Per person for 5 days / 4 nights</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" onclick="selectPackage('simple')">Select This Package</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Luxury Package Modal -->
+<div class="modal fade" id="luxuryPackageModal" tabindex="-1" aria-labelledby="luxuryPackageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="luxuryPackageModalLabel">Luxury Package Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h6 class="text-primary">What's Included:</h6>
+            <ul class="package-features">
+              <li>✅ 5-Star Luxury Hotel</li>
+              <li>✅ All Meals (Breakfast, Lunch, Dinner)</li>
+              <li>✅ Private Chauffeur Service</li>
+              <li>✅ Premium Sightseeing Tours</li>
+              <li>✅ Spa & Wellness Access</li>
+              <li>✅ VIP Airport Lounge Access</li>
+              <li>✅ Premium Travel Insurance</li>
+              <li>✅ Personal Travel Concierge</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h6 class="text-primary">Luxury Features:</h6>
+            <ul class="package-highlights">
+              <li>🏨 5-star accommodation</li>
+              <li>🚗 Private luxury vehicle</li>
+              <li>🍽️ Fine dining experiences</li>
+              <li>💆 Spa treatments included</li>
+              <li>🎫 Skip-the-line attractions</li>
+              <li>👑 VIP experiences</li>
+              <li>📱 Dedicated app with premium features</li>
+              <li>🎁 Welcome gift package</li>
+            </ul>
+          </div>
+        </div>
+        <div class="package-price mt-4">
+          <h4 class="text-center">Total Price: <span class="text-success">₹35,000</span></h4>
+          <p class="text-center text-muted">Per person for 5 days / 4 nights</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" onclick="selectPackage('luxury')">Select This Package</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  &copy; 2025 TripPlanner. All rights reserved.
+</footer>
+
+<script>
+  function openPackageModal(packageType) {
+    if (packageType === 'simple') {
+      new bootstrap.Modal(document.getElementById('simplePackageModal')).show();
+    } else if (packageType === 'luxury') {
+      new bootstrap.Modal(document.getElementById('luxuryPackageModal')).show();
+    }
+  }
+
+  const trackBtn = document.getElementById('track-btn');
+  const locationDisplay = document.getElementById('location-display');
+
+  if (trackBtn) {
+    trackBtn.addEventListener('click', () => {
+      locationDisplay.innerHTML = 'Fetching location...';
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+      } else {
+        locationDisplay.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    });
+  }
+
+  function showPosition(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    locationDisplay.innerHTML = `
+      <div class="d-flex align-items-center gap-3">
+        <div class="text-nowrap">
+          <strong>Latitude:</strong> ${latitude.toFixed(4)}<br>
+          <strong>Longitude:</strong> ${longitude.toFixed(4)}
+        </div>
+        <a href="https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}#map=15/${latitude}/${longitude}" class="btn btn-success" target="_blank">View on Map</a>
+      </div>
+    `;
+  }
+
+  function showError(error) {
+    switch(error.code) {
+      case error.PERMISSION_DENIED:
+        locationDisplay.innerHTML = "User denied the request for Geolocation."
+        break;
+      case error.POSITION_UNAVAILABLE:
+        locationDisplay.innerHTML = "Location information is unavailable."
+        break;
+      case error.TIMEOUT:
+        locationDisplay.innerHTML = "The request to get user location timed out."
+        break;
+      case error.UNKNOWN_ERROR:
+        locationDisplay.innerHTML = "An unknown error occurred."
+        break;
+    }
+  }
+
+  // Fetch and display packages from backend
+  fetch('http://localhost:8082/api/packages')
+    .then(response => response.json())
+    .then(packages => {
+      const packageCards = document.querySelectorAll('.package-card');
+      packages.forEach((pkg, idx) => {
+        if (packageCards[idx]) {
+          packageCards[idx].querySelector('.card-title').textContent = pkg.name;
+          packageCards[idx].querySelector('ul').innerHTML = pkg.description.split(',').map(item => `<li>${item.trim()}</li>`).join('');
+          packageCards[idx].querySelector('p strong').textContent = `₹${pkg.price}`;
+        }
+      });
+    })
+    .catch(err => console.log('Could not fetch packages:', err));
+
+  // Update selectPackage to POST booking to backend
+  function selectPackage(packageName) {
+    // Store the selected package name
+    localStorage.setItem('selectedPackage', packageName);
+    // Example: collect user info (replace with real form in production)
+    const name = prompt('Enter your name for booking:');
+    const email = prompt('Enter your email:');
+    if (!name || !email) {
+      alert('Name and email are required!');
+      return;
+    }
+    fetch('http://localhost:8082/api/bookings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, packageName })
+    })
+      .then(res => res.text())
+      .then(msg => {
+        alert(msg);
+        // Close all modals
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+          const modalInstance = bootstrap.Modal.getInstance(modal);
+          if (modalInstance) {
+            modalInstance.hide();
+          }
+        });
+        // Redirect to booking page
+        window.location.href ='booking.html';
+      })
+      .catch(() => alert('Booking failed. Please try again.'));
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

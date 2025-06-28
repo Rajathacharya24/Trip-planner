@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Your Trip - Trip Planner</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">TripPlanner</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="explore.html">Explore</a></li>
+        <li class="nav-item"><a class="nav-link active" href="booking.html">Booking</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Interactive Hero Section -->
+<section id="booking-hero" class="text-center p-5">
+  <div class="container">
+    <h1 class="display-4 mb-4 animate-text">Book Your Trip</h1>
+    <p class="lead mb-4">Fill in your details and we'll plan your perfect vacation</p>
+    <div class="booking-progress">
+      <div class="progress-circle active" data-step="1">
+        <span>1</span>
+        <small>Personal</small>
+      </div>
+      <div class="progress-line"></div>
+      <div class="progress-circle" data-step="2">
+        <span>2</span>
+        <small>Trip</small>
+      </div>
+      <div class="progress-line"></div>
+      <div class="progress-circle" data-step="3">
+        <span>3</span>
+        <small>Confirm</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive Booking Form -->
+<section id="booking-form" class="container my-5">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <div class="booking-card">
+        
+        <!-- Step 1: Personal Information -->
+        <div class="booking-step active" id="step1">
+          <h4 class="section-title">Personal Information</h4>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="firstName" class="form-label">First Name *</label>
+              <input type="text" class="form-control interactive-input" id="firstName" required>
+              <div class="input-feedback"></div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="lastName" class="form-label">Last Name *</label>
+              <input type="text" class="form-control interactive-input" id="lastName" required>
+              <div class="input-feedback"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="email" class="form-label">Email *</label>
+              <input type="email" class="form-control interactive-input" id="email" required>
+              <div class="input-feedback"></div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="phone" class="form-label">Phone *</label>
+              <input type="tel" class="form-control interactive-input" id="phone" required>
+              <div class="input-feedback"></div>
+            </div>
+          </div>
+          <div class="text-center mt-4">
+            <button class="btn btn-primary btn-lg" onclick="nextStep()" id="nextBtn1">Next Step</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Trip Details -->
+        <div class="booking-step" id="step2">
+          <h4 class="section-title">Trip Details</h4>
+          
+          <!-- Interactive Destination Selection -->
+          <div class="mb-4">
+            <label class="form-label">Choose Your Destination *</label>
+            <div class="destination-selector">
+              <div class="destination-card" data-destination="Dubai">
+                <img src="pexels-lina-12238221.jpg" alt="Dubai">
+                <div class="destination-overlay">
+                  <h5>Dubai, UAE</h5>
+                  <p>Where tradition meets luxury</p>
+                  <div class="destination-price">From ₹15,000</div>
+                </div>
+              </div>
+              <div class="destination-card" data-destination="Northern China">
+                <img src="pexels-manjose-19872.jpg" alt="Northern China">
+                <div class="destination-overlay">
+                  <h5>Northern China</h5>
+                  <p>Land of emperors</p>
+                  <div class="destination-price">From ₹15,000</div>
+                </div>
+              </div>
+              <div class="destination-card" data-destination="Kerala">
+                <img src="pexels-swastikarora-19743480.jpg" alt="Kerala">
+                <div class="destination-overlay">
+                  <h5>Kerala, India</h5>
+                  <p>God's own country</p>
+                  <div class="destination-price">From ₹15,000</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Package Selection -->
+          <div class="mb-4">
+            <label class="form-label">Select Your Package *</label>
+            <div class="package-selector">
+              <div class="package-card" data-package="Simple">
+                <div class="package-header">
+                  <h5>Simple Package</h5>
+                  <div class="package-price">₹15,000</div>
+                </div>
+                <ul class="package-features">
+                  <li>✅ 3-Star Hotel</li>
+                  <li>✅ Breakfast & Dinner</li>
+                  <li>✅ Airport Transfers</li>
+                  <li>✅ Local Sightseeing</li>
+                </ul>
+              </div>
+              <div class="package-card" data-package="Luxury">
+                <div class="package-header">
+                  <h5>Luxury Package</h5>
+                  <div class="package-price">₹35,000</div>
+                </div>
+                <ul class="package-features">
+                  <li>✅ 5-Star Hotel</li>
+                  <li>✅ All Meals Included</li>
+                  <li>✅ Private Chauffeur</li>
+                  <li>✅ Premium Tours</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Travel Dates -->
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="departureDate" class="form-label">Departure Date *</label>
+              <input type="date" class="form-control interactive-input" id="departureDate" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="returnDate" class="form-label">Return Date *</label>
+              <input type="date" class="form-control interactive-input" id="returnDate" required>
+            </div>
+          </div>
+
+          <!-- Travelers -->
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="adults" class="form-label">Adults *</label>
+              <div class="number-selector">
+                <button type="button" class="btn-number" onclick="changeNumber('adults', -1)">-</button>
+                <input type="number" class="form-control" id="adults" value="2" min="1" max="10" readonly>
+                <button type="button" class="btn-number" onclick="changeNumber('adults', 1)">+</button>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="children" class="form-label">Children</label>
+              <div class="number-selector">
+                <button type="button" class="btn-number" onclick="changeNumber('children', -1)">-</button>
+                <input type="number" class="form-control" id="children" value="0" min="0" max="8" readonly>
+                <button type="button" class="btn-number" onclick="changeNumber('children', 1)">+</button>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="rooms" class="form-label">Rooms *</label>
+              <div class="number-selector">
+                <button type="button" class="btn-number" onclick="changeNumber('rooms', -1)">-</button>
+                <input type="number" class="form-control" id="rooms" value="1" min="1" max="5" readonly>
+                <button type="button" class="btn-number" onclick="changeNumber('rooms', 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trip Summary -->
+          <div class="trip-summary" id="tripSummary">
+            <h5>Trip Summary</h5>
+            <div class="summary-content">
+              <p><strong>Duration:</strong> <span id="tripDuration">Select dates</span></p>
+              <p><strong>Total Travelers:</strong> <span id="totalTravelers">2</span></p>
+              <p><strong>Estimated Cost:</strong> <span id="estimatedCost">₹30,000</span></p>
+            </div>
+          </div>
+
+          <div class="text-center mt-4">
+            <button class="btn btn-secondary btn-lg me-3" onclick="prevStep()">Previous</button>
+            <button class="btn btn-primary btn-lg" onclick="nextStep()" id="nextBtn2">Next Step</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Confirmation -->
+        <div class="booking-step" id="step3">
+          <h4 class="section-title">Confirm Your Booking</h4>
+          
+          <div class="booking-summary-card">
+            <div id="finalBookingSummary"></div>
+          </div>
+
+          <!-- Special Requests -->
+          <div class="form-section mb-4">
+            <h5>Special Requests (Optional)</h5>
+            <textarea class="form-control" id="specialRequests" rows="3" placeholder="Tell us about any special requirements..."></textarea>
+          </div>
+
+          <div class="text-center mt-4">
+            <button class="btn btn-secondary btn-lg me-3" onclick="prevStep()">Previous</button>
+            <button class="btn btn-success btn-lg" onclick="confirmBooking()">Confirm Booking</button>
+          </div>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="alert alert-success mt-4 d-none">
+          <div class="text-center">
+            <div class="success-animation">
+              <div class="checkmark">✓</div>
+            </div>
+            <h4>🎉 Booking Confirmed!</h4>
+            <p>Thank you for choosing TripPlanner. We'll contact you soon with your travel details.</p>
+            <div class="booking-summary mt-3">
+              <h5>Booking Summary:</h5>
+              <div id="bookingSummary"></div>
+            </div>
+            <a href="index.html" class="btn btn-primary mt-3">Back to Home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h5>DreamPlanner</h5>
+        <p>Making your travel dreams come true since 2025.</p>
+      </div>
+      <div class="col-md-6 text-md-end">
+        <h5>Contact Us</h5>
+        <p>📧 info@tripplanner.com<br>📞 +91 98765 43210</p>
+      </div>
+    </div>
+    <hr>
+    <p class="text-center mb-0">&copy; 2025 TripPlanner. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  let currentStep = 1;
+  let selectedDestination = '';
+  let selectedPackage = '';
+  let allPackages = [];
+
+  // Auto-fill destination if coming from explore page
+  window.addEventListener('load', function() {
+    const storedDestination = localStorage.getItem('selectedDestination');
+    if (storedDestination) {
+      selectDestination(storedDestination);
+      localStorage.removeItem('selectedDestination');
+    }
+    
+    const storedPackage = localStorage.getItem('selectedPackage');
+    if (storedPackage) {
+      selectPackage(storedPackage);
+      localStorage.removeItem('selectedPackage');
+    }
+
+    // Add interactive input listeners
+    addInteractiveListeners();
+    updateTripSummary();
+  });
+
+  // Fetch all packages from backend on page load
+  window.addEventListener('DOMContentLoaded', async function() {
+    try {
+      const response = await fetch('http://localhost:8082/api/packages');
+      allPackages = await response.json();
+    } catch (error) {
+      console.error('Error fetching packages:', error);
+    }
+  });
+
+  function addInteractiveListeners() {
+    // Real-time validation for inputs
+    document.querySelectorAll('.interactive-input').forEach(input => {
+      input.addEventListener('input', function() {
+        validateInput(this);
+      });
+      
+      input.addEventListener('blur', function() {
+        validateInput(this);
+      });
+    });
+
+    // Date change listeners
+    document.getElementById('departureDate').addEventListener('change', updateTripSummary);
+    document.getElementById('returnDate').addEventListener('change', updateTripSummary);
+  }
+
+  function validateInput(input) {
+    const feedback = input.parentNode.querySelector('.input-feedback');
+    let isValid = true;
+    let message = '';
+
+    if (input.type === 'email') {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      isValid = emailRegex.test(input.value);
+      message = isValid ? '✓ Valid email' : '✗ Please enter a valid email';
+    } else if (input.type === 'tel') {
+      const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
+      isValid = phoneRegex.test(input.value);
+      message = isValid ? '✓ Valid phone number' : '✗ Please enter a valid phone number';
+    } else if (input.required && input.value.trim() === '') {
+      isValid = false;
+      message = '✗ This field is required';
+    } else if (input.value.trim() !== '') {
+      isValid = true;
+      message = '✓ Valid input';
+    }
+
+    input.classList.toggle('is-valid', isValid && input.value.trim() !== '');
+    input.classList.toggle('is-invalid', !isValid && input.value.trim() !== '');
+    
+    if (feedback) {
+      feedback.textContent = message;
+      feedback.className = `input-feedback ${isValid ? 'valid' : 'invalid'}`;
+    }
+  }
+
+  function selectDestination(destination) {
+    selectedDestination = destination;
+    
+    // Remove active class from all destination cards
+    document.querySelectorAll('.destination-card').forEach(card => {
+      card.classList.remove('active');
+    });
+    
+    // Add active class to selected destination
+    const selectedCard = document.querySelector(`[data-destination="${destination}"]`);
+    if (selectedCard) {
+      selectedCard.classList.add('active');
+    }
+    
+    updateTripSummary();
+  }
+
+  function selectPackage(packageType) {
+    selectedPackage = packageType;
+    // Find the full package object by type
+    const pkg = allPackages.find(p => p.type.toLowerCase() === packageType.toLowerCase());
+    if (pkg) {
+      localStorage.setItem('selectedPackage', JSON.stringify(pkg));
+    }
+    // Remove active class from all package cards
+    document.querySelectorAll('.package-card').forEach(card => {
+      card.classList.remove('active');
+    });
+    // Add active class to selected package
+    const selectedCard = document.querySelector(`[data-package="${packageType}"]`);
+    if (selectedCard) {
+      selectedCard.classList.add('active');
+    }
+    updateTripSummary();
+  }
+
+  function changeNumber(fieldId, change) {
+    const input = document.getElementById(fieldId);
+    const currentValue = parseInt(input.value);
+    const newValue = currentValue + change;
+    
+    if (newValue >= parseInt(input.min) && newValue <= parseInt(input.max)) {
+      input.value = newValue;
+      updateTripSummary();
+    }
+  }
+
+  function updateTripSummary() {
+    const departureDate = document.getElementById('departureDate').value;
+    const returnDate = document.getElementById('returnDate').value;
+    const adults = parseInt(document.getElementById('adults').value);
+    const children = parseInt(document.getElementById('children').value);
+    
+    // Calculate duration
+    let duration = 'Select dates';
+    if (departureDate && returnDate) {
+      const start = new Date(departureDate);
+      const end = new Date(returnDate);
+      const diffTime = Math.abs(end - start);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      duration = `${diffDays} days`;
+    }
+    
+    // Calculate total travelers
+    const totalTravelers = adults + children;
+    
+    // Calculate estimated cost
+    let baseCost = selectedPackage === 'Luxury' ? 35000 : 15000;
+    let estimatedCost = baseCost * adults + (baseCost * 0.7 * children);
+    
+    document.getElementById('tripDuration').textContent = duration;
+    document.getElementById('totalTravelers').textContent = totalTravelers;
+    document.getElementById('estimatedCost').textContent = `₹${estimatedCost !== undefined && estimatedCost !== null ? estimatedCost.toLocaleString() : ''}`;
+  }
+
+  function nextStep() {
+    if (validateCurrentStep()) {
+      if (currentStep < 3) {
+        // Hide current step
+        document.getElementById(`step${currentStep}`).classList.remove('active');
+        
+        // Show next step
+        currentStep++;
+        document.getElementById(`step${currentStep}`).classList.add('active');
+        
+        // Update progress
+        updateProgress();
+        
+        // If moving to confirmation step, update summary
+        if (currentStep === 3) {
+          updateFinalSummary();
+        }
+      }
+    }
+  }
+
+  function prevStep() {
+    if (currentStep > 1) {
+      // Hide current step
+      document.getElementById(`step${currentStep}`).classList.remove('active');
+      
+      // Show previous step
+      currentStep--;
+      document.getElementById(`step${currentStep}`).classList.add('active');
+      
+      // Update progress
+      updateProgress();
+    }
+  }
+
+  function validateCurrentStep() {
+    if (currentStep === 1) {
+      const requiredFields = ['firstName', 'lastName', 'email', 'phone'];
+      let isValid = true;
+      
+      requiredFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (!field.value.trim()) {
+          field.classList.add('is-invalid');
+          isValid = false;
+        }
+      });
+      
+      return isValid;
+    } else if (currentStep === 2) {
+      if (!selectedDestination || !selectedPackage) {
+        alert('Please select both destination and package');
+        return false;
+      }
+      
+      const departureDate = document.getElementById('departureDate').value;
+      const returnDate = document.getElementById('returnDate').value;
+      
+      if (!departureDate || !returnDate) {
+        alert('Please select both departure and return dates');
+        return false;
+      }
+      
+      return true;
+    }
+    
+    return true;
+  }
+
+  function updateProgress() {
+    // Update progress circles
+    document.querySelectorAll('.progress-circle').forEach((circle, index) => {
+      if (index + 1 <= currentStep) {
+        circle.classList.add('active');
+      } else {
+        circle.classList.remove('active');
+      }
+    });
+  }
+
+  function updateFinalSummary() {
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const departureDate = document.getElementById('departureDate').value;
+    const returnDate = document.getElementById('returnDate').value;
+    const adults = document.getElementById('adults').value;
+    const children = document.getElementById('children').value;
+    const rooms = document.getElementById('rooms').value;
+    
+    const summary = `
+      <div class="row">
+        <div class="col-md-6">
+          <h5>Personal Details</h5>
+          <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${phone}</p>
+        </div>
+        <div class="col-md-6">
+          <h5>Trip Details</h5>
+          <p><strong>Destination:</strong> ${selectedDestination}</p>
+          <p><strong>Package:</strong> ${selectedPackage}</p>
+          <p><strong>Dates:</strong> ${departureDate} to ${returnDate}</p>
+          <p><strong>Travelers:</strong> ${adults} adults, ${children} children</p>
+          <p><strong>Rooms:</strong> ${rooms}</p>
+        </div>
+      </div>
+    `;
+    
+    document.getElementById('finalBookingSummary').innerHTML = summary;
+  }
+
+  function confirmBooking() {
+  const specialRequests = document.getElementById('specialRequests').value;
+  const firstName = document.getElementById('firstName').value;
+  const lastName = document.getElementById('lastName').value;
+  const email = document.getElementById('email').value;
+  const packageName = selectedPackage;
+
+  // Show loading state
+  const confirmBtn = document.querySelector('button[onclick="confirmBooking()"]');
+  const originalText = confirmBtn.textContent;
+  confirmBtn.textContent = 'Processing...';
+  confirmBtn.disabled = true;
+
+  // Send booking to Java backend (flat object)
+  fetch('http://localhost:8082/api/bookings', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: firstName + ' ' + lastName,
+      email: email,
+      packageName: packageName
+    })
+  })
+  .then(response => {
+    if (!response.ok) {
+      return response.json().then(err => {
+        throw new Error(err.message || 'Failed to create booking');
+      });
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Create booking summary
+    const bookingSummary = `
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Booking ID:</strong> #${data.id}</p>
+          <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Destination:</strong> ${selectedDestination}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Package:</strong> ${packageName ? packageName : 'N/A'}</p>
+        </div>
+      </div>
+      ${specialRequests ? `<div class="mt-3"><strong>Special Requests:</strong> ${specialRequests}</div>` : ''}
+    `;
+    // Display booking summary
+    document.getElementById('bookingSummary').innerHTML = bookingSummary;
+    // Hide form and show success message
+    document.querySelector('.booking-card').classList.add('d-none');
+    document.getElementById('successMessage').classList.remove('d-none');
+    // Scroll to success message
+    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+  })
+  .catch(error => {
+    alert('Error: ' + error.message);
+  })
+  .finally(() => {
+    // Reset button
+    confirmBtn.textContent = originalText;
+    confirmBtn.disabled = false;
+  });
+}
+  // Add click listeners for destination and package selection
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.destination-card').forEach(card => {
+      card.addEventListener('click', function() {
+        selectDestination(this.dataset.destination);
+      });
+    });
+    
+    document.querySelectorAll('.package-card').forEach(card => {
+      card.addEventListener('click', function() {
+        selectPackage(this.dataset.package);
+      });
+    });
+  });
+
+  // Load the selected package details when the page loads
+  document.addEventListener('DOMContentLoaded', () => {
+    const selectedPackage = JSON.parse(localStorage.getItem('selectedPackage'));
+    if (selectedPackage) {
+      document.getElementById('packageType').value = selectedPackage.type;
+      document.getElementById('packagePrice').textContent = `₹${selectedPackage.price}`;
+    }
+  });
+
+  // Handle form submission
+  document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const selectedPackage = JSON.parse(localStorage.getItem('selectedPackage'));
+    const formData = {
+      user: {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        phoneNumber: document.getElementById('phone').value,
+        password: 'dummyPassword123'
+      },
+      tourPackage: selectedPackage && selectedPackage.id ? { id: selectedPackage.id } : null,
+      startDate: document.getElementById('departureDate').value,
+      numberOfTravelers: parseInt(document.getElementById('adults').value) + parseInt(document.getElementById('children').value),
+      specialRequirements: document.getElementById('specialRequests').value
+    };
+
+    try {
+      // First create/update user
+      const userResponse = await fetch('http://localhost:8082/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData.user)
+      });
+      
+      if (!userResponse.ok) {
+        throw new Error('Failed to create user');
+      }
+      
+      const user = await userResponse.json();
+      
+      // Then create booking
+      const bookingData = {
+        ...formData,
+        user: user
+      };
+      
+      const bookingResponse = await fetch('http://localhost:8082/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingData)
+      });
+      
+      if (!bookingResponse.ok) {
+        throw new Error('Failed to create booking');
+      }
+      
+      // Show success message
+      document.getElementById('bookingSuccess').classList.remove('d-none');
+      document.getElementById('bookingForm').classList.add('d-none');
+      
+      // Clear stored package data
+      localStorage.removeItem('selectedPackage');
+      
+    } catch (error) {
+      console.error('Error creating booking:', error);
+      alert('Failed to create booking. Please try again.');
+    }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
