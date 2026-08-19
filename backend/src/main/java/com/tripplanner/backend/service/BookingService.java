@@ -5,28 +5,27 @@ import com.tripplanner.backend.dto.BookingResponseDto;
 import com.tripplanner.backend.exception.ResourceNotFoundException;
 import com.tripplanner.backend.model.Booking;
 import com.tripplanner.backend.repository.BookingRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Slf4j
 @Service
-@RequiredArgsConstructor
 public class BookingService {
 
+    private static final Logger log = LoggerFactory.getLogger(BookingService.class);
     private final BookingRepository bookingRepository;
+
+    public BookingService(BookingRepository bookingRepository) {
+        this.bookingRepository = bookingRepository;
+    }
 
     @Transactional
     public BookingResponseDto createBooking(BookingRequestDto requestDto) {
         log.info("Creating new booking for email: {}", requestDto.getEmail());
-        Booking booking = Booking.builder()
-                .name(requestDto.getName())
-                .email(requestDto.getEmail())
-                .packageName(requestDto.getPackageName())
-                .build();
+        Booking booking = new Booking(null, requestDto.getName(), requestDto.getEmail(), requestDto.getPackageName());
         Booking savedBooking = bookingRepository.save(booking);
         log.info("Booking created successfully with ID: {}", savedBooking.getId());
         return mapToDto(savedBooking);
@@ -79,11 +78,11 @@ public class BookingService {
     }
 
     private BookingResponseDto mapToDto(Booking booking) {
-        return BookingResponseDto.builder()
-                .id(booking.getId())
-                .name(booking.getName())
-                .email(booking.getEmail())
-                .packageName(booking.getPackageName())
-                .build();
+        return new BookingResponseDto(
+                booking.getId(),
+                booking.getName(),
+                booking.getEmail(),
+                booking.getPackageName()
+        );
     }
 }

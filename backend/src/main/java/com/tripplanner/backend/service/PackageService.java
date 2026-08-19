@@ -5,28 +5,27 @@ import com.tripplanner.backend.dto.PackageResponseDto;
 import com.tripplanner.backend.exception.ResourceNotFoundException;
 import com.tripplanner.backend.model.Package;
 import com.tripplanner.backend.repository.PackageRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Slf4j
 @Service
-@RequiredArgsConstructor
 public class PackageService {
 
+    private static final Logger log = LoggerFactory.getLogger(PackageService.class);
     private final PackageRepository packageRepository;
+
+    public PackageService(PackageRepository packageRepository) {
+        this.packageRepository = packageRepository;
+    }
 
     @Transactional
     public PackageResponseDto createPackage(PackageRequestDto requestDto) {
         log.info("Creating new package: {}", requestDto.getName());
-        Package pkg = Package.builder()
-                .name(requestDto.getName())
-                .description(requestDto.getDescription())
-                .price(requestDto.getPrice())
-                .build();
+        Package pkg = new Package(null, requestDto.getName(), requestDto.getDescription(), requestDto.getPrice());
         Package savedPkg = packageRepository.save(pkg);
         log.info("Package created successfully with ID: {}", savedPkg.getId());
         return mapToDto(savedPkg);
@@ -79,11 +78,11 @@ public class PackageService {
     }
 
     private PackageResponseDto mapToDto(Package pkg) {
-        return PackageResponseDto.builder()
-                .id(pkg.getId())
-                .name(pkg.getName())
-                .description(pkg.getDescription())
-                .price(pkg.getPrice())
-                .build();
+        return new PackageResponseDto(
+                pkg.getId(),
+                pkg.getName(),
+                pkg.getDescription(),
+                pkg.getPrice()
+        );
     }
 }
