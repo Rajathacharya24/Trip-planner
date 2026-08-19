@@ -1,9 +1,3 @@
-com\tripplanner\backend\controller\PackageController.class
-com\tripplanner\backend\model\Booking.class
-com\tripplanner\backend\CorsConfig.class
-com\tripplanner\backend\BackendApplication.class
-com\tripplanner\backend\model\PackageInfo.class
-com\tripplanner\backend\controller\BookingController.class
-com\tripplanner\backend\model\BookingRequest.class
-com\tripplanner\backend\repository\BookingRepository.class
-com\tripplanner\backend\CorsConfig$1.class
+com/tripplanner/backend/CorsConfig$1.class
+com/tripplanner/backend/CorsConfig.class
+com/tripplanner/backend/exception/ResourceNotFoundException.class
