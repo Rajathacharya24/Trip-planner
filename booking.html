@@ -555,11 +555,13 @@
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + btoa('admin:admin123')
     },
     body: JSON.stringify({
       name: firstName + ' ' + lastName,
       email: email,
-      packageName: packageName
+      phone: "1234567890",
+      packageName: packageName || "Custom Package"
     })
   })
   .then(response => {
@@ -632,52 +634,33 @@
     e.preventDefault();
     
     const selectedPackage = JSON.parse(localStorage.getItem('selectedPackage'));
+    let packageName = "Custom Package";
+    if (selectedPackage && selectedPackage.type) {
+        packageName = selectedPackage.type;
+    } else if (document.getElementById('packageType') && document.getElementById('packageType').value) {
+        packageName = document.getElementById('packageType').value;
+    }
+
     const formData = {
-      user: {
-        firstName: document.getElementById('firstName').value,
-        lastName: document.getElementById('lastName').value,
-        email: document.getElementById('email').value,
-        phoneNumber: document.getElementById('phone').value,
-        password: 'dummyPassword123'
-      },
-      tourPackage: selectedPackage && selectedPackage.id ? { id: selectedPackage.id } : null,
-      startDate: document.getElementById('departureDate').value,
-      numberOfTravelers: parseInt(document.getElementById('adults').value) + parseInt(document.getElementById('children').value),
-      specialRequirements: document.getElementById('specialRequests').value
+      name: document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      packageName: packageName
     };
 
     try {
-      // First create/update user
-      const userResponse = await fetch('http://localhost:8082/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData.user)
-      });
-      
-      if (!userResponse.ok) {
-        throw new Error('Failed to create user');
-      }
-      
-      const user = await userResponse.json();
-      
-      // Then create booking
-      const bookingData = {
-        ...formData,
-        user: user
-      };
-      
       const bookingResponse = await fetch('http://localhost:8082/api/bookings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + btoa('admin:admin123')
         },
-        body: JSON.stringify(bookingData)
+        body: JSON.stringify(formData)
       });
       
       if (!bookingResponse.ok) {
-        throw new Error('Failed to create booking');
+        const errorData = await bookingResponse.json().catch(() => ({}));
+        throw new Error(errorData.message || 'Failed to create booking');
       }
       
       // Show success message
