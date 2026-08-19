@@ -11,16 +11,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "bookings")
+@Table(name = "packages")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Booking {
+public class Package {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String email;
-    private String packageName;
+    private String description;
+    private int price;
 }
