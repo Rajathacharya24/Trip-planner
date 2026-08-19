@@ -95,27 +95,27 @@ The website is fully responsive and works on:
 - Java 17 or higher
 - Maven
 - PostgreSQL 15 or higher
-- Docker (for running integration tests)
 
 ### Database Setup
 1. Install PostgreSQL if not already installed
 2. Create a new database:
 ```sql
-CREATE DATABASE trip_planner_db;
+CREATE DATABASE tripyydb;
 ```
 
 ### Configuration
-The backend is configured to use the following PostgreSQL settings (in `src/main/resources/application.properties`):
-- Database: `trip_planner_db`
+The backend is configured to use the following PostgreSQL settings (in `backend/src/main/resources/application.properties`):
+- Database: `tripyydb`
 - Username: `postgres`
-- Password: `postgres`
+- Password: `0111`
 - Port: `5432`
 
 Modify these settings if your PostgreSQL configuration is different.
 
 ### Building and Running
-1. Build the project:
+1. Navigate to the backend directory and build the project:
 ```bash
+cd backend
 mvn clean install
 ```
 
@@ -124,18 +124,32 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-The backend will start on `http://localhost:8080`.
+The backend will start on `http://localhost:8082`.
+
+### API Documentation
+Swagger UI is available at `http://localhost:8082/swagger-ui.html` and provides interactive documentation for all endpoints.
 
 ### API Endpoints
-- `POST /api/bookings` - Create a new booking
-- `GET /api/bookings/{id}` - Get a booking by ID
+- **Packages**
+  - `GET /api/packages` - List all packages (supports pagination & sorting)
+  - `GET /api/packages/{id}` - Get a package by ID
+  - `POST /api/packages` - Create a new package (Requires Basic Auth)
+  - `PUT /api/packages/{id}` - Update a package (Requires Basic Auth)
+  - `DELETE /api/packages/{id}` - Delete a package (Requires Basic Auth)
+  - `GET /api/packages/search?maxPrice=X` - Search packages by max price
+- **Bookings**
+  - `GET /api/bookings` - List all bookings (supports pagination & sorting)
+  - `GET /api/bookings/{id}` - Get a booking by ID
+  - `POST /api/bookings` - Create a new booking (Requires Basic Auth)
+  - `PUT /api/bookings/{id}` - Update a booking (Requires Basic Auth)
+  - `DELETE /api/bookings/{id}` - Delete a booking (Requires Basic Auth)
+  - `GET /api/bookings/search?email=X` - Search bookings by email
 
 ### Running Tests
 ```bash
+cd backend
 mvn test
 ```
-
-Integration tests use Testcontainers and require Docker to be running.
 
 ---
 
