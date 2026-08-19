@@ -301,12 +301,15 @@
     }
     fetch('http://localhost:8082/api/bookings', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, packageName })
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + btoa('admin:admin123')
+      },
+      body: JSON.stringify({ name, email, phone: "1234567890", packageName })
     })
-      .then(res => res.text())
-      .then(msg => {
-        alert(msg);
+      .then(res => res.json())
+      .then(data => {
+        alert("Booking successful! Booking ID: " + (data.id || "Success"));
         // Close all modals
         const modals = document.querySelectorAll('.modal');
         modals.forEach(modal => {

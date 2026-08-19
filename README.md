@@ -97,20 +97,26 @@ The website is fully responsive and works on:
 - PostgreSQL 15 or higher
 
 ### Database Setup
-1. Install PostgreSQL if not already installed
-2. Create a new database:
+The application is pre-configured to use an in-memory **H2 database** by default. This means you do not need to install any external database to run the app locally!
+
+To access the H2 console while the app is running:
+- URL: `http://localhost:8082/h2-console`
+- JDBC URL: `jdbc:h2:mem:tripyydb`
+- Username: `sa`
+- Password: `password`
+
+### Production Database (PostgreSQL)
+If you want to run the application with PostgreSQL (e.g. for production), a `prod` profile is provided.
+1. Install PostgreSQL and create a database:
 ```sql
 CREATE DATABASE tripyydb;
 ```
-
-### Configuration
-The backend is configured to use the following PostgreSQL settings (in `backend/src/main/resources/application.properties`):
-- Database: `tripyydb`
+2. The PostgreSQL settings are located in `backend/src/main/resources/application-prod.properties`:
 - Username: `postgres`
 - Password: `0111`
 - Port: `5432`
 
-Modify these settings if your PostgreSQL configuration is different.
+Modify these settings if your configuration is different.
 
 ### Building and Running
 1. Navigate to the backend directory and build the project:
@@ -119,9 +125,14 @@ cd backend
 mvn clean install
 ```
 
-2. Run the application:
+2. Run the application (uses H2 by default):
 ```bash
 mvn spring-boot:run
+```
+
+*To run the application using PostgreSQL instead, run:*
+```bash
+mvn spring-boot:run -Dspring-boot.run.profiles=prod
 ```
 
 The backend will start on `http://localhost:8082`.
