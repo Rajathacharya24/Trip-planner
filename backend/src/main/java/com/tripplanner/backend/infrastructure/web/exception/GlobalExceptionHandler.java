@@ -1,7 +1,6 @@
-package com.tripplanner.backend;
+package com.tripplanner.backend.infrastructure.web.exception;
 
-import com.tripplanner.backend.exception.ErrorResponse;
-import com.tripplanner.backend.exception.ResourceNotFoundException;
+import com.tripplanner.backend.domain.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

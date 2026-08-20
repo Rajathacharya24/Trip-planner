@@ -1,4 +1,4 @@
-package com.tripplanner.backend.exception;
+package com.tripplanner.backend.infrastructure.web.exception;
 
 import java.time.LocalDateTime;
 
