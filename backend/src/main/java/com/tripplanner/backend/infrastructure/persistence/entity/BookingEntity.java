@@ -1,4 +1,4 @@
-package com.tripplanner.backend.model;
+package com.tripplanner.backend.infrastructure.persistence.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "bookings")
-public class Booking {
+public class BookingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,9 +16,9 @@ public class Booking {
     private String email;
     private String packageName;
 
-    public Booking() {}
+    public BookingEntity() {}
 
-    public Booking(Long id, String name, String email, String packageName) {
+    public BookingEntity(Long id, String name, String email, String packageName) {
         this.id = id;
         this.name = name;
         this.email = email;
