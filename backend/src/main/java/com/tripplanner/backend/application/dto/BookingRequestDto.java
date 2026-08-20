@@ -1,4 +1,4 @@
-package com.tripplanner.backend.dto;
+package com.tripplanner.backend.application.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

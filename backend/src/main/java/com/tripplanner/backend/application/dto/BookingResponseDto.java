@@ -1,4 +1,4 @@
-package com.tripplanner.backend.dto;
+package com.tripplanner.backend.application.dto;
 
 public class BookingResponseDto {
     private Long id;

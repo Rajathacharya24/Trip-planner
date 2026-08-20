@@ -1,25 +1,22 @@
-package com.tripplanner.backend.dto;
+package com.tripplanner.backend.application.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
-
-public class PackageRequestDto {
-    @NotBlank(message = "Name is required")
+public class PackageResponseDto {
+    private Long id;
     private String name;
-
-    @NotBlank(message = "Description is required")
     private String description;
-
-    @Positive(message = "Price must be greater than zero")
     private int price;
 
-    public PackageRequestDto() {}
+    public PackageResponseDto() {}
 
-    public PackageRequestDto(String name, String description, int price) {
+    public PackageResponseDto(Long id, String name, String description, int price) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
     }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
