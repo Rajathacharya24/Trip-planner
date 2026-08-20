@@ -1,8 +1,8 @@
-package com.tripplanner.backend.controller;
+package com.tripplanner.backend.infrastructure.web.controller;
 
-import com.tripplanner.backend.dto.BookingRequestDto;
-import com.tripplanner.backend.dto.BookingResponseDto;
-import com.tripplanner.backend.service.BookingService;
+import com.tripplanner.backend.application.dto.BookingRequestDto;
+import com.tripplanner.backend.application.dto.BookingResponseDto;
+import com.tripplanner.backend.application.service.BookingService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
