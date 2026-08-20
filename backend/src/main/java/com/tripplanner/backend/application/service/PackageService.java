@@ -1,10 +1,10 @@
-package com.tripplanner.backend.service;
+package com.tripplanner.backend.application.service;
 
-import com.tripplanner.backend.dto.PackageRequestDto;
-import com.tripplanner.backend.dto.PackageResponseDto;
-import com.tripplanner.backend.exception.ResourceNotFoundException;
-import com.tripplanner.backend.model.Package;
-import com.tripplanner.backend.repository.PackageRepository;
+import com.tripplanner.backend.application.dto.PackageRequestDto;
+import com.tripplanner.backend.application.dto.PackageResponseDto;
+import com.tripplanner.backend.domain.exception.ResourceNotFoundException;
+import com.tripplanner.backend.domain.model.Package;
+import com.tripplanner.backend.domain.repository.PackageDomainRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,9 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class PackageService {
 
     private static final Logger log = LoggerFactory.getLogger(PackageService.class);
-    private final PackageRepository packageRepository;
+    private final PackageDomainRepository packageRepository;
 
-    public PackageService(PackageRepository packageRepository) {
+    public PackageService(PackageDomainRepository packageRepository) {
         this.packageRepository = packageRepository;
     }
 
