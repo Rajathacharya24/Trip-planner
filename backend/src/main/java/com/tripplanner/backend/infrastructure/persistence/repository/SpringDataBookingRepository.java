@@ -1,13 +1,13 @@
-package com.tripplanner.backend.repository;
+package com.tripplanner.backend.infrastructure.persistence.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.tripplanner.backend.model.Booking;
+import com.tripplanner.backend.infrastructure.persistence.entity.BookingEntity;
 
 @Repository
-public interface BookingRepository extends JpaRepository<Booking, Long> {
-    Page<Booking> findByEmailContainingIgnoreCase(String email, Pageable pageable);
+public interface SpringDataBookingRepository extends JpaRepository<BookingEntity, Long> {
+    Page<BookingEntity> findByEmailContainingIgnoreCase(String email, Pageable pageable);
 }
