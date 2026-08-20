@@ -1,9 +1,9 @@
-package com.tripplanner.backend.service;
+package com.tripplanner.backend.application.service;
 
-import com.tripplanner.backend.dto.BookingRequestDto;
-import com.tripplanner.backend.dto.BookingResponseDto;
-import com.tripplanner.backend.model.Booking;
-import com.tripplanner.backend.repository.BookingRepository;
+import com.tripplanner.backend.application.dto.BookingRequestDto;
+import com.tripplanner.backend.application.dto.BookingResponseDto;
+import com.tripplanner.backend.domain.model.Booking;
+import com.tripplanner.backend.domain.repository.BookingDomainRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 public class BookingServiceTest {
 
     @Mock
-    private BookingRepository bookingRepository;
+    private BookingDomainRepository bookingRepository;
 
     @InjectMocks
     private BookingService bookingService;

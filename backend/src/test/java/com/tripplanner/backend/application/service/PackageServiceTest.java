@@ -1,9 +1,9 @@
-package com.tripplanner.backend.service;
+package com.tripplanner.backend.application.service;
 
-import com.tripplanner.backend.dto.PackageRequestDto;
-import com.tripplanner.backend.dto.PackageResponseDto;
-import com.tripplanner.backend.model.Package;
-import com.tripplanner.backend.repository.PackageRepository;
+import com.tripplanner.backend.application.dto.PackageRequestDto;
+import com.tripplanner.backend.application.dto.PackageResponseDto;
+import com.tripplanner.backend.domain.model.Package;
+import com.tripplanner.backend.domain.repository.PackageDomainRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 public class PackageServiceTest {
 
     @Mock
-    private PackageRepository packageRepository;
+    private PackageDomainRepository packageRepository;
 
     @InjectMocks
     private PackageService packageService;

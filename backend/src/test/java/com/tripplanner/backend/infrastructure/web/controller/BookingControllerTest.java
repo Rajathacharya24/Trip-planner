@@ -1,10 +1,10 @@
-package com.tripplanner.backend.controller;
+package com.tripplanner.backend.infrastructure.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tripplanner.backend.dto.BookingRequestDto;
-import com.tripplanner.backend.dto.BookingResponseDto;
-import com.tripplanner.backend.exception.ResourceNotFoundException;
-import com.tripplanner.backend.service.BookingService;
+import com.tripplanner.backend.application.dto.BookingRequestDto;
+import com.tripplanner.backend.application.dto.BookingResponseDto;
+import com.tripplanner.backend.domain.exception.ResourceNotFoundException;
+import com.tripplanner.backend.application.service.BookingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
