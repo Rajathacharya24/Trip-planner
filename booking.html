@@ -273,6 +273,32 @@
   let selectedPackage = '';
   let allPackages = [];
 
+  function resolvePackages(responseBody) {
+    if (Array.isArray(responseBody)) {
+      return responseBody;
+    }
+
+    return responseBody?.content ?? [];
+  }
+
+  function normalizePackageName(packageName) {
+    const lowerCaseName = String(packageName).toLowerCase();
+
+    if (lowerCaseName.includes('luxury')) {
+      return 'Luxury Package';
+    }
+
+    if (lowerCaseName.includes('ordinary') || lowerCaseName.includes('simple')) {
+      return 'Ordinary Package';
+    }
+
+    return packageName;
+  }
+
+  function getSelectedPackageDetails() {
+    return allPackages.find(pkg => pkg.name.toLowerCase() === String(selectedPackage).toLowerCase());
+  }
+
   // Auto-fill destination if coming from explore page
   window.addEventListener('load', function() {
     const storedDestination = localStorage.getItem('selectedDestination');
@@ -296,7 +322,8 @@
   window.addEventListener('DOMContentLoaded', async function() {
     try {
       const response = await fetch('http://localhost:8082/api/packages');
-      allPackages = await response.json();
+      const responseBody = await response.json();
+      allPackages = resolvePackages(responseBody);
     } catch (error) {
       console.error('Error fetching packages:', error);
     }
@@ -367,12 +394,8 @@
   }
 
   function selectPackage(packageType) {
-    selectedPackage = packageType;
-    // Find the full package object by type
-    const pkg = allPackages.find(p => p.type.toLowerCase() === packageType.toLowerCase());
-    if (pkg) {
-      localStorage.setItem('selectedPackage', JSON.stringify(pkg));
-    }
+    selectedPackage = normalizePackageName(packageType);
+    localStorage.setItem('selectedPackage', selectedPackage);
     // Remove active class from all package cards
     document.querySelectorAll('.package-card').forEach(card => {
       card.classList.remove('active');
@@ -416,7 +439,8 @@
     const totalTravelers = adults + children;
     
     // Calculate estimated cost
-    let baseCost = selectedPackage === 'Luxury' ? 35000 : 15000;
+    const selectedPackageDetails = getSelectedPackageDetails();
+    const baseCost = selectedPackageDetails ? selectedPackageDetails.price : 15000;
     let estimatedCost = baseCost * adults + (baseCost * 0.7 * children);
     
     document.getElementById('tripDuration').textContent = duration;
@@ -624,55 +648,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     const selectedPackage = JSON.parse(localStorage.getItem('selectedPackage'));
     if (selectedPackage) {
-      document.getElementById('packageType').value = selectedPackage.type;
-      document.getElementById('packagePrice').textContent = `₹${selectedPackage.price}`;
-    }
-  });
-
-  // Handle form submission
-  document.getElementById('bookingForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const selectedPackage = JSON.parse(localStorage.getItem('selectedPackage'));
-    let packageName = "Custom Package";
-    if (selectedPackage && selectedPackage.type) {
-        packageName = selectedPackage.type;
-    } else if (document.getElementById('packageType') && document.getElementById('packageType').value) {
-        packageName = document.getElementById('packageType').value;
-    }
-
-    const formData = {
-      name: document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value,
-      email: document.getElementById('email').value,
-      phone: document.getElementById('phone').value,
-      packageName: packageName
-    };
-
-    try {
-      const bookingResponse = await fetch('http://localhost:8082/api/bookings', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Basic ' + btoa('admin:admin123')
-        },
-        body: JSON.stringify(formData)
-      });
-      
-      if (!bookingResponse.ok) {
-        const errorData = await bookingResponse.json().catch(() => ({}));
-        throw new Error(errorData.message || 'Failed to create booking');
-      }
-      
-      // Show success message
-      document.getElementById('bookingSuccess').classList.remove('d-none');
-      document.getElementById('bookingForm').classList.add('d-none');
-      
-      // Clear stored package data
-      localStorage.removeItem('selectedPackage');
-      
-    } catch (error) {
-      console.error('Error creating booking:', error);
-      alert('Failed to create booking. Please try again.');
+      selectPackage(selectedPackage);
     }
   });
 </script>

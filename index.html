@@ -88,7 +88,7 @@
   <h2 class="text-center mb-4">Packages</h2>
   <div class="row">
     <div class="col-md-6 mb-3">
-      <div class="card package-card" onclick="openPackageModal('simple')" style="cursor: pointer;">
+        <div class="card package-card" onclick="openPackageModal('Ordinary Package')" style="cursor: pointer;">
         <div class="card-body">
           <h5 class="card-title">Ordinary Package</h5>
           <ul>
@@ -102,7 +102,7 @@
       </div>
     </div>
     <div class="col-md-6 mb-3">
-      <div class="card package-card" onclick="openPackageModal('luxury')" style="cursor: pointer;">
+        <div class="card package-card" onclick="openPackageModal('Luxury Package')" style="cursor: pointer;">
         <div class="card-body">
           <h5 class="card-title">Luxury Package</h5>
           <ul>
@@ -221,11 +221,19 @@
 
 <script>
   function openPackageModal(packageType) {
-    if (packageType === 'simple') {
+    if (packageType === 'Ordinary Package') {
       new bootstrap.Modal(document.getElementById('simplePackageModal')).show();
-    } else if (packageType === 'luxury') {
+    } else if (packageType === 'Luxury Package') {
       new bootstrap.Modal(document.getElementById('luxuryPackageModal')).show();
     }
+  }
+
+  function resolvePackages(responseBody) {
+    if (Array.isArray(responseBody)) {
+      return responseBody;
+    }
+
+    return responseBody?.content ?? [];
   }
 
   const trackBtn = document.getElementById('track-btn');
@@ -276,7 +284,8 @@
   // Fetch and display packages from backend
   fetch('http://localhost:8082/api/packages')
     .then(response => response.json())
-    .then(packages => {
+    .then(responseBody => {
+      const packages = resolvePackages(responseBody);
       const packageCards = document.querySelectorAll('.package-card');
       packages.forEach((pkg, idx) => {
         if (packageCards[idx]) {
@@ -290,8 +299,12 @@
 
   // Update selectPackage to POST booking to backend
   function selectPackage(packageName) {
+    const resolvedPackageName = packageName.toLowerCase().includes('luxury')
+      ? 'Luxury Package'
+      : 'Ordinary Package';
+
     // Store the selected package name
-    localStorage.setItem('selectedPackage', packageName);
+    localStorage.setItem('selectedPackage', resolvedPackageName);
     // Example: collect user info (replace with real form in production)
     const name = prompt('Enter your name for booking:');
     const email = prompt('Enter your email:');
@@ -305,7 +318,7 @@
         'Content-Type': 'application/json',
         'Authorization': 'Basic ' + btoa('admin:admin123')
       },
-      body: JSON.stringify({ name, email, phone: "1234567890", packageName })
+      body: JSON.stringify({ name, email, phone: "1234567890", packageName: resolvedPackageName })
     })
       .then(res => res.json())
       .then(data => {
