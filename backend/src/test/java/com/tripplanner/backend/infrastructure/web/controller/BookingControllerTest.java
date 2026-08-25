@@ -61,6 +61,19 @@ public class BookingControllerTest {
     }
 
     @Test
+    public void getBookingById_shouldIncludeSecurityHeaders() throws Exception {
+        BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", "Standard");
+        when(bookingService.getBookingById(1L)).thenReturn(responseDto);
+
+        mockMvc.perform(get("/api/bookings/1"))
+                .andExpect(status().isOk())
+                .andExpect(header().string("X-Content-Type-Options", "nosniff"))
+                .andExpect(header().string("X-Frame-Options", "DENY"))
+                .andExpect(header().string("Referrer-Policy", "no-referrer"))
+                .andExpect(header().string("Permissions-Policy", "camera=(), microphone=(), geolocation=()"));
+    }
+
+    @Test
     public void getBookingById_whenNotFound_shouldReturn404() throws Exception {
         when(bookingService.getBookingById(999L)).thenThrow(new ResourceNotFoundException("Not found"));
 
