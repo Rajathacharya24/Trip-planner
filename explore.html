@@ -20,11 +20,11 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto" id="nav-links">
         <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
         <li class="nav-item"><a class="nav-link active" href="#destinations">Destinations</a></li>
         <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
-        <li class="nav-item"><a class="nav-link" href="#booking">Booking</a></li>
+        <!-- Dynamic links will be injected here via JS -->
       </ul>
     </div>
   </div>
@@ -211,6 +211,60 @@
 </footer>
 
 <script>
+  function updateNavbar() {
+    const navLinks = document.getElementById('nav-links');
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem('userRole');
+    
+    // Remove existing auth links
+    const existingAuthLinks = navLinks.querySelectorAll('.auth-link');
+    existingAuthLinks.forEach(el => el.remove());
+
+    if (token) {
+      const myBookings = document.createElement('li');
+      myBookings.className = 'nav-item auth-link';
+      myBookings.innerHTML = '<a class="nav-link" href="booking.html">Booking</a>';
+      
+      const profile = document.createElement('li');
+      profile.className = 'nav-item auth-link';
+      if (role === 'ADMIN') {
+        profile.innerHTML = '<a class="nav-link" href="#">Admin Dashboard</a>';
+      } else {
+        profile.innerHTML = '<a class="nav-link" href="#">Profile</a>';
+      }
+
+      const logout = document.createElement('li');
+      logout.className = 'nav-item auth-link';
+      logout.innerHTML = '<a class="nav-link" href="#" onclick="logoutUser(event)">Logout</a>';
+      
+      navLinks.appendChild(myBookings);
+      navLinks.appendChild(profile);
+      navLinks.appendChild(logout);
+    } else {
+      const login = document.createElement('li');
+      login.className = 'nav-item auth-link';
+      login.innerHTML = '<a class="nav-link" href="login.html">Login</a>';
+      
+      const register = document.createElement('li');
+      register.className = 'nav-item auth-link';
+      register.innerHTML = '<a class="nav-link" href="register.html">Register</a>';
+      
+      navLinks.appendChild(login);
+      navLinks.appendChild(register);
+    }
+  }
+
+  function logoutUser(e) {
+    if(e) e.preventDefault();
+    localStorage.removeItem('token');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('userName');
+    window.location.href = 'index.html';
+  }
+
+  // Initial call
+  document.addEventListener('DOMContentLoaded', updateNavbar);
+
   function selectDestination(destination) {
     // Store the selected destination
     localStorage.setItem('selectedDestination', destination);
