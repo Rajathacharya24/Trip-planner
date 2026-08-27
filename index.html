@@ -20,13 +20,13 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto" id="nav-links">
         <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="#explore">Explore</a></li>
         <li class="nav-item"><a class="nav-link" href="#destinations">Destinations</a></li>
         <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
         <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#location-tracker-content" role="button" aria-expanded="false" aria-controls="location-tracker-content">Location</a></li>
-        <li class="nav-item"><a class="nav-link" href="booking.html">Booking</a></li>
+        <!-- Dynamic links will be injected here via JS -->
       </ul>
     </div>
   </div>
@@ -259,6 +259,60 @@
 </footer>
 
 <script>
+  function updateNavbar() {
+    const navLinks = document.getElementById('nav-links');
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem('userRole');
+    
+    // Remove existing auth links
+    const existingAuthLinks = navLinks.querySelectorAll('.auth-link');
+    existingAuthLinks.forEach(el => el.remove());
+
+    if (token) {
+      const myBookings = document.createElement('li');
+      myBookings.className = 'nav-item auth-link';
+      myBookings.innerHTML = '<a class="nav-link" href="booking.html">My Bookings</a>';
+      
+      const profile = document.createElement('li');
+      profile.className = 'nav-item auth-link';
+      if (role === 'ADMIN') {
+        profile.innerHTML = '<a class="nav-link" href="#">Admin Dashboard</a>';
+      } else {
+        profile.innerHTML = '<a class="nav-link" href="#">Profile</a>';
+      }
+
+      const logout = document.createElement('li');
+      logout.className = 'nav-item auth-link';
+      logout.innerHTML = '<a class="nav-link" href="#" onclick="logoutUser(event)">Logout</a>';
+      
+      navLinks.appendChild(myBookings);
+      navLinks.appendChild(profile);
+      navLinks.appendChild(logout);
+    } else {
+      const login = document.createElement('li');
+      login.className = 'nav-item auth-link';
+      login.innerHTML = '<a class="nav-link" href="login.html">Login</a>';
+      
+      const register = document.createElement('li');
+      register.className = 'nav-item auth-link';
+      register.innerHTML = '<a class="nav-link" href="register.html">Register</a>';
+      
+      navLinks.appendChild(login);
+      navLinks.appendChild(register);
+    }
+  }
+
+  function logoutUser(e) {
+    if(e) e.preventDefault();
+    localStorage.removeItem('token');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('userName');
+    window.location.href = 'index.html';
+  }
+
+  // Initial call
+  document.addEventListener('DOMContentLoaded', updateNavbar);
+
   function openPackageModal(packageType) {
     if (packageType === 'Ordinary Package') {
       new bootstrap.Modal(document.getElementById('simplePackageModal')).show();
@@ -338,28 +392,44 @@
 
   // Update selectPackage to POST booking to backend
   function selectPackage(packageName) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('You must be logged in to make a booking.');
+      window.location.href = 'login.html';
+      return;
+    }
+
     const resolvedPackageName = packageName.toLowerCase().includes('luxury')
       ? 'Luxury Package'
       : 'Ordinary Package';
 
     // Store the selected package name
     localStorage.setItem('selectedPackage', resolvedPackageName);
-    // Example: collect user info (replace with real form in production)
-    const name = prompt('Enter your name for booking:');
-    const email = prompt('Enter your email:');
-    if (!name || !email) {
-      alert('Name and email are required!');
-      return;
-    }
+    
+    // We get the name and email from the backend during token validation anyway,
+    // but the backend requires Name for the DTO for now (or email).
+    // Let's pass a placeholder name or retrieve from localStorage.
+    const name = localStorage.getItem('userName') || 'User';
+
     fetch('http://localhost:8082/api/bookings', {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa('admin:admin123')
+        'Authorization': 'Bearer ' + token
       },
-      body: JSON.stringify({ name, email, phone: "1234567890", packageName: resolvedPackageName })
+      // Backend automatically sets the email from token, we send name and packageName
+      body: JSON.stringify({ name, email: "dummy@example.com", packageName: resolvedPackageName })
     })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+            if (res.status === 401 || res.status === 403) {
+                logoutUser();
+                throw new Error("Session expired. Please login again.");
+            }
+            throw new Error("Booking failed");
+        }
+        return res.json();
+      })
       .then(data => {
         alert("Booking successful! Booking ID: " + (data.id || "Success"));
         // Close all modals
@@ -373,7 +443,7 @@
         // Redirect to booking page
         window.location.href ='booking.html';
       })
-      .catch(() => alert('Booking failed. Please try again.'));
+      .catch(err => alert(err.message || 'Booking failed. Please try again.'));
   }
 </script>
 
