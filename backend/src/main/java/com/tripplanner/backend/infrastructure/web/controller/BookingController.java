@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,7 +31,17 @@ public class BookingController {
     @Operation(summary = "Create a new booking")
     public BookingResponseDto createBooking(@Valid @RequestBody BookingRequestDto requestDto) {
         log.info("Received request to create booking");
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        requestDto.setEmail(currentUserEmail);
         return bookingService.createBooking(requestDto);
+    }
+
+    @GetMapping("/my")
+    @Operation(summary = "Get bookings for the authenticated user")
+    public Page<BookingResponseDto> getMyBookings(Pageable pageable) {
+        log.info("Received request to get my bookings");
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        return bookingService.searchBookingsByEmail(currentUserEmail, pageable);
     }
 
     @GetMapping
