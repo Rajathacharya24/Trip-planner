@@ -253,6 +253,60 @@
   </div>
 </section>
 
+<!-- Admin Dashboard View -->
+<section id="admin-dashboard-section" class="container my-5 d-none">
+  <div class="card shadow p-4">
+    <h2 class="text-center mb-4">Admin Dashboard</h2>
+    <div class="row g-4 mb-4 text-center">
+      <div class="col-md-3">
+        <div class="bg-white border rounded p-3 shadow-sm">
+          <h6 class="text-muted">Total Bookings</h6>
+          <h3 id="dash-total-bookings">0</h3>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="bg-white border rounded p-3 shadow-sm">
+          <h6 class="text-muted">Confirmed Bookings</h6>
+          <h3 id="dash-confirmed-bookings">0</h3>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="bg-white border rounded p-3 shadow-sm">
+          <h6 class="text-muted">Pending Reviews</h6>
+          <h3 id="dash-pending-bookings">0</h3>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="bg-white border rounded p-3 shadow-sm">
+          <h6 class="text-muted">Total Revenue</h6>
+          <h3 id="dash-total-revenue">₹0</h3>
+        </div>
+      </div>
+    </div>
+
+    <h4>Recent Bookings Management</h4>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>Booking ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Package</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="admin-bookings-list">
+          <tr>
+            <td colspan="6" class="text-center text-muted">Loading bookings...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
 <!-- Footer -->
 <footer>
   <div class="container">
