@@ -105,6 +105,8 @@ public class BookingControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestDto)))
                 .andExpect(status().isBadRequest());
+    }
+
     @Test
     @WithMockUser(username = "invalid@example.com")
     public void getBookingById_whenUserDoesNotOwnBooking_shouldReturnForbidden() throws Exception {
