@@ -221,24 +221,26 @@
     existingAuthLinks.forEach(el => el.remove());
 
     if (token) {
-      const myBookings = document.createElement('li');
-      myBookings.className = 'nav-item auth-link';
-      myBookings.innerHTML = '<a class="nav-link" href="booking.html">Booking</a>';
-      
-      const profile = document.createElement('li');
-      profile.className = 'nav-item auth-link';
       if (role === 'ADMIN') {
-        profile.innerHTML = '<a class="nav-link" href="#">Admin Dashboard</a>';
+        const dashboard = document.createElement('li');
+        dashboard.className = 'nav-item auth-link';
+        dashboard.innerHTML = '<a class="nav-link" href="booking.html#admin-dashboard">Admin Dashboard</a>';
+        navLinks.appendChild(dashboard);
       } else {
+        const myBookings = document.createElement('li');
+        myBookings.className = 'nav-item auth-link';
+        myBookings.innerHTML = '<a class="nav-link" href="booking.html">My Bookings</a>';
+        navLinks.appendChild(myBookings);
+
+        const profile = document.createElement('li');
+        profile.className = 'nav-item auth-link';
         profile.innerHTML = '<a class="nav-link" href="#">Profile</a>';
+        navLinks.appendChild(profile);
       }
 
       const logout = document.createElement('li');
       logout.className = 'nav-item auth-link';
       logout.innerHTML = '<a class="nav-link" href="#" onclick="logoutUser(event)">Logout</a>';
-      
-      navLinks.appendChild(myBookings);
-      navLinks.appendChild(profile);
       navLinks.appendChild(logout);
     } else {
       const login = document.createElement('li');
