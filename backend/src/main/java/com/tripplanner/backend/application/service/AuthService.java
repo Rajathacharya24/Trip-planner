@@ -44,7 +44,7 @@ public class AuthService {
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole("USER");
+        user.setRole(com.tripplanner.backend.domain.model.Role.USER);
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
 
@@ -54,7 +54,7 @@ public class AuthService {
                 savedUser.getId(),
                 savedUser.getName(),
                 savedUser.getEmail(),
-                savedUser.getRole()
+                savedUser.getRole().name()
         );
     }
 
@@ -73,7 +73,7 @@ public class AuthService {
                     user.getId(),
                     user.getName(),
                     user.getEmail(),
-                    user.getRole()
+                    user.getRole().name()
             );
 
             return new LoginResponse(jwt, userResponse);
