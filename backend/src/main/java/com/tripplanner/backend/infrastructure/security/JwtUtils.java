@@ -12,35 +12,60 @@ import java.util.Date;
 @Component
 public class JwtUtils {
 
-    // Using a securely generated key for HS512
-    private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+    @Value("${jwt.secret}")
+    private String jwtSecret;
 
     @Value("${jwt.expirationMs:86400000}")
     private int jwtExpirationMs;
 
+    private Key getSigningKey() {
+        byte[] keyBytes = jwtSecret.getBytes();
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
+
     public String generateJwtToken(Authentication authentication) {
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        return generateToken(userPrincipal);
+    }
 
+    public String generateToken(UserDetails userDetails) {
         return Jwts.builder()
-                .setSubject((userPrincipal.getUsername()))
+                .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(key, SignatureAlgorithm.HS512)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
     public String getUserNameFromJwtToken(String token) {
-        return Jwts.parserBuilder().setSigningKey(key).build()
+        return extractUsername(token);
+    }
+
+    public String extractUsername(String token) {
+        return Jwts.parserBuilder().setSigningKey(getSigningKey()).build()
                    .parseClaimsJws(token).getBody().getSubject();
     }
 
     public boolean validateJwtToken(String authToken) {
         try {
-            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(authToken);
+            Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(authToken);
             return true;
         } catch (JwtException | IllegalArgumentException e) {
-            // Invalid JWT token
+            // Invalid or expired token
         }
         return false;
     }
+
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        try {
+            Claims claims = Jwts.parserBuilder().setSigningKey(getSigningKey()).build()
+                    .parseClaimsJws(token).getBody();
+            String username = claims.getSubject();
+            boolean isExpired = claims.getExpiration().before(new Date());
+            return (username.equals(userDetails.getUsername()) && !isExpired);
+        } catch (JwtException | IllegalArgumentException e) {
+            return false;
+        }
+    }
 }
+
