@@ -785,7 +785,121 @@
         selectPackage(this.dataset.package);
       });
     });
+
+    checkAdminView();
   });
+
+  window.addEventListener('hashchange', checkAdminView);
+
+  function checkAdminView() {
+    const role = localStorage.getItem('userRole');
+    const token = localStorage.getItem('token');
+    const hash = window.location.hash;
+
+    if (token && role === 'ADMIN' && (hash === '#admin-dashboard' || hash === '#')) {
+      // Show admin dashboard, hide booking wizard
+      document.getElementById('booking-hero').classList.add('d-none');
+      document.getElementById('booking-form').classList.add('d-none');
+      document.getElementById('admin-dashboard-section').classList.remove('d-none');
+      loadAdminDashboard();
+    } else {
+      // Show normal wizard if logged in as USER
+      document.getElementById('booking-hero').classList.remove('d-none');
+      document.getElementById('booking-form').classList.remove('d-none');
+      document.getElementById('admin-dashboard-section').classList.add('d-none');
+    }
+  }
+
+  function loadAdminDashboard() {
+    const token = localStorage.getItem('token');
+    fetch('http://localhost:8082/api/bookings', {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to load dashboard bookings");
+      return res.json();
+    })
+    .then(data => {
+      const bookings = data.content || data || [];
+      const listContainer = document.getElementById('admin-bookings-list');
+      listContainer.innerHTML = '';
+
+      if (bookings.length === 0) {
+        listContainer.innerHTML = `<tr><td colspan="6" class="text-center text-muted">No bookings found.</td></tr>`;
+        return;
+      }
+
+      let total = bookings.length;
+      let confirmed = 0;
+      let pending = 0;
+      let revenue = 0;
+
+      bookings.forEach(b => {
+        const pkgName = b.packageName || '';
+        let pkgPrice = pkgName.toLowerCase().includes('luxury') ? 35000 : 15000;
+        
+        if (b.status === 'CONFIRMED' || b.status === 'COMPLETED') {
+          confirmed++;
+          revenue += pkgPrice;
+        } else if (b.status === 'PENDING') {
+          pending++;
+        }
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>#${b.id}</strong></td>
+          <td>${escapeHtml(b.name)}</td>
+          <td>${escapeHtml(b.email)}</td>
+          <td>${escapeHtml(b.packageName)}</td>
+          <td>
+            <span class="badge ${b.status === 'CONFIRMED' ? 'bg-success' : b.status === 'CANCELLED' ? 'bg-danger' : 'bg-warning'}">
+              ${escapeHtml(b.status || 'PENDING')}
+            </span>
+          </td>
+          <td>
+            <select class="form-select form-select-sm d-inline-block w-auto me-2" onchange="changeBookingStatus(${b.id}, this.value)">
+              <option value="PENDING" ${b.status === 'PENDING' ? 'selected' : ''}>PENDING</option>
+              <option value="CONFIRMED" ${b.status === 'CONFIRMED' ? 'selected' : ''}>CONFIRMED</option>
+              <option value="CANCELLED" ${b.status === 'CANCELLED' ? 'selected' : ''}>CANCELLED</option>
+              <option value="COMPLETED" ${b.status === 'COMPLETED' ? 'selected' : ''}>COMPLETED</option>
+            </select>
+          </td>
+        `;
+        listContainer.appendChild(tr);
+      });
+
+      document.getElementById('dash-total-bookings').textContent = total;
+      document.getElementById('dash-confirmed-bookings').textContent = confirmed;
+      document.getElementById('dash-pending-bookings').textContent = pending;
+      document.getElementById('dash-total-revenue').textContent = '₹' + revenue.toLocaleString();
+    })
+    .catch(err => {
+      console.error(err);
+      document.getElementById('admin-bookings-list').innerHTML = `<tr><td colspan="6" class="text-center text-danger">Error loading data.</td></tr>`;
+    });
+  }
+
+  function changeBookingStatus(id, newStatus) {
+    const token = localStorage.getItem('token');
+    fetch(`http://localhost:8082/api/bookings/${id}/status`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({ status: newStatus })
+    })
+    .then(res => {
+      if (!res.ok) throw new Error("Status update failed");
+      alert("Booking status updated successfully!");
+      loadAdminDashboard();
+    })
+    .catch(err => {
+      alert("Error: " + err.message);
+    });
+  }
 
 </script>
 
