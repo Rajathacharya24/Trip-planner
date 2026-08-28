@@ -27,8 +27,9 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
+    @jakarta.persistence.Enumerated(jakarta.persistence.EnumType.STRING)
     @Column(nullable = false)
-    private String role = "USER";
+    private com.tripplanner.backend.domain.model.Role role = com.tripplanner.backend.domain.model.Role.USER;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -40,7 +41,7 @@ public class UserEntity {
 
     public UserEntity() {}
 
-    public UserEntity(Long id, String name, String email, String password, String role, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public UserEntity(Long id, String name, String email, String password, com.tripplanner.backend.domain.model.Role role, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.email = email;
