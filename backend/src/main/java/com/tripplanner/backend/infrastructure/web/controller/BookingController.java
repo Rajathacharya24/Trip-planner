@@ -55,13 +55,35 @@ public class BookingController {
     @Operation(summary = "Get booking by ID")
     public BookingResponseDto getBookingById(@PathVariable Long id) {
         log.info("Received request to get booking by ID: {}", id);
-        return bookingService.getBookingById(id);
+        BookingResponseDto booking = bookingService.getBookingById(id);
+        
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        boolean isAdmin = SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+                
+        if (!isAdmin && !booking.getEmail().equalsIgnoreCase(currentUserEmail)) {
+            throw new org.springframework.security.access.AccessDeniedException("Access denied to this booking");
+        }
+        return booking;
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update an existing booking")
     public BookingResponseDto updateBooking(@PathVariable Long id, @Valid @RequestBody BookingRequestDto requestDto) {
         log.info("Received request to update booking with ID: {}", id);
+        BookingResponseDto booking = bookingService.getBookingById(id);
+        
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        boolean isAdmin = SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+                
+        if (!isAdmin && !booking.getEmail().equalsIgnoreCase(currentUserEmail)) {
+            throw new org.springframework.security.access.AccessDeniedException("Access denied to this booking");
+        }
+        
+        if (!isAdmin) {
+            requestDto.setEmail(currentUserEmail);
+        }
         return bookingService.updateBooking(id, requestDto);
     }
 
@@ -70,6 +92,15 @@ public class BookingController {
     @Operation(summary = "Delete a booking")
     public void deleteBooking(@PathVariable Long id) {
         log.info("Received request to delete booking with ID: {}", id);
+        BookingResponseDto booking = bookingService.getBookingById(id);
+        
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        boolean isAdmin = SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+                
+        if (!isAdmin && !booking.getEmail().equalsIgnoreCase(currentUserEmail)) {
+            throw new org.springframework.security.access.AccessDeniedException("Access denied to this booking");
+        }
         bookingService.deleteBooking(id);
     }
 
