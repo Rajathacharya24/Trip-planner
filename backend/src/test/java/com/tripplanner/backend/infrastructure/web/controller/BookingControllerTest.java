@@ -34,8 +34,15 @@ public class BookingControllerTest {
     @MockBean
     private BookingService bookingService;
 
+    @MockBean
+    private com.tripplanner.backend.infrastructure.security.JwtUtils jwtUtils;
+
+    @MockBean
+    private com.tripplanner.backend.infrastructure.security.CustomUserDetailsService customUserDetailsService;
+
     @Autowired
     private ObjectMapper objectMapper;
+
 
     @Test
     @WithMockUser
