@@ -15,6 +15,7 @@ public class BookingEntity {
     private String name;
     private String email;
     private String packageName;
+    private String status = "PENDING";
 
     public BookingEntity() {}
 
@@ -23,6 +24,15 @@ public class BookingEntity {
         this.name = name;
         this.email = email;
         this.packageName = packageName;
+        this.status = "PENDING";
+    }
+
+    public BookingEntity(Long id, String name, String email, String packageName, String status) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.packageName = packageName;
+        this.status = status;
     }
 
     public Long getId() { return id; }
@@ -36,4 +46,7 @@ public class BookingEntity {
 
     public String getPackageName() { return packageName; }
     public void setPackageName(String packageName) { this.packageName = packageName; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }
