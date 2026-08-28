@@ -62,6 +62,7 @@ public class BookingControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "john@example.com")
     public void getBookingById_shouldReturnOkStatus() throws Exception {
         BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", "Standard");
         when(bookingService.getBookingById(1L)).thenReturn(responseDto);
@@ -72,6 +73,7 @@ public class BookingControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "john@example.com")
     public void getBookingById_shouldIncludeSecurityHeaders() throws Exception {
         BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", "Standard");
         when(bookingService.getBookingById(1L)).thenReturn(responseDto);
@@ -85,6 +87,7 @@ public class BookingControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "john@example.com")
     public void getBookingById_whenNotFound_shouldReturn404() throws Exception {
         when(bookingService.getBookingById(999L)).thenThrow(new ResourceNotFoundException("Not found"));
 
