@@ -56,7 +56,8 @@ public class BookingPersistenceAdapter implements BookingDomainRepository {
                 booking.getId(),
                 booking.getName(),
                 booking.getEmail(),
-                booking.getPackageName()
+                booking.getPackageName(),
+                booking.getStatus()
         );
     }
 
@@ -65,7 +66,8 @@ public class BookingPersistenceAdapter implements BookingDomainRepository {
                 entity.getId(),
                 entity.getName(),
                 entity.getEmail(),
-                entity.getPackageName()
+                entity.getPackageName(),
+                entity.getStatus()
         );
     }
 }

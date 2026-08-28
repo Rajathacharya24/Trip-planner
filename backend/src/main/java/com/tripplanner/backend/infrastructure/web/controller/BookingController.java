@@ -104,6 +104,17 @@ public class BookingController {
         bookingService.deleteBooking(id);
     }
 
+    @PutMapping("/{id}/status")
+    @Operation(summary = "Update booking status (Admin only)")
+    public BookingResponseDto updateBookingStatus(@PathVariable Long id, @RequestBody java.util.Map<String, String> body) {
+        log.info("Received request to update status of booking ID: {}", id);
+        String status = body.get("status");
+        if (status == null || status.trim().isEmpty()) {
+            throw new IllegalArgumentException("Status cannot be empty");
+        }
+        return bookingService.updateBookingStatus(id, status);
+    }
+
     @GetMapping("/search")
     @Operation(summary = "Search bookings by email")
     public Page<BookingResponseDto> searchBookings(@RequestParam String email, Pageable pageable) {

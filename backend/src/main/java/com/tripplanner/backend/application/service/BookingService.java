@@ -59,7 +59,17 @@ public class BookingService {
         Booking updatedBooking = bookingRepository.save(booking);
         log.info("Booking updated successfully for ID: {}", id);
         return mapToDto(updatedBooking);
-    }
+     }
+ 
+     @Transactional
+     public BookingResponseDto updateBookingStatus(Long id, String status) {
+         log.info("Updating status for booking ID: {} to {}", id, status);
+         Booking booking = bookingRepository.findById(id)
+                 .orElseThrow(() -> new ResourceNotFoundException("Booking not found with id: " + id));
+         booking.setStatus(status);
+         Booking updatedBooking = bookingRepository.save(booking);
+         return mapToDto(updatedBooking);
+     }
 
     @Transactional
     public void deleteBooking(Long id) {
@@ -82,7 +92,8 @@ public class BookingService {
                 booking.getId(),
                 booking.getName(),
                 booking.getEmail(),
-                booking.getPackageName()
+                booking.getPackageName(),
+                booking.getStatus()
         );
     }
 }

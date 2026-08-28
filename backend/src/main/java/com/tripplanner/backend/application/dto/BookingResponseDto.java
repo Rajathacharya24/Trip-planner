@@ -5,6 +5,7 @@ public class BookingResponseDto {
     private String name;
     private String email;
     private String packageName;
+    private String status;
 
     public BookingResponseDto() {}
 
@@ -13,6 +14,15 @@ public class BookingResponseDto {
         this.name = name;
         this.email = email;
         this.packageName = packageName;
+        this.status = "PENDING";
+    }
+
+    public BookingResponseDto(Long id, String name, String email, String packageName, String status) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.packageName = packageName;
+        this.status = status;
     }
 
     public Long getId() { return id; }
@@ -26,4 +36,7 @@ public class BookingResponseDto {
 
     public String getPackageName() { return packageName; }
     public void setPackageName(String packageName) { this.packageName = packageName; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

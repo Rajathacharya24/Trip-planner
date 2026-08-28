@@ -45,7 +45,7 @@ public class BookingControllerTest {
 
 
     @Test
-    @WithMockUser
+    @WithMockUser(username = "john@example.com")
     public void createBooking_shouldReturnCreatedStatus() throws Exception {
         BookingRequestDto requestDto = new BookingRequestDto("John", "john@example.com", "Standard");
         BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", "Standard");
