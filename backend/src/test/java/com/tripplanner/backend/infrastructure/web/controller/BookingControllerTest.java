@@ -105,5 +105,47 @@ public class BookingControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestDto)))
                 .andExpect(status().isBadRequest());
+    @Test
+    @WithMockUser(username = "invalid@example.com")
+    public void getBookingById_whenUserDoesNotOwnBooking_shouldReturnForbidden() throws Exception {
+        BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", "Standard");
+        when(bookingService.getBookingById(1L)).thenReturn(responseDto);
+
+        mockMvc.perform(get("/api/bookings/1"))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    @WithMockUser(username = "admin@example.com", roles = {"ADMIN"})
+    public void getBookingById_whenAdminAccessesOtherBooking_shouldAllow() throws Exception {
+        BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", "Standard");
+        when(bookingService.getBookingById(1L)).thenReturn(responseDto);
+
+        mockMvc.perform(get("/api/bookings/1"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithMockUser(username = "john@example.com")
+    public void updateBookingStatus_whenUser_shouldReturnForbidden() throws Exception {
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/api/bookings/1/status")
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"status\":\"CONFIRMED\"}"))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    @WithMockUser(username = "admin@example.com", roles = {"ADMIN"})
+    public void updateBookingStatus_whenAdmin_shouldAllow() throws Exception {
+        BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", "Standard", "CONFIRMED");
+        when(bookingService.updateBookingStatus(any(Long.class), any(String.class))).thenReturn(responseDto);
+
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/api/bookings/1/status")
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"status\":\"CONFIRMED\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("CONFIRMED"));
     }
 }
