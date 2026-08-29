@@ -270,10 +270,13 @@
 
     if (token) {
       if (role === 'ADMIN') {
-        const dashboard = document.createElement('li');
-        dashboard.className = 'nav-item auth-link';
-        dashboard.innerHTML = '<a class="nav-link" href="booking.html#admin-dashboard">Admin Dashboard</a>';
-        navLinks.appendChild(dashboard);
+        ['Admin Dashboard', 'Manage Packages', 'Manage Bookings'].forEach((label, index) => {
+          const item = document.createElement('li');
+          item.className = 'nav-item auth-link';
+          const href = index === 0 ? 'booking.html#admin-dashboard' : index === 1 ? 'booking.html#manage-packages' : 'booking.html#manage-bookings';
+          item.innerHTML = `<a class="nav-link" href="${href}">${label}</a>`;
+          navLinks.appendChild(item);
+        });
       } else {
         const myBookings = document.createElement('li');
         myBookings.className = 'nav-item auth-link';

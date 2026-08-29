@@ -260,20 +260,20 @@
     <div class="row g-4 mb-4 text-center">
       <div class="col-md-3">
         <div class="bg-white border rounded p-3 shadow-sm">
+          <h6 class="text-muted">Total Users</h6>
+          <h3 id="dash-total-users">0</h3>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="bg-white border rounded p-3 shadow-sm">
+          <h6 class="text-muted">Total Packages</h6>
+          <h3 id="dash-total-packages">0</h3>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="bg-white border rounded p-3 shadow-sm">
           <h6 class="text-muted">Total Bookings</h6>
           <h3 id="dash-total-bookings">0</h3>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="bg-white border rounded p-3 shadow-sm">
-          <h6 class="text-muted">Confirmed Bookings</h6>
-          <h3 id="dash-confirmed-bookings">0</h3>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="bg-white border rounded p-3 shadow-sm">
-          <h6 class="text-muted">Pending Reviews</h6>
-          <h3 id="dash-pending-bookings">0</h3>
         </div>
       </div>
       <div class="col-md-3">
@@ -284,7 +284,19 @@
       </div>
     </div>
 
-    <h4>Recent Bookings Management</h4>
+    <div class="d-flex flex-wrap gap-2 justify-content-center mb-4">
+      <a class="btn btn-outline-primary" href="#manage-packages">Manage Packages</a>
+      <a class="btn btn-outline-primary" href="#manage-bookings">Manage Bookings</a>
+    </div>
+
+    <div id="manage-packages" class="mb-4">
+      <h4>Manage Packages</h4>
+      <p class="text-muted mb-0">Use the package APIs to create, edit, and delete packages.</p>
+    </div>
+
+    <div id="manage-bookings" class="mb-3">
+      <h4>Manage Bookings</h4>
+    </div>
     <div class="table-responsive">
       <table class="table table-hover align-middle">
         <thead class="table-dark">
@@ -342,14 +354,17 @@
 
     if (token) {
       if (role === 'ADMIN') {
-        const dashboard = document.createElement('li');
-        dashboard.className = 'nav-item auth-link';
-        dashboard.innerHTML = '<a class="nav-link" href="booking.html#admin-dashboard">Admin Dashboard</a>';
-        navLinks.appendChild(dashboard);
+        ['Admin Dashboard', 'Manage Packages', 'Manage Bookings'].forEach((label, index) => {
+          const item = document.createElement('li');
+          item.className = 'nav-item auth-link';
+          const href = index === 0 ? 'booking.html#admin-dashboard' : index === 1 ? 'booking.html#manage-packages' : 'booking.html#manage-bookings';
+          item.innerHTML = `<a class="nav-link" href="${href}">${label}</a>`;
+          navLinks.appendChild(item);
+        });
       } else {
         const myBookings = document.createElement('li');
         myBookings.className = 'nav-item auth-link';
-        myBookings.innerHTML = '<a class="nav-link active" href="booking.html">Booking</a>';
+        myBookings.innerHTML = '<a class="nav-link active" href="booking.html">My Bookings</a>';
         navLinks.appendChild(myBookings);
 
         const profile = document.createElement('li');
@@ -812,10 +827,26 @@
 
   function loadAdminDashboard() {
     const token = localStorage.getItem('token');
-    fetch('http://localhost:8082/api/bookings', {
+    fetch('http://localhost:8082/api/admin/dashboard', {
       headers: {
         'Authorization': 'Bearer ' + token
       }
+    })
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to load dashboard stats");
+      return res.json();
+    })
+    .then(stats => {
+      document.getElementById('dash-total-users').textContent = stats.totalUsers ?? 0;
+      document.getElementById('dash-total-packages').textContent = stats.totalPackages ?? 0;
+      document.getElementById('dash-total-bookings').textContent = stats.totalBookings ?? 0;
+      document.getElementById('dash-total-revenue').textContent = '₹' + Number(stats.totalRevenue ?? 0).toLocaleString();
+
+      return fetch('http://localhost:8082/api/bookings', {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      });
     })
     .then(res => {
       if (!res.ok) throw new Error("Failed to load dashboard bookings");
@@ -831,22 +862,7 @@
         return;
       }
 
-      let total = bookings.length;
-      let confirmed = 0;
-      let pending = 0;
-      let revenue = 0;
-
       bookings.forEach(b => {
-        const pkgName = b.packageName || '';
-        let pkgPrice = pkgName.toLowerCase().includes('luxury') ? 35000 : 15000;
-        
-        if (b.status === 'CONFIRMED' || b.status === 'COMPLETED') {
-          confirmed++;
-          revenue += pkgPrice;
-        } else if (b.status === 'PENDING') {
-          pending++;
-        }
-
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td><strong>#${b.id}</strong></td>
@@ -869,11 +885,6 @@
         `;
         listContainer.appendChild(tr);
       });
-
-      document.getElementById('dash-total-bookings').textContent = total;
-      document.getElementById('dash-confirmed-bookings').textContent = confirmed;
-      document.getElementById('dash-pending-bookings').textContent = pending;
-      document.getElementById('dash-total-revenue').textContent = '₹' + revenue.toLocaleString();
     })
     .catch(err => {
       console.error(err);
