@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,6 +28,7 @@ public class PackageController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Create a new package")
     public PackageResponseDto createPackage(@Valid @RequestBody PackageRequestDto requestDto) {
         log.info("Received request to create package");
@@ -48,6 +50,7 @@ public class PackageController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Update an existing package")
     public PackageResponseDto updatePackage(@PathVariable Long id, @Valid @RequestBody PackageRequestDto requestDto) {
         log.info("Received request to update package with ID: {}", id);
@@ -56,6 +59,7 @@ public class PackageController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Delete a package")
     public void deletePackage(@PathVariable Long id) {
         log.info("Received request to delete package with ID: {}", id);

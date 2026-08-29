@@ -39,6 +39,11 @@ public class UserPersistenceAdapter implements UserDomainRepository {
         return repository.findById(id).map(this::toDomain);
     }
 
+    @Override
+    public long count() {
+        return repository.count();
+    }
+
     private User toDomain(UserEntity entity) {
         if (entity == null) return null;
         return new User(

@@ -8,4 +8,5 @@ public interface UserDomainRepository {
     boolean existsByEmail(String email);
     User save(User user);
     Optional<User> findById(Long id);
+    long count();
 }

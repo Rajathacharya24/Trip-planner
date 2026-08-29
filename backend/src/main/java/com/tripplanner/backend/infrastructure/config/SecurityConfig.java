@@ -9,8 +9,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,6 +26,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
     private final CustomUserDetailsService userDetailsService;
@@ -41,7 +41,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .cors(Customizer.withDefaults())
-            .csrf(AbstractHttpConfigurer::disable)
+            .csrf(csrf -> csrf.disable())
             .headers(headers -> headers
                 .contentSecurityPolicy(csp -> csp.policyDirectives(
                     "default-src 'self'; " +
@@ -54,7 +54,7 @@ public class SecurityConfig {
                     "base-uri 'self'; " +
                     "form-action 'self'"
                 ))
-                .frameOptions(HeadersConfigurer.FrameOptionsConfig::deny)
+                .frameOptions(frameOptions -> frameOptions.deny())
                 .httpStrictTransportSecurity(hsts -> hsts
                     .includeSubDomains(true)
                     .preload(true)
@@ -65,17 +65,17 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.POST, "/api/auth/register", "/api/auth/login").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/packages/**", "/api/packages").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/packages/**", "/api/packages").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/api/packages/**", "/api/packages").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/api/packages/**", "/api/packages").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/api/packages").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/packages/*").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/packages/*").hasRole("ADMIN")
                 .requestMatchers("/api/bookings/my").authenticated()
-                .requestMatchers(HttpMethod.POST, "/api/bookings").authenticated()
-                .requestMatchers(HttpMethod.GET, "/api/bookings/{id}").authenticated()
-                .requestMatchers(HttpMethod.PUT, "/api/bookings/{id}").authenticated()
-                .requestMatchers(HttpMethod.DELETE, "/api/bookings/{id}").authenticated()
-                .requestMatchers(HttpMethod.PUT, "/api/bookings/{id}/status").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/api/bookings").hasRole("ADMIN")
                 .requestMatchers("/api/bookings/search").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/api/bookings").authenticated()
+                .requestMatchers(HttpMethod.GET, "/api/bookings/*").authenticated()
+                .requestMatchers(HttpMethod.PUT, "/api/bookings/*/status").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/bookings/*").authenticated()
+                .requestMatchers(HttpMethod.DELETE, "/api/bookings/*").authenticated()
+                .requestMatchers(HttpMethod.GET, "/api/bookings").hasRole("ADMIN")
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                 .anyRequest().authenticated()
             )

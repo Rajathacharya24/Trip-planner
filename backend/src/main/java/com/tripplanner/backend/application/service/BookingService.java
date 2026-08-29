@@ -5,6 +5,7 @@ import com.tripplanner.backend.application.dto.BookingResponseDto;
 import com.tripplanner.backend.domain.exception.ResourceNotFoundException;
 import com.tripplanner.backend.domain.model.Booking;
 import com.tripplanner.backend.domain.repository.BookingDomainRepository;
+import org.springframework.security.access.AccessDeniedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -46,6 +47,13 @@ public class BookingService {
         return mapToDto(booking);
     }
 
+    public BookingResponseDto getBookingById(Long id, String currentUserEmail, boolean isAdmin) {
+        Booking booking = bookingRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Booking not found with id: " + id));
+        verifyOwnershipOrAdmin(booking, currentUserEmail, isAdmin);
+        return mapToDto(booking);
+    }
+
     @Transactional
     public BookingResponseDto updateBooking(Long id, BookingRequestDto requestDto) {
         log.info("Updating booking with ID: {}", id);
@@ -60,6 +68,20 @@ public class BookingService {
         log.info("Booking updated successfully for ID: {}", id);
         return mapToDto(updatedBooking);
      }
+
+    @Transactional
+    public BookingResponseDto updateBooking(Long id, BookingRequestDto requestDto, String currentUserEmail, boolean isAdmin) {
+        Booking booking = bookingRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Booking not found with id: " + id));
+        verifyOwnershipOrAdmin(booking, currentUserEmail, isAdmin);
+
+        booking.setName(requestDto.getName());
+        booking.setEmail(requestDto.getEmail());
+        booking.setPackageName(requestDto.getPackageName());
+
+        Booking updatedBooking = bookingRepository.save(booking);
+        return mapToDto(updatedBooking);
+    }
  
      @Transactional
      public BookingResponseDto updateBookingStatus(Long id, String status) {
@@ -70,6 +92,14 @@ public class BookingService {
          Booking updatedBooking = bookingRepository.save(booking);
          return mapToDto(updatedBooking);
      }
+
+    @Transactional
+    public void deleteBooking(Long id, String currentUserEmail, boolean isAdmin) {
+        Booking booking = bookingRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Booking not found with id: " + id));
+        verifyOwnershipOrAdmin(booking, currentUserEmail, isAdmin);
+        bookingRepository.deleteById(id);
+    }
 
     @Transactional
     public void deleteBooking(Long id) {
@@ -95,5 +125,15 @@ public class BookingService {
                 booking.getPackageName(),
                 booking.getStatus()
         );
+    }
+
+    private void verifyOwnershipOrAdmin(Booking booking, String currentUserEmail, boolean isAdmin) {
+        if (isAdmin) {
+            return;
+        }
+
+        if (currentUserEmail == null || !booking.getEmail().equalsIgnoreCase(currentUserEmail)) {
+            throw new AccessDeniedException("Access denied to this booking");
+        }
     }
 }
