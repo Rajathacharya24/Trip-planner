@@ -811,12 +811,17 @@
     const token = localStorage.getItem('token');
     const hash = window.location.hash;
 
-    if (token && role === 'ADMIN' && (hash === '#admin-dashboard' || hash === '#')) {
+    if (token && role === 'ADMIN' && (hash === '#admin-dashboard' || hash === '#manage-packages' || hash === '#manage-bookings' || hash === '#')) {
       // Show admin dashboard, hide booking wizard
       document.getElementById('booking-hero').classList.add('d-none');
       document.getElementById('booking-form').classList.add('d-none');
       document.getElementById('admin-dashboard-section').classList.remove('d-none');
       loadAdminDashboard();
+      if (hash === '#manage-packages') {
+        document.getElementById('manage-packages').scrollIntoView({ behavior: 'smooth' });
+      } else if (hash === '#manage-bookings') {
+        document.getElementById('manage-bookings').scrollIntoView({ behavior: 'smooth' });
+      }
     } else {
       // Show normal wizard if logged in as USER
       document.getElementById('booking-hero').classList.remove('d-none');

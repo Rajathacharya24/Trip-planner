@@ -28,6 +28,7 @@ public class UserPersistenceAdapter implements UserDomainRepository {
     }
 
     @Override
+    @SuppressWarnings("null")
     public User save(User user) {
         UserEntity entity = toEntity(user);
         UserEntity saved = repository.save(entity);
@@ -35,6 +36,7 @@ public class UserPersistenceAdapter implements UserDomainRepository {
     }
 
     @Override
+    @SuppressWarnings("null")
     public Optional<User> findById(Long id) {
         return repository.findById(id).map(this::toDomain);
     }
