@@ -13,4 +13,5 @@ public interface BookingDomainRepository {
     boolean existsById(Long id);
     void deleteById(Long id);
     Page<Booking> findByEmailContainingIgnoreCase(String email, Pageable pageable);
+    Page<Booking> findByUserId(Long userId, Pageable pageable);
 }

@@ -25,7 +25,7 @@ public class PackageService {
     @Transactional
     public PackageResponseDto createPackage(PackageRequestDto requestDto) {
         log.info("Creating new package: {}", requestDto.getName());
-        Package pkg = new Package(null, requestDto.getName(), requestDto.getDescription(), requestDto.getPrice());
+        Package pkg = new Package(null, requestDto.getName(), requestDto.getDestination(), requestDto.getDescription(), requestDto.getPrice());
         Package savedPkg = packageRepository.save(pkg);
         log.info("Package created successfully with ID: {}", savedPkg.getId());
         return mapToDto(savedPkg);
@@ -53,6 +53,7 @@ public class PackageService {
                 .orElseThrow(() -> new ResourceNotFoundException("Package not found with id: " + id));
 
         pkg.setName(requestDto.getName());
+        pkg.setDestination(requestDto.getDestination());
         pkg.setDescription(requestDto.getDescription());
         pkg.setPrice(requestDto.getPrice());
         
@@ -81,6 +82,7 @@ public class PackageService {
         return new PackageResponseDto(
                 pkg.getId(),
                 pkg.getName(),
+                pkg.getDestination(),
                 pkg.getDescription(),
                 pkg.getPrice()
         );

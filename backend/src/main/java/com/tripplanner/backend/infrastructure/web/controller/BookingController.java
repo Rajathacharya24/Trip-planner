@@ -1,6 +1,7 @@
 package com.tripplanner.backend.infrastructure.web.controller;
 
 import com.tripplanner.backend.application.dto.BookingRequestDto;
+import com.tripplanner.backend.application.dto.BookingStatusUpdateRequest;
 import com.tripplanner.backend.application.dto.BookingResponseDto;
 import com.tripplanner.backend.application.service.BookingService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,8 +34,7 @@ public class BookingController {
     public BookingResponseDto createBooking(@Valid @RequestBody BookingRequestDto requestDto) {
         log.info("Received request to create booking");
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        requestDto.setEmail(currentUserEmail);
-        return bookingService.createBooking(requestDto);
+        return bookingService.createBooking(requestDto, currentUserEmail);
     }
 
     @GetMapping("/my")
@@ -42,7 +42,7 @@ public class BookingController {
     public Page<BookingResponseDto> getMyBookings(Pageable pageable) {
         log.info("Received request to get my bookings");
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        return bookingService.searchBookingsByEmail(currentUserEmail, pageable);
+        return bookingService.getMyBookings(currentUserEmail, pageable);
     }
 
     @GetMapping
@@ -70,17 +70,14 @@ public class BookingController {
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         boolean isAdmin = SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
-        if (!isAdmin) {
-            requestDto.setEmail(currentUserEmail);
-        }
         return bookingService.updateBooking(id, requestDto, currentUserEmail, isAdmin);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "Delete a booking")
+    @Operation(summary = "Cancel a booking")
     public void deleteBooking(@PathVariable Long id) {
-        log.info("Received request to delete booking with ID: {}", id);
+        log.info("Received request to cancel booking with ID: {}", id);
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         boolean isAdmin = SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
@@ -90,13 +87,9 @@ public class BookingController {
     @PutMapping("/{id}/status")
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Update booking status (Admin only)")
-    public BookingResponseDto updateBookingStatus(@PathVariable Long id, @RequestBody java.util.Map<String, String> body) {
+    public BookingResponseDto updateBookingStatus(@PathVariable Long id, @Valid @RequestBody BookingStatusUpdateRequest body) {
         log.info("Received request to update status of booking ID: {}", id);
-        String status = body.get("status");
-        if (status == null || status.trim().isEmpty()) {
-            throw new IllegalArgumentException("Status cannot be empty");
-        }
-        return bookingService.updateBookingStatus(id, status);
+        return bookingService.updateBookingStatus(id, body.getStatus());
     }
 
     @GetMapping("/search")

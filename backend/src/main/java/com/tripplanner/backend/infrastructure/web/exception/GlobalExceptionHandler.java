@@ -1,6 +1,7 @@
 package com.tripplanner.backend.infrastructure.web.exception;
 
 import com.tripplanner.backend.domain.exception.EmailAlreadyExistsException;
+import com.tripplanner.backend.domain.exception.InvalidBookingRequestException;
 import com.tripplanner.backend.domain.exception.InvalidCredentialsException;
 import com.tripplanner.backend.domain.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
@@ -52,6 +53,17 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now()
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(InvalidBookingRequestException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidBookingRequestException(InvalidBookingRequestException ex) {
+        log.warn("Invalid booking request: {}", ex.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
