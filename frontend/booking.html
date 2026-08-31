@@ -94,66 +94,22 @@
         <!-- Step 2: Trip Details -->
         <div class="booking-step" id="step2">
           <h4 class="section-title">Trip Details</h4>
-          
-          <!-- Interactive Destination Selection -->
-          <div class="mb-4">
-            <label class="form-label">Choose Your Destination *</label>
-            <div class="destination-selector">
-              <div class="destination-card" data-destination="Dubai">
-                <img src="../pexels-lina-12238221.jpg" alt="Dubai">
-                <div class="destination-overlay">
-                  <h5>Dubai, UAE</h5>
-                  <p>Where tradition meets luxury</p>
-                  <div class="destination-price">From ₹15,000</div>
-                </div>
-              </div>
-              <div class="destination-card" data-destination="Northern China">
-                <img src="../pexels-manjose-19872.jpg" alt="Northern China">
-                <div class="destination-overlay">
-                  <h5>Northern China</h5>
-                  <p>Land of emperors</p>
-                  <div class="destination-price">From ₹15,000</div>
-                </div>
-              </div>
-              <div class="destination-card" data-destination="Kerala">
-                <img src="../pexels-swastikarora-19743480.jpg" alt="Kerala">
-                <div class="destination-overlay">
-                  <h5>Kerala, India</h5>
-                  <p>God's own country</p>
-                  <div class="destination-price">From ₹15,000</div>
-                </div>
-              </div>
+          <div class="row mb-4">
+            <div class="col-md-6 mb-3">
+              <label for="selectedPackageName" class="form-label">Package *</label>
+              <input type="text" id="selectedPackageName" class="form-control" readonly placeholder="Select a package below">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="selectedDestination" class="form-label">Destination *</label>
+              <input type="text" id="selectedDestination" class="form-control" readonly placeholder="Derived from the selected package">
             </div>
           </div>
 
-          <!-- Interactive Package Selection -->
+          <!-- Backend-driven Package Selection -->
           <div class="mb-4">
             <label class="form-label">Select Your Package *</label>
-            <div class="package-selector">
-              <div class="package-card" data-package="Simple">
-                <div class="package-header">
-                  <h5>Simple Package</h5>
-                  <div class="package-price">₹15,000</div>
-                </div>
-                <ul class="package-features">
-                  <li>✅ 3-Star Hotel</li>
-                  <li>✅ Breakfast & Dinner</li>
-                  <li>✅ Airport Transfers</li>
-                  <li>✅ Local Sightseeing</li>
-                </ul>
-              </div>
-              <div class="package-card" data-package="Luxury">
-                <div class="package-header">
-                  <h5>Luxury Package</h5>
-                  <div class="package-price">₹35,000</div>
-                </div>
-                <ul class="package-features">
-                  <li>✅ 5-Star Hotel</li>
-                  <li>✅ All Meals Included</li>
-                  <li>✅ Private Chauffeur</li>
-                  <li>✅ Premium Tours</li>
-                </ul>
-              </div>
+            <div class="package-selector" id="packageSelector">
+              <div class="text-muted">Loading packages...</div>
             </div>
           </div>
 
