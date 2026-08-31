@@ -3,6 +3,7 @@ package com.tripplanner.backend.infrastructure.web.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tripplanner.backend.application.dto.BookingRequestDto;
 import com.tripplanner.backend.application.dto.BookingResponseDto;
+import com.tripplanner.backend.application.dto.BookingStatusUpdateRequest;
 import com.tripplanner.backend.domain.exception.ResourceNotFoundException;
 import com.tripplanner.backend.application.service.BookingService;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.tripplanner.backend.infrastructure.config.SecurityConfig;
@@ -50,10 +52,10 @@ public class BookingControllerTest {
     @Test
     @WithMockUser(username = "john@example.com")
     public void createBooking_shouldReturnCreatedStatus() throws Exception {
-        BookingRequestDto requestDto = new BookingRequestDto("John", "john@example.com", "Standard");
-        BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", "Standard");
+        BookingRequestDto requestDto = new BookingRequestDto(5L, java.time.LocalDate.now().plusDays(10), java.time.LocalDate.now().plusDays(15), 2, 1, 1);
+        BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", 5L, "Kerala Premium", "Kerala", java.time.LocalDate.now().plusDays(10), java.time.LocalDate.now().plusDays(15), 2, 1, 1, new java.math.BigDecimal("45000.00"), com.tripplanner.backend.domain.model.BookingStatus.PENDING, java.time.LocalDateTime.now());
 
-        when(bookingService.createBooking(any(BookingRequestDto.class))).thenReturn(responseDto);
+        when(bookingService.createBooking(any(BookingRequestDto.class), anyString())).thenReturn(responseDto);
 
         mockMvc.perform(post("/api/bookings")
                 .with(csrf())
@@ -61,13 +63,26 @@ public class BookingControllerTest {
                 .content(objectMapper.writeValueAsString(requestDto)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.name").value("John"));
+                .andExpect(jsonPath("$.customerName").value("John"))
+                .andExpect(jsonPath("$.totalAmount").value(45000.00));
+    }
+
+    @Test
+    @WithAnonymousUser
+    public void createBooking_withoutJwt_shouldReturnUnauthorized() throws Exception {
+        BookingRequestDto requestDto = new BookingRequestDto(5L, java.time.LocalDate.now().plusDays(10), java.time.LocalDate.now().plusDays(15), 2, 1, 1);
+
+        mockMvc.perform(post("/api/bookings")
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(requestDto)))
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
     @WithMockUser(username = "john@example.com")
     public void getBookingById_shouldReturnOkStatus() throws Exception {
-        BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", "Standard");
+        BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", 5L, "Kerala Premium", "Kerala", java.time.LocalDate.now().plusDays(10), java.time.LocalDate.now().plusDays(15), 2, 1, 1, new java.math.BigDecimal("45000.00"), com.tripplanner.backend.domain.model.BookingStatus.PENDING, java.time.LocalDateTime.now());
         when(bookingService.getBookingById(anyLong(), anyString(), anyBoolean())).thenReturn(responseDto);
 
         mockMvc.perform(get("/api/bookings/1"))
@@ -78,7 +93,7 @@ public class BookingControllerTest {
     @Test
     @WithMockUser(username = "john@example.com")
     public void getBookingById_shouldIncludeSecurityHeaders() throws Exception {
-        BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", "Standard");
+        BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", 5L, "Kerala Premium", "Kerala", java.time.LocalDate.now().plusDays(10), java.time.LocalDate.now().plusDays(15), 2, 1, 1, new java.math.BigDecimal("45000.00"), com.tripplanner.backend.domain.model.BookingStatus.PENDING, java.time.LocalDateTime.now());
         when(bookingService.getBookingById(anyLong(), anyString(), anyBoolean())).thenReturn(responseDto);
 
         mockMvc.perform(get("/api/bookings/1"))
@@ -113,7 +128,7 @@ public class BookingControllerTest {
     @Test
     @WithMockUser(username = "admin@example.com", roles = {"ADMIN"})
     public void getBookingById_whenAdminAccessesOtherBooking_shouldAllow() throws Exception {
-        BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", "Standard");
+        BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", 5L, "Kerala Premium", "Kerala", java.time.LocalDate.now().plusDays(10), java.time.LocalDate.now().plusDays(15), 2, 1, 1, new java.math.BigDecimal("45000.00"), com.tripplanner.backend.domain.model.BookingStatus.PENDING, java.time.LocalDateTime.now());
         when(bookingService.getBookingById(anyLong(), anyString(), anyBoolean())).thenReturn(responseDto);
 
         mockMvc.perform(get("/api/bookings/1"))
@@ -126,20 +141,20 @@ public class BookingControllerTest {
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/api/bookings/1/status")
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"status\":\"CONFIRMED\"}"))
+            .content(objectMapper.writeValueAsString(new BookingStatusUpdateRequest(com.tripplanner.backend.domain.model.BookingStatus.CONFIRMED))))
                 .andExpect(status().isForbidden());
     }
 
     @Test
     @WithMockUser(username = "admin@example.com", roles = {"ADMIN"})
     public void updateBookingStatus_whenAdmin_shouldAllow() throws Exception {
-        BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", "Standard", "CONFIRMED");
-        when(bookingService.updateBookingStatus(any(Long.class), any(String.class))).thenReturn(responseDto);
+        BookingResponseDto responseDto = new BookingResponseDto(1L, "John", "john@example.com", 5L, "Kerala Premium", "Kerala", java.time.LocalDate.now().plusDays(10), java.time.LocalDate.now().plusDays(15), 2, 1, 1, new java.math.BigDecimal("45000.00"), com.tripplanner.backend.domain.model.BookingStatus.CONFIRMED, java.time.LocalDateTime.now());
+        when(bookingService.updateBookingStatus(any(Long.class), any(com.tripplanner.backend.domain.model.BookingStatus.class))).thenReturn(responseDto);
 
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/api/bookings/1/status")
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"status\":\"CONFIRMED\"}"))
+            .content(objectMapper.writeValueAsString(new BookingStatusUpdateRequest(com.tripplanner.backend.domain.model.BookingStatus.CONFIRMED))))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("CONFIRMED"));
     }
