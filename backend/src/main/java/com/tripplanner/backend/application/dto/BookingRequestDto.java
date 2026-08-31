@@ -1,33 +1,90 @@
 package com.tripplanner.backend.application.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
+import java.time.LocalDate;
 
 public class BookingRequestDto {
-    @NotBlank(message = "Name is required")
-    private String name;
+    @NotNull(message = "Package ID is required")
+    private Long packageId;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Invalid email format")
-    private String email;
+    @NotNull(message = "Departure date is required")
+    private LocalDate departureDate;
 
-    @NotBlank(message = "Package name is required")
-    private String packageName;
+    @NotNull(message = "Return date is required")
+    private LocalDate returnDate;
 
-    public BookingRequestDto() {}
+    @NotNull(message = "Adults is required")
+    @Positive(message = "Adults must be greater than 0")
+    private Integer adults;
 
-    public BookingRequestDto(String name, String email, String packageName) {
-        this.name = name;
-        this.email = email;
-        this.packageName = packageName;
+    @NotNull(message = "Children is required")
+    @Min(value = 0, message = "Children cannot be negative")
+    private Integer children;
+
+    @NotNull(message = "Rooms is required")
+    @Positive(message = "Rooms must be at least 1")
+    private Integer rooms;
+
+    public BookingRequestDto() {
     }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public BookingRequestDto(Long packageId, LocalDate departureDate, LocalDate returnDate, Integer adults, Integer children, Integer rooms) {
+        this.packageId = packageId;
+        this.departureDate = departureDate;
+        this.returnDate = returnDate;
+        this.adults = adults;
+        this.children = children;
+        this.rooms = rooms;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public Long getPackageId() {
+        return packageId;
+    }
 
-    public String getPackageName() { return packageName; }
-    public void setPackageName(String packageName) { this.packageName = packageName; }
+    public void setPackageId(Long packageId) {
+        this.packageId = packageId;
+    }
+
+    public LocalDate getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(LocalDate departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public LocalDate getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public Integer getAdults() {
+        return adults;
+    }
+
+    public void setAdults(Integer adults) {
+        this.adults = adults;
+    }
+
+    public Integer getChildren() {
+        return children;
+    }
+
+    public void setChildren(Integer children) {
+        this.children = children;
+    }
+
+    public Integer getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Integer rooms) {
+        this.rooms = rooms;
+    }
 }
