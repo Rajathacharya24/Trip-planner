@@ -55,6 +55,7 @@ public class PackagePersistenceAdapter implements PackageDomainRepository {
         return new PackageEntity(
                 pkg.getId(),
                 pkg.getName(),
+                pkg.getDestination(),
                 pkg.getDescription(),
                 pkg.getPrice()
         );
@@ -64,6 +65,7 @@ public class PackagePersistenceAdapter implements PackageDomainRepository {
         return new Package(
                 entity.getId(),
                 entity.getName(),
+                entity.getDestination(),
                 entity.getDescription(),
                 entity.getPrice()
         );
