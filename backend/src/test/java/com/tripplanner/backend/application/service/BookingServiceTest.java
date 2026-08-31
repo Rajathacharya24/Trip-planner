@@ -55,11 +55,15 @@ public class BookingServiceTest {
 
         when(userRepository.findByEmail("john@example.com")).thenReturn(java.util.Optional.of(currentUser));
         when(packageRepository.findById(5L)).thenReturn(java.util.Optional.of(travelPackage));
-        when(bookingRepository.save(any(Booking.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        when(bookingRepository.save(any(Booking.class))).thenAnswer(invocation -> {
+            Booking booking = invocation.getArgument(0);
+            booking.setId(1001L);
+            return booking;
+        });
 
         BookingResponseDto responseDto = bookingService.createBooking(requestDto, "john@example.com");
 
-        assertEquals(10L, responseDto.getId());
+        assertEquals(1001L, responseDto.getId());
         assertEquals("John Doe", responseDto.getCustomerName());
         assertEquals("john@example.com", responseDto.getCustomerEmail());
         assertEquals(5L, responseDto.getPackageId());

@@ -31,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(BookingController.class)
 @Import(SecurityConfig.class)
 @WithMockUser
+@SuppressWarnings("null")
 public class BookingControllerTest {
 
     @Autowired
@@ -116,7 +117,7 @@ public class BookingControllerTest {
     @Test
     @WithMockUser
     public void createBooking_withInvalidData_shouldReturn400() throws Exception {
-        BookingRequestDto requestDto = new BookingRequestDto("", "invalid-email", "");
+        BookingRequestDto requestDto = new BookingRequestDto(null, null, null, null, null, null);
         
         mockMvc.perform(post("/api/bookings")
                 .with(csrf())

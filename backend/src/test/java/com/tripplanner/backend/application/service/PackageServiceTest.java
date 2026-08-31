@@ -25,14 +25,15 @@ public class PackageServiceTest {
 
     @Test
     public void createPackage_shouldReturnPackageResponseDto() {
-        PackageRequestDto requestDto = new PackageRequestDto("Budget", "Cheap", 1000);
-        Package savedPackage = new Package(1L, "Budget", "Cheap", 1000);
+        PackageRequestDto requestDto = new PackageRequestDto("Budget", "Kerala", "Cheap", 1000);
+        Package savedPackage = new Package(1L, "Budget", "Kerala", "Cheap", 1000);
 
         when(packageRepository.save(any(Package.class))).thenReturn(savedPackage);
 
         PackageResponseDto responseDto = packageService.createPackage(requestDto);
 
         assertEquals("Budget", responseDto.getName());
+        assertEquals("Kerala", responseDto.getDestination());
         assertEquals("Cheap", responseDto.getDescription());
         assertEquals(1000, responseDto.getPrice());
         assertEquals(1L, responseDto.getId());

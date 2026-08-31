@@ -26,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(PackageController.class)
 @Import(SecurityConfig.class)
+@SuppressWarnings("null")
 public class PackageControllerTest {
 
     @Autowired
@@ -45,7 +46,7 @@ public class PackageControllerTest {
 
     @Test
     public void noJwt_shouldRejectAdminPackageCreate() throws Exception {
-        PackageRequestDto requestDto = new PackageRequestDto("Budget", "Cheap", 1000);
+        PackageRequestDto requestDto = new PackageRequestDto("Budget", "Kerala", "Cheap", 1000);
 
         mockMvc.perform(post("/api/packages")
                 .with(csrf())
@@ -57,7 +58,7 @@ public class PackageControllerTest {
     @Test
     @WithMockUser(roles = {"USER"})
     public void user_shouldNotCreatePackage() throws Exception {
-        PackageRequestDto requestDto = new PackageRequestDto("Budget", "Cheap", 1000);
+        PackageRequestDto requestDto = new PackageRequestDto("Budget", "Kerala", "Cheap", 1000);
 
         mockMvc.perform(post("/api/packages")
                 .with(csrf())
@@ -69,8 +70,8 @@ public class PackageControllerTest {
     @Test
     @WithMockUser(roles = {"ADMIN"})
     public void admin_shouldCreatePackage() throws Exception {
-        PackageRequestDto requestDto = new PackageRequestDto("Budget", "Cheap", 1000);
-        PackageResponseDto responseDto = new PackageResponseDto(1L, "Budget", "Cheap", 1000);
+        PackageRequestDto requestDto = new PackageRequestDto("Budget", "Kerala", "Cheap", 1000);
+        PackageResponseDto responseDto = new PackageResponseDto(1L, "Budget", "Kerala", "Cheap", 1000);
         when(packageService.createPackage(any(PackageRequestDto.class))).thenReturn(responseDto);
 
         mockMvc.perform(post("/api/packages")
@@ -91,8 +92,8 @@ public class PackageControllerTest {
     @Test
     @WithMockUser(roles = {"ADMIN"})
     public void admin_shouldUpdatePackage() throws Exception {
-        PackageRequestDto requestDto = new PackageRequestDto("Updated", "Better", 2000);
-        PackageResponseDto responseDto = new PackageResponseDto(1L, "Updated", "Better", 2000);
+        PackageRequestDto requestDto = new PackageRequestDto("Updated", "Kerala", "Better", 2000);
+        PackageResponseDto responseDto = new PackageResponseDto(1L, "Updated", "Kerala", "Better", 2000);
         when(packageService.updatePackage(any(Long.class), any(PackageRequestDto.class))).thenReturn(responseDto);
 
         mockMvc.perform(put("/api/packages/1")
@@ -113,7 +114,7 @@ public class PackageControllerTest {
     @Test
     @WithMockUser(roles = {"ADMIN"})
     public void admin_shouldViewPackages() throws Exception {
-        when(packageService.getPackageById(1L)).thenReturn(new PackageResponseDto(1L, "Budget", "Cheap", 1000));
+        when(packageService.getPackageById(1L)).thenReturn(new PackageResponseDto(1L, "Budget", "Kerala", "Cheap", 1000));
 
         mockMvc.perform(get("/api/packages/1"))
                 .andExpect(status().isOk())
