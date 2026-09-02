@@ -140,11 +140,7 @@ public class BookingServiceTest {
 
     @Test
     public void createBooking_shouldRejectPastDepartureDate() {
-        User currentUser = new User(10L, "John Doe", "john@example.com", "secret", Role.USER, LocalDateTime.now(), LocalDateTime.now());
-        when(userRepository.findByEmail("john@example.com")).thenReturn(java.util.Optional.of(currentUser));
-
         BookingRequestDto requestDto = new BookingRequestDto(5L, LocalDate.now().minusDays(1), LocalDate.now().plusDays(2), 2, 1, 1);
-
         assertThrows(InvalidBookingRequestException.class, () -> bookingService.createBooking(requestDto, "john@example.com"));
     }
 
@@ -157,11 +153,7 @@ public class BookingServiceTest {
 
     @Test
     public void createBooking_shouldRejectReturnDateBeforeDepartureDate() {
-        User currentUser = new User(10L, "John Doe", "john@example.com", "secret", Role.USER, LocalDateTime.now(), LocalDateTime.now());
-        when(userRepository.findByEmail("john@example.com")).thenReturn(java.util.Optional.of(currentUser));
-
         BookingRequestDto requestDto = new BookingRequestDto(5L, LocalDate.now().plusDays(5), LocalDate.now().plusDays(2), 2, 1, 1);
-
         assertThrows(InvalidBookingRequestException.class, () -> bookingService.createBooking(requestDto, "john@example.com"));
     }
 }
