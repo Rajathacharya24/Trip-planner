@@ -30,3 +30,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### OS & Temp Files ###
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+
