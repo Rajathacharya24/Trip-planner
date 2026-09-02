@@ -150,9 +150,6 @@ public class BookingServiceTest {
 
     @Test
     public void createBooking_shouldRejectInvalidTravelerCounts() {
-        User currentUser = new User(10L, "John Doe", "john@example.com", "secret", Role.USER, LocalDateTime.now(), LocalDateTime.now());
-        when(userRepository.findByEmail("john@example.com")).thenReturn(java.util.Optional.of(currentUser));
-
         assertThrows(InvalidBookingRequestException.class, () -> bookingService.createBooking(new BookingRequestDto(5L, LocalDate.now().plusDays(1), LocalDate.now().plusDays(2), 0, 0, 1), "john@example.com"));
         assertThrows(InvalidBookingRequestException.class, () -> bookingService.createBooking(new BookingRequestDto(5L, LocalDate.now().plusDays(1), LocalDate.now().plusDays(2), 1, -1, 1), "john@example.com"));
         assertThrows(InvalidBookingRequestException.class, () -> bookingService.createBooking(new BookingRequestDto(5L, LocalDate.now().plusDays(1), LocalDate.now().plusDays(2), 1, 0, 0), "john@example.com"));

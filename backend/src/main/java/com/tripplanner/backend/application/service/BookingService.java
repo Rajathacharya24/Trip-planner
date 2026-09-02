@@ -49,8 +49,6 @@ public class BookingService {
         Package travelPackage = packageRepository.findById(requestDto.getPackageId())
                 .orElseThrow(() -> new ResourceNotFoundException("Package not found with id: " + requestDto.getPackageId()));
 
-        validateDates(requestDto.getDepartureDate(), requestDto.getReturnDate());
-
         BigDecimal totalAmount = calculateTotalAmount(travelPackage.getPrice(), requestDto.getAdults(), requestDto.getChildren(), requestDto.getRooms());
 
         Booking booking = new Booking();
@@ -110,8 +108,6 @@ public class BookingService {
 
         Package travelPackage = packageRepository.findById(requestDto.getPackageId())
                 .orElseThrow(() -> new ResourceNotFoundException("Package not found with id: " + requestDto.getPackageId()));
-
-        validateDates(requestDto.getDepartureDate(), requestDto.getReturnDate());
 
         booking.setTravelPackage(travelPackage);
         booking.setDestination(travelPackage.getDestination());
@@ -200,6 +196,7 @@ public class BookingService {
         if (requestDto.getRooms() == null || requestDto.getRooms() < 1) {
             throw new InvalidBookingRequestException("Rooms must be at least 1");
         }
+        validateDates(requestDto.getDepartureDate(), requestDto.getReturnDate());
     }
 
     private void validateDates(LocalDate departureDate, LocalDate returnDate) {
@@ -217,6 +214,6 @@ public class BookingService {
         BigDecimal adultCharge = basePrice.multiply(BigDecimal.valueOf(adults));
         BigDecimal childCharge = basePrice.multiply(BigDecimal.valueOf(children)).multiply(BigDecimal.valueOf(0.5));
         BigDecimal roomCharge = basePrice.multiply(BigDecimal.valueOf(rooms)).multiply(BigDecimal.valueOf(0.5));
-        return adultCharge.add(childCharge).add(roomCharge);
+        return adultCharge.add(childCharge).add(roomCharge).setScale(2, java.math.RoundingMode.HALF_UP);
     }
 }
