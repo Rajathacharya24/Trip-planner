@@ -83,16 +83,16 @@ mvn spring-boot:run
 
 ### 3. Frontend Setup & Run
 
-The frontend consists of static web assets located in the `frontend/` directory.
+The frontend consists of static web assets located in the root directory.
 
 **Option A: Simple HTTP Server (Recommended)**
 ```bash
-python3 -m http.server --directory frontend 8000
+python3 -m http.server 8000
 # Open http://localhost:8000 in your web browser
 ```
 
 **Option B: Direct Browser Opening**
-Open `frontend/index.html` directly in your browser.
+Open `index.html` directly in your browser.
 
 ---
 
