@@ -30,26 +30,25 @@
 ```text
 Trip-planner/
 ├── README.md                  # Project documentation
-├── backend/                   # Spring Boot backend application
-│   ├── pom.xml                # Maven dependencies & build configuration
-│   └── src/
-│       ├── main/
-│       │   ├── java/com/tripplanner/backend/
-│       │   │   ├── application/       # Services & DTOs
-│       │   │   ├── domain/            # Domain models, repositories & exceptions
-│       │   │   └── infrastructure/    # Web controllers, JPA entities, Security & Config
-│       │   └── resources/
-│       │       ├── application.properties
-│       │       └── db/migration/      # Flyway SQL migrations (V1..V5)
-│       └── test/              # Comprehensive JUnit 5 & MockMvc unit test suite
-└── frontend/                  # Static frontend web client
-    ├── booking.html           # Interactive multi-step booking page & admin dashboard
-    ├── explore.html           # Destination showcase & detail view
-    ├── index.html             # Homepage, featured packages & location tracker
-    ├── login.html             # User authentication login form
-    ├── register.html          # New user registration form
-    ├── style.css              # Global custom stylesheet & theme variables
-    └── images/                # Destination & showcase images
+├── index.html                 # Homepage, featured packages & location tracker
+├── booking.html               # Interactive multi-step booking page & admin dashboard
+├── explore.html               # Destination showcase & detail view
+├── login.html                 # User authentication login form
+├── register.html              # New user registration form
+├── style.css                  # Global custom stylesheet & theme variables
+├── images/                    # Destination & showcase images
+└── backend/                   # Spring Boot backend application
+    ├── pom.xml                # Maven dependencies & build configuration
+    └── src/
+        ├── main/
+        │   ├── java/com/tripplanner/backend/
+        │   │   ├── application/       # Services & DTOs
+        │   │   ├── domain/            # Domain models, repositories & exceptions
+        │   │   └── infrastructure/    # Web controllers, JPA entities, Security & Config
+        │   └── resources/
+        │       ├── application.properties
+        │       └── db/migration/      # Flyway SQL migrations (V1..V5)
+        └── test/              # Comprehensive JUnit 5 & MockMvc unit test suite
 ```
 
 ---
