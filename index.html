@@ -11,7 +11,7 @@
   <!-- Google Fonts & Bootstrap -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-lg sticky-top">
   <div class="container">
     <a class="navbar-brand" href="index.html">
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="brand-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10"></circle>
         <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
       </svg>
@@ -44,23 +44,56 @@
   </div>
 </nav>
 
-<!-- Hero Section with Soft Vignette -->
+<!-- Hero Section with Vignette -->
 <section id="home" class="hero-vignette text-center">
   <div class="hero-bg-overlay" style="background-image: url('images/pexels-lina-12238221.jpg');"></div>
   <div class="hero-vignette-layer"></div>
   <div class="container hero-content">
-    <span class="hero-tagline">Boutique Travel & Curated Itineraries</span>
-    <h1 class="hero-title">Embark on Extraordinary Expeditions</h1>
-    <p class="hero-lead">Rediscover the joy of vintage wanderlust with handcrafted journeys tailored for the discerning voyager.</p>
+    <span class="hero-tagline">Est. 1925 &bull; Handcrafted Expeditions</span>
+    <h1 class="hero-title">Embark on Extraordinary <span class="text-gold-gradient">Expeditions</span></h1>
+    <p class="hero-lead">Rediscover the timeless romance of vintage wanderlust with curated boutique journeys designed for the modern voyager.</p>
+    
     <div class="d-flex justify-content-center gap-3 flex-wrap">
       <a href="explore.html" class="btn btn-terracotta">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"></circle>
           <polygon points="12 8 8 12 12 16 12 8"></polygon>
         </svg>
-        Explore Destinations
+        Explore Gazette
       </a>
-      <a href="booking.html" class="btn btn-gold-outline text-white" style="border-color: rgba(250,246,238,0.5);">Plan Your Trip</a>
+      <a href="booking.html" class="btn btn-gold-outline text-white" style="border-color: rgba(250,246,238,0.6);">Reserve Your Voyage</a>
+    </div>
+  </div>
+</section>
+
+<!-- Gazette Stats Counter Bar -->
+<section class="gazette-stats-bar">
+  <div class="container">
+    <div class="row g-4 justify-content-center">
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <div class="stat-number">45+</div>
+          <div class="stat-label">Curated Destinations</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <div class="stat-number">1,200+</div>
+          <div class="stat-label">Expeditions Completed</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <div class="stat-number">99.8%</div>
+          <div class="stat-label">Guest Approval Rate</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Boutique Concierge</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -70,7 +103,7 @@
   <div class="collapse" id="location-tracker-content">
     <div class="location-widget text-center">
       <div class="mb-3">
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
           <circle cx="12" cy="10" r="3"></circle>
         </svg>
@@ -95,8 +128,9 @@
 <!-- Fab Favourite Destinations Section -->
 <section id="destinations" class="container my-5">
   <div class="section-header-wrap">
+    <span class="passport-stamp mb-2">Approved Portfolio</span>
     <h2 class="section-title">Curated Destinations</h2>
-    <div class="section-subtitle">handpicked escapes for timeless memories</div>
+    <div class="script-accent">handpicked escapes for timeless memories</div>
   </div>
 
   <div class="row g-4">
@@ -110,7 +144,7 @@
         <div class="journal-card-body">
           <h3 class="journal-card-title">Dubai, UAE</h3>
           <p class="journal-card-desc">Where ancient silk roads embrace futuristic luxury and golden dunes.</p>
-          <a href="explore.html#dubai" class="btn btn-gold-outline mt-auto">View Details</a>
+          <a href="explore.html#dubai" class="btn btn-gold-outline mt-auto">View Portfolio Details</a>
         </div>
       </div>
     </div>
@@ -125,7 +159,7 @@
         <div class="journal-card-body">
           <h3 class="journal-card-title">Northern China</h3>
           <p class="journal-card-desc">Land of ancient emperors, imperial palaces, and majestic mist-veiled peaks.</p>
-          <a href="explore.html#china" class="btn btn-gold-outline mt-auto">View Details</a>
+          <a href="explore.html#china" class="btn btn-gold-outline mt-auto">View Portfolio Details</a>
         </div>
       </div>
     </div>
@@ -140,7 +174,7 @@
         <div class="journal-card-body">
           <h3 class="journal-card-title">Kerala, India</h3>
           <p class="journal-card-desc">Serene emerald backwaters, spice-scented breezes, and ayurvedic sanctuaries.</p>
-          <a href="explore.html#kerala" class="btn btn-gold-outline mt-auto">View Details</a>
+          <a href="explore.html#kerala" class="btn btn-gold-outline mt-auto">View Portfolio Details</a>
         </div>
       </div>
     </div>
@@ -150,15 +184,16 @@
 <!-- Section Divider -->
 <div class="container">
   <div class="section-divider">
-    <span class="section-divider-icon">⚜</span>
+    <span class="section-divider-icon">⚜ ⚜ ⚜</span>
   </div>
 </div>
 
 <!-- Travel Packages Section -->
 <section id="packages" class="container my-5">
   <div class="section-header-wrap">
+    <span class="passport-stamp mb-2">First Class Tiers</span>
     <h2 class="section-title">Boutique Travel Packages</h2>
-    <div class="section-subtitle">all-inclusive itineraries tailored to your pace</div>
+    <div class="script-accent">all-inclusive itineraries tailored to your pace</div>
   </div>
 
   <div class="row g-4">
@@ -167,7 +202,7 @@
       <div class="package-ticket-card package-card" onclick="openPackageModal('Ordinary Package')" style="cursor: pointer;">
         <div class="package-header">
           <div>
-            <span class="text-uppercase text-muted" style="font-size:0.75rem; letter-spacing: 0.1em;">Standard Edition</span>
+            <span class="font-cinzel text-muted" style="font-size:0.7rem; letter-spacing: 0.12em;">STANDARD EDITION</span>
             <h3 class="package-title">Ordinary Package</h3>
           </div>
           <div class="package-price-tag">₹15,000</div>
@@ -198,7 +233,7 @@
       <div class="package-ticket-card luxury package-card" onclick="openPackageModal('Luxury Package')" style="cursor: pointer;">
         <div class="package-header">
           <div>
-            <span class="text-uppercase" style="font-size:0.75rem; letter-spacing: 0.1em; color: var(--gold-muted);">First Class Edition</span>
+            <span class="font-cinzel text-gold-muted" style="font-size:0.7rem; letter-spacing: 0.12em;">GRAND EXPRESS EDITION</span>
             <h3 class="package-title">Luxury Package</h3>
           </div>
           <div class="package-price-tag" style="color: var(--navy-deep);">₹35,000</div>
@@ -230,14 +265,14 @@
 <section id="safety" class="container my-5">
   <div class="section-header-wrap">
     <h2 class="section-title">The Voyager Standard</h2>
-    <div class="section-subtitle">trustworthy, sophisticated, and protected journeying</div>
+    <div class="script-accent">trustworthy, sophisticated, and protected journeying</div>
   </div>
 
   <div class="row g-4">
     <div class="col-lg-3 col-md-6">
       <div class="feature-box">
         <div class="feature-icon-wrap">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
         </div>
         <h4>Secure Booking</h4>
         <p>Verified trip details, protected APIs, and session-safe user data encryption.</p>
@@ -246,7 +281,7 @@
     <div class="col-lg-3 col-md-6">
       <div class="feature-box">
         <div class="feature-icon-wrap">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
         </div>
         <h4>24/7 Concierge</h4>
         <p>Dedicated travel coordination and local assistance for every custom itinerary.</p>
@@ -255,7 +290,7 @@
     <div class="col-lg-3 col-md-6">
       <div class="feature-box">
         <div class="feature-icon-wrap">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
         </div>
         <h4>Privacy Guarantee</h4>
         <p>Your contact and travel preferences are strictly private and never shared.</p>
@@ -264,7 +299,7 @@
     <div class="col-lg-3 col-md-6">
       <div class="feature-box">
         <div class="feature-icon-wrap">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
         </div>
         <h4>Curated Plans</h4>
         <p>Every destination is personally audited for safety, comfort, and authenticity.</p>
@@ -362,14 +397,14 @@
   <div class="container">
     <div class="row g-4">
       <div class="col-md-6">
-        <h5 class="d-flex align-items-center gap-2">
+        <h5 class="d-flex align-items-center gap-2 font-serif">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
-          TripPlanner
+          TripPlanner Agency
         </h5>
-        <p>Curating timeless voyages, boutique itineraries, and classic wanderlust since 2025.</p>
+        <p>Curating timeless voyages, boutique itineraries, and classic wanderlust since 1925.</p>
       </div>
       <div class="col-md-6 text-md-end">
-        <h5>Boutique Inquiries</h5>
+        <h5 class="font-serif">Boutique Inquiries</h5>
         <p>📧 concierge@tripplanner.com<br>📞 +91 98765 43210</p>
       </div>
     </div>
