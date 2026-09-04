@@ -7,11 +7,11 @@
   <meta http-equiv="Referrer-Policy" content="no-referrer">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <title>Plan Your Voyage - TripPlanner</title>
+  <title>Plan Your Voyage - TripPlanner Gazette</title>
   <!-- Google Fonts & Bootstrap -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-lg sticky-top">
   <div class="container">
     <a class="navbar-brand" href="index.html">
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="brand-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10"></circle>
         <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
       </svg>
@@ -47,8 +47,8 @@
   <div class="hero-bg-overlay" style="background-image: url('images/pexels-swastikarora-19743480.jpg');"></div>
   <div class="hero-vignette-layer"></div>
   <div class="container hero-content">
-    <span class="hero-tagline">Boutique Booking Journal</span>
-    <h1 class="hero-title">Plan Your Bespoke Voyage</h1>
+    <span class="hero-tagline">Vol. 1925 &bull; Booking Journal</span>
+    <h1 class="hero-title">Plan Your Bespoke <span class="text-gold-gradient">Voyage</span></h1>
     <p class="hero-lead">Fill in your travel preferences and our concierges will curate an unforgettable journey.</p>
     
     <div class="booking-progress-wrap">
@@ -80,7 +80,7 @@
         <div class="booking-step active" id="step1">
           <div class="border-bottom pb-3 mb-4 d-flex align-items-center justify-content-between">
             <h4 class="font-serif text-navy mb-0">1. Voyager Identification</h4>
-            <span class="text-muted" style="font-size:0.85rem;">Step 1 of 3</span>
+            <span class="font-cinzel text-muted" style="font-size:0.75rem; letter-spacing:0.1em;">STEP 1 OF 3</span>
           </div>
 
           <div class="row g-3">
@@ -118,7 +118,7 @@
         <div class="booking-step" id="step2">
           <div class="border-bottom pb-3 mb-4 d-flex align-items-center justify-content-between">
             <h4 class="font-serif text-navy mb-0">2. Itinerary & Travelers</h4>
-            <span class="text-muted" style="font-size:0.85rem;">Step 2 of 3</span>
+            <span class="font-cinzel text-muted" style="font-size:0.75rem; letter-spacing:0.1em;">STEP 2 OF 3</span>
           </div>
 
           <div class="row g-3 mb-3">
@@ -138,7 +138,7 @@
             <div class="row g-3" id="packageSelector">
               <div class="col-md-6">
                 <div class="package-ticket-card package-card" onclick="selectPackage('Ordinary Package')" style="cursor:pointer;" data-package="Ordinary Package">
-                  <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
                     <h5 class="font-serif mb-0">Ordinary Package</h5>
                     <span class="badge bg-secondary">₹15,000</span>
                   </div>
@@ -147,7 +147,7 @@
               </div>
               <div class="col-md-6">
                 <div class="package-ticket-card luxury package-card" onclick="selectPackage('Luxury Package')" style="cursor:pointer;" data-package="Luxury Package">
-                  <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
                     <h5 class="font-serif mb-0" style="color:var(--navy-deep);">Luxury Package</h5>
                     <span class="badge" style="background-color: var(--terracotta);">₹35,000</span>
                   </div>
@@ -202,15 +202,15 @@
             <h5 class="font-serif text-navy mb-2">Estimated Itinerary Summary</h5>
             <div class="row text-center g-2 mt-2">
               <div class="col-4 border-end">
-                <small class="text-muted d-block">Duration</small>
+                <small class="text-muted d-block font-cinzel">Duration</small>
                 <strong id="tripDuration" class="font-serif text-navy">Select dates</strong>
               </div>
               <div class="col-4 border-end">
-                <small class="text-muted d-block">Travelers</small>
+                <small class="text-muted d-block font-cinzel">Travelers</small>
                 <strong id="totalTravelers" class="font-serif text-navy">2</strong>
               </div>
               <div class="col-4">
-                <small class="text-muted d-block">Est. Total Cost</small>
+                <small class="text-muted d-block font-cinzel">Est. Total Cost</small>
                 <strong id="estimatedCost" class="font-serif text-terracotta" style="color:var(--terracotta);">₹30,000</strong>
               </div>
             </div>
@@ -226,7 +226,7 @@
         <div class="booking-step" id="step3">
           <div class="border-bottom pb-3 mb-4 d-flex align-items-center justify-content-between">
             <h4 class="font-serif text-navy mb-0">3. Review & Confirm Booking</h4>
-            <span class="text-muted" style="font-size:0.85rem;">Step 3 of 3</span>
+            <span class="font-cinzel text-muted" style="font-size:0.75rem; letter-spacing:0.1em;">STEP 3 OF 3</span>
           </div>
 
           <div class="trip-summary-box mb-4">
@@ -248,7 +248,7 @@
         <!-- Success Message -->
         <div id="successMessage" class="alert alert-success mt-4 d-none" style="background-color: var(--bg-paper); border-color: var(--gold-muted); color: var(--navy-deep);">
           <div class="text-center py-3">
-            <div class="mb-3" style="font-size: 3rem; color: var(--gold-muted);">⚜</div>
+            <div class="mb-3" style="font-size: 3.5rem; color: var(--gold-muted);">⚜</div>
             <h3 class="font-serif text-navy">🎉 Voyage Booking Confirmed!</h3>
             <p>Thank you for choosing TripPlanner. Our boutique concierge will reach out to confirm your custom travel documents.</p>
             <div class="trip-summary-box mt-3 text-start">
@@ -271,25 +271,25 @@
     <div class="row g-4 mb-4 text-center">
       <div class="col-md-3">
         <div class="bg-white border rounded p-3 shadow-sm">
-          <small class="text-muted">Total Users</small>
+          <small class="text-muted font-cinzel">Total Users</small>
           <h3 id="dash-total-users" class="font-serif text-navy mb-0">0</h3>
         </div>
       </div>
       <div class="col-md-3">
         <div class="bg-white border rounded p-3 shadow-sm">
-          <small class="text-muted">Total Packages</small>
+          <small class="text-muted font-cinzel">Total Packages</small>
           <h3 id="dash-total-packages" class="font-serif text-navy mb-0">0</h3>
         </div>
       </div>
       <div class="col-md-3">
         <div class="bg-white border rounded p-3 shadow-sm">
-          <small class="text-muted">Total Bookings</small>
+          <small class="text-muted font-cinzel">Total Bookings</small>
           <h3 id="dash-total-bookings" class="font-serif text-navy mb-0">0</h3>
         </div>
       </div>
       <div class="col-md-3">
         <div class="bg-white border rounded p-3 shadow-sm">
-          <small class="text-muted">Total Revenue</small>
+          <small class="text-muted font-cinzel">Total Revenue</small>
           <h3 id="dash-total-revenue" class="font-serif text-terracotta mb-0">₹0</h3>
         </div>
       </div>
@@ -335,14 +335,14 @@
   <div class="container">
     <div class="row g-4">
       <div class="col-md-6">
-        <h5 class="d-flex align-items-center gap-2">
+        <h5 class="d-flex align-items-center gap-2 font-serif">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
-          TripPlanner
+          TripPlanner Agency
         </h5>
-        <p>Curating timeless voyages, boutique itineraries, and classic wanderlust since 2025.</p>
+        <p>Curating timeless voyages, boutique itineraries, and classic wanderlust since 1925.</p>
       </div>
       <div class="col-md-6 text-md-end">
-        <h5>Boutique Inquiries</h5>
+        <h5 class="font-serif">Boutique Inquiries</h5>
         <p>📧 concierge@tripplanner.com<br>📞 +91 98765 43210</p>
       </div>
     </div>
