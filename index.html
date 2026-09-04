@@ -2,202 +2,314 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' http://localhost:8082 http://127.0.0.1:8082; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https://cdn.jsdelivr.net https://images.unsplash.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' http://localhost:8082 http://127.0.0.1:8082; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
   <meta http-equiv="Referrer-Policy" content="no-referrer">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <title>Trip Planner</title>
+  <title>TripPlanner - Grand Voyage & Curated Journeys</title>
+  <!-- Google Fonts & Bootstrap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.html">TripPlanner</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="brand-icon">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+      </svg>
+      TripPlanner
+    </a>
+    <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto" id="nav-links">
-        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#explore">Explore</a></li>
+      <ul class="navbar-nav ms-auto align-items-lg-center" id="nav-links">
+        <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="explore.html">Explore</a></li>
         <li class="nav-item"><a class="nav-link" href="#destinations">Destinations</a></li>
         <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
         <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#location-tracker-content" role="button" aria-expanded="false" aria-controls="location-tracker-content">Location</a></li>
-        <!-- Dynamic links will be injected here via JS -->
+        <!-- Dynamic Auth Links injected via JS -->
       </ul>
+      <a href="booking.html" class="btn btn-nav-cta">Plan Your Trip</a>
     </div>
   </div>
 </nav>
 
-<!-- Hero Section -->
-<section id="home" class="text-center p-5 bg-light">
-  <h1>Find Your Destination</h1>
-  <p>Plan your dream vacation with ease!</p>
-  <a href="explore.html" class="btn btn-primary">Explore Now</a>
+<!-- Hero Section with Soft Vignette -->
+<section id="home" class="hero-vignette text-center">
+  <div class="hero-bg-overlay" style="background-image: url('images/pexels-lina-12238221.jpg');"></div>
+  <div class="hero-vignette-layer"></div>
+  <div class="container hero-content">
+    <span class="hero-tagline">Boutique Travel & Curated Itineraries</span>
+    <h1 class="hero-title">Embark on Extraordinary Expeditions</h1>
+    <p class="hero-lead">Rediscover the joy of vintage wanderlust with handcrafted journeys tailored for the discerning voyager.</p>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <a href="explore.html" class="btn btn-terracotta">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polygon points="12 8 8 12 12 16 12 8"></polygon>
+        </svg>
+        Explore Destinations
+      </a>
+      <a href="booking.html" class="btn btn-gold-outline text-white" style="border-color: rgba(250,246,238,0.5);">Plan Your Trip</a>
+    </div>
+  </div>
 </section>
 
-<!-- Location Tracker -->
+<!-- Location Tracker Widget -->
 <section class="container my-5">
   <div class="collapse" id="location-tracker-content">
-    <h2 class="text-center mb-4">Live Location Tracker</h2>
-    <div class="d-flex justify-content-center align-items-center flex-wrap gap-3">
-      <button id="track-btn" class="btn btn-primary">Show My Location</button>
-      <div id="location-display"></div>
+    <div class="location-widget text-center">
+      <div class="mb-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+      </div>
+      <h2 class="h3 font-serif mb-2">Live Traveler Location Tracker</h2>
+      <p class="text-light mb-4" style="opacity: 0.85;">Sync your global coordinates to view surrounding points of interest.</p>
+      <div class="d-flex justify-content-center align-items-center flex-wrap gap-3">
+        <button id="track-btn" class="btn btn-terracotta">Show My Location</button>
+        <div id="location-display"></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Fab Favourite -->
+<!-- Section Divider -->
+<div class="container">
+  <div class="section-divider">
+    <span class="section-divider-icon">✦ ✦ ✦</span>
+  </div>
+</div>
+
+<!-- Fab Favourite Destinations Section -->
 <section id="destinations" class="container my-5">
-  <h2 class="text-center mb-4">Fab Favourite</h2>
-  <div class="row">
-    <div class="col-md-4 mb-3">
-      <div class="card">
-        <img src="images/pexels-lina-12238221.jpg" class="card-img-top" alt="Dubai">
-        <div class="card-body">
-          <h5 class="card-title">Dubai,UAE</h5>
-          <p class="card-text">Where tradition meets towering luxury.</p>
-          <a href="explore.html#dubai" class="btn btn-outline-primary">View Details</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 mb-3">
-      <div class="card">
-        <img src="images/pexels-manjose-19872.jpg" class="card-img-top" alt="Northern China">
-        <div class="card-body">
-          <h5 class="card-title">Northern, China</h5>
-          <p class="card-text">Land of emperors and ancient wonders.</p>
-          <a href="explore.html#china" class="btn btn-outline-primary">View Details</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 mb-3">
-      <div class="card">
-        <img src="images/pexels-swastikarora-19743480.jpg" class="card-img-top" alt="Kerala">
-        <div class="card-body">
-          <h5 class="card-title">Kerala,India</h5>
-          <p class="card-text">God's own country.</p>
-          <a href="explore.html#kerala" class="btn btn-outline-primary">View Details</a>
-        </div>
-      </div>
-    </div>
+  <div class="section-header-wrap">
+    <h2 class="section-title">Curated Destinations</h2>
+    <div class="section-subtitle">handpicked escapes for timeless memories</div>
   </div>
-</section>
 
-<!-- Packages -->
-<section id="packages" class="container my-5">
-  <h2 class="text-center mb-4">Packages</h2>
-  <div class="row">
-    <div class="col-md-6 mb-3">
-        <div class="card package-card" onclick="openPackageModal('Ordinary Package')" style="cursor: pointer;">
-        <div class="card-body">
-          <h5 class="card-title">Ordinary Package</h5>
-          <ul>
-            <li>Hotel Stay</li>
-            <li>Basic Transport</li>
-            <li>2 Meals Daily</li>
-          </ul>
-          <p><strong>₹15,000</strong></p>
-          <button class="btn btn-outline-primary">View Details</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6 mb-3">
-        <div class="card package-card" onclick="openPackageModal('Luxury Package')" style="cursor: pointer;">
-        <div class="card-body">
-          <h5 class="card-title">Luxury Package</h5>
-          <ul>
-            <li>5-Star Hotel</li>
-            <li>Private Cab</li>
-            <li>All Meals Included</li>
-          </ul>
-          <p><strong>₹35,000</strong></p>
-          <button class="btn btn-outline-primary">View Details</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Safety & Smart Travel Protection -->
-<section id="safety" class="container my-5">
-  <h2 class="text-center mb-4">Safety & Smart Travel Protection</h2>
   <div class="row g-4">
-    <div class="col-md-3">
-      <div class="feature-card text-center h-100 p-4">
-        <div class="feature-icon">🛡️</div>
-        <h4>Secure Booking</h4>
-        <p>Verified trip details, protected APIs, and session-safe user data handling.</p>
+    <!-- Dubai Card -->
+    <div class="col-lg-4 col-md-6">
+      <div class="journal-card">
+        <div class="photo-frame-wrap">
+          <span class="card-badge">Middle East</span>
+          <img src="images/pexels-lina-12238221.jpg" class="photo-frame-img" alt="Dubai, UAE">
+        </div>
+        <div class="journal-card-body">
+          <h3 class="journal-card-title">Dubai, UAE</h3>
+          <p class="journal-card-desc">Where ancient silk roads embrace futuristic luxury and golden dunes.</p>
+          <a href="explore.html#dubai" class="btn btn-gold-outline mt-auto">View Details</a>
+        </div>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="feature-card text-center h-100 p-4">
-        <div class="feature-icon">📍</div>
-        <h4>Live Support</h4>
-        <p>Emergency coordination and local assistance for every itinerary.</p>
+
+    <!-- China Card -->
+    <div class="col-lg-4 col-md-6">
+      <div class="journal-card">
+        <div class="photo-frame-wrap">
+          <span class="card-badge">East Asia</span>
+          <img src="images/pexels-manjose-19872.jpg" class="photo-frame-img" alt="Northern China">
+        </div>
+        <div class="journal-card-body">
+          <h3 class="journal-card-title">Northern China</h3>
+          <p class="journal-card-desc">Land of ancient emperors, imperial palaces, and majestic mist-veiled peaks.</p>
+          <a href="explore.html#china" class="btn btn-gold-outline mt-auto">View Details</a>
+        </div>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="feature-card text-center h-100 p-4">
-        <div class="feature-icon">🔒</div>
-        <h4>Privacy First</h4>
-        <p>Your contact information is validated and kept private from third-party exposure.</p>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="feature-card text-center h-100 p-4">
-        <div class="feature-icon">✅</div>
-        <h4>Trusted Plans</h4>
-        <p>Every destination and package is reviewed for safe, reliable travel planning.</p>
+
+    <!-- Kerala Card -->
+    <div class="col-lg-4 col-md-6">
+      <div class="journal-card">
+        <div class="photo-frame-wrap">
+          <span class="card-badge">South Asia</span>
+          <img src="images/pexels-swastikarora-19743480.jpg" class="photo-frame-img" alt="Kerala, India">
+        </div>
+        <div class="journal-card-body">
+          <h3 class="journal-card-title">Kerala, India</h3>
+          <p class="journal-card-desc">Serene emerald backwaters, spice-scented breezes, and ayurvedic sanctuaries.</p>
+          <a href="explore.html#kerala" class="btn btn-gold-outline mt-auto">View Details</a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Simple Package Modal -->
+<!-- Section Divider -->
+<div class="container">
+  <div class="section-divider">
+    <span class="section-divider-icon">⚜</span>
+  </div>
+</div>
+
+<!-- Travel Packages Section -->
+<section id="packages" class="container my-5">
+  <div class="section-header-wrap">
+    <h2 class="section-title">Boutique Travel Packages</h2>
+    <div class="section-subtitle">all-inclusive itineraries tailored to your pace</div>
+  </div>
+
+  <div class="row g-4">
+    <!-- Ordinary / Heritage Package -->
+    <div class="col-md-6">
+      <div class="package-ticket-card package-card" onclick="openPackageModal('Ordinary Package')" style="cursor: pointer;">
+        <div class="package-header">
+          <div>
+            <span class="text-uppercase text-muted" style="font-size:0.75rem; letter-spacing: 0.1em;">Standard Edition</span>
+            <h3 class="package-title">Ordinary Package</h3>
+          </div>
+          <div class="package-price-tag">₹15,000</div>
+        </div>
+        <ul class="package-features-list">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+            Boutique 3-Star Hotel Stay
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            Guided Ground Transport
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+            Daily Breakfast & Dinner Included
+          </li>
+        </ul>
+        <div class="mt-auto">
+          <p class="mb-0"><strong>Price: ₹15,000</strong></p>
+          <button class="btn btn-gold-outline w-100 mt-2">View Itinerary Details</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Luxury / Grand Express Package -->
+    <div class="col-md-6">
+      <div class="package-ticket-card luxury package-card" onclick="openPackageModal('Luxury Package')" style="cursor: pointer;">
+        <div class="package-header">
+          <div>
+            <span class="text-uppercase" style="font-size:0.75rem; letter-spacing: 0.1em; color: var(--gold-muted);">First Class Edition</span>
+            <h3 class="package-title">Luxury Package</h3>
+          </div>
+          <div class="package-price-tag" style="color: var(--navy-deep);">₹35,000</div>
+        </div>
+        <ul class="package-features-list">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            5-Star Heritage Hotel Accommodation
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+            Private Chauffeur Service
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            All Gourmet Meals & Concierge Included
+          </li>
+        </ul>
+        <div class="mt-auto">
+          <p class="mb-0"><strong>Price: ₹35,000</strong></p>
+          <button class="btn btn-terracotta w-100 mt-2">View Luxury Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Safety & Smart Protection Section -->
+<section id="safety" class="container my-5">
+  <div class="section-header-wrap">
+    <h2 class="section-title">The Voyager Standard</h2>
+    <div class="section-subtitle">trustworthy, sophisticated, and protected journeying</div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-3 col-md-6">
+      <div class="feature-box">
+        <div class="feature-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <h4>Secure Booking</h4>
+        <p>Verified trip details, protected APIs, and session-safe user data encryption.</p>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="feature-box">
+        <div class="feature-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        </div>
+        <h4>24/7 Concierge</h4>
+        <p>Dedicated travel coordination and local assistance for every custom itinerary.</p>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="feature-box">
+        <div class="feature-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+        <h4>Privacy Guarantee</h4>
+        <p>Your contact and travel preferences are strictly private and never shared.</p>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="feature-box">
+        <div class="feature-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        </div>
+        <h4>Curated Plans</h4>
+        <p>Every destination is personally audited for safety, comfort, and authenticity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ordinary Package Modal -->
 <div class="modal fade" id="simplePackageModal" tabindex="-1" aria-labelledby="simplePackageModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="simplePackageModalLabel">Simple Package Details</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="simplePackageModalLabel">Ordinary Package Details</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="row">
+        <div class="row g-4">
           <div class="col-md-6">
-            <h6 class="text-primary">What's Included:</h6>
-            <ul class="package-features">
-              <li>✅ 3-Star Hotel Accommodation</li>
-              <li>✅ Daily Breakfast & Dinner</li>
-              <li>✅ Airport Transfers</li>
-              <li>✅ Local Sightseeing</li>
-              <li>✅ Basic Travel Insurance</li>
-              <li>✅ 24/7 Support</li>
+            <h6 class="font-serif text-primary mb-3">Inclusions:</h6>
+            <ul class="list-unstyled">
+              <li class="py-1">✓ 3-Star Hotel Accommodation</li>
+              <li class="py-1">✓ Daily Breakfast & Dinner</li>
+              <li class="py-1">✓ Airport Transfers</li>
+              <li class="py-1">✓ Local Sightseeing Guided Tour</li>
+              <li class="py-1">✓ Basic Travel Insurance</li>
             </ul>
           </div>
           <div class="col-md-6">
-            <h6 class="text-primary">Package Highlights:</h6>
-            <ul class="package-highlights">
-              <li>🏨 Comfortable hotel stay</li>
-              <li>🚗 Shared transportation</li>
-              <li>🍽️ 2 meals per day</li>
-              <li>📱 Mobile app access</li>
-              <li>🎫 Entry to major attractions</li>
-              <li>📞 Emergency contact</li>
+            <h6 class="font-serif text-primary mb-3">Highlights:</h6>
+            <ul class="list-unstyled">
+              <li class="py-1">🏨 Comfortable curated stays</li>
+              <li class="py-1">🚗 Shared air-conditioned transport</li>
+              <li class="py-1">🎟️ Access to main historic sites</li>
             </ul>
           </div>
         </div>
-        <div class="package-price mt-4">
-          <h4 class="text-center">Total Price: <span class="text-success">₹15,000</span></h4>
-          <p class="text-center text-muted">Per person for 5 days / 4 nights</p>
+        <div class="trip-summary-box text-center mt-4">
+          <h4 class="font-serif mb-1">Package Price: <span style="color: var(--terracotta);">₹15,000</span></h4>
+          <small class="text-muted">Per person for 5 days / 4 nights</small>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success" onclick="selectPackage('simple')">Select This Package</button>
+        <button type="button" class="btn btn-gold-outline" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-terracotta" onclick="selectPackage('simple')">Select This Package</button>
       </div>
     </div>
   </div>
@@ -205,49 +317,41 @@
 
 <!-- Luxury Package Modal -->
 <div class="modal fade" id="luxuryPackageModal" tabindex="-1" aria-labelledby="luxuryPackageModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="luxuryPackageModalLabel">Luxury Package Details</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="row">
+        <div class="row g-4">
           <div class="col-md-6">
-            <h6 class="text-primary">What's Included:</h6>
-            <ul class="package-features">
-              <li>✅ 5-Star Luxury Hotel</li>
-              <li>✅ All Meals (Breakfast, Lunch, Dinner)</li>
-              <li>✅ Private Chauffeur Service</li>
-              <li>✅ Premium Sightseeing Tours</li>
-              <li>✅ Spa & Wellness Access</li>
-              <li>✅ VIP Airport Lounge Access</li>
-              <li>✅ Premium Travel Insurance</li>
-              <li>✅ Personal Travel Concierge</li>
+            <h6 class="font-serif text-primary mb-3">Luxury Inclusions:</h6>
+            <ul class="list-unstyled">
+              <li class="py-1">✓ 5-Star Heritage Luxury Stay</li>
+              <li class="py-1">✓ Gourmet Fine-Dining All Meals</li>
+              <li class="py-1">✓ Private Chauffeur Vehicle</li>
+              <li class="py-1">✓ VIP Airport Lounge Access</li>
+              <li class="py-1">✓ Personal Travel Concierge</li>
             </ul>
           </div>
           <div class="col-md-6">
-            <h6 class="text-primary">Luxury Features:</h6>
-            <ul class="package-highlights">
-              <li>🏨 5-star accommodation</li>
-              <li>🚗 Private luxury vehicle</li>
-              <li>🍽️ Fine dining experiences</li>
-              <li>💆 Spa treatments included</li>
-              <li>🎫 Skip-the-line attractions</li>
-              <li>👑 VIP experiences</li>
-              <li>📱 Dedicated app with premium features</li>
-              <li>🎁 Welcome gift package</li>
+            <h6 class="font-serif text-primary mb-3">Exclusive Features:</h6>
+            <ul class="list-unstyled">
+              <li class="py-1">💆 Spa & wellness session</li>
+              <li class="py-1">👑 Skip-the-line attraction passes</li>
+              <li class="py-1">🎁 Premium welcome souvenir</li>
             </ul>
           </div>
         </div>
-        <div class="package-price mt-4">
-          <h4 class="text-center">Total Price: <span class="text-success">₹35,000</span></h4>
-          <p class="text-center text-muted">Per person for 5 days / 4 nights</p>
+        <div class="trip-summary-box text-center mt-4">
+          <h4 class="font-serif mb-1">Package Price: <span style="color: var(--navy-deep);">₹35,000</span></h4>
+          <small class="text-muted">Per person for 5 days / 4 nights</small>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success" onclick="selectPackage('luxury')">Select This Package</button>
+        <button type="button" class="btn btn-gold-outline" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-terracotta" onclick="selectPackage('luxury')">Select Luxury Package</button>
       </div>
     </div>
   </div>
@@ -255,7 +359,23 @@
 
 <!-- Footer -->
 <footer>
-  &copy; 2025 TripPlanner. All rights reserved.
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <h5 class="d-flex align-items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+          TripPlanner
+        </h5>
+        <p>Curating timeless voyages, boutique itineraries, and classic wanderlust since 2025.</p>
+      </div>
+      <div class="col-md-6 text-md-end">
+        <h5>Boutique Inquiries</h5>
+        <p>📧 concierge@tripplanner.com<br>📞 +91 98765 43210</p>
+      </div>
+    </div>
+    <hr>
+    <p class="text-center mb-0">&copy; 2025 TripPlanner Agency. All rights reserved.</p>
+  </div>
 </footer>
 
 <script>
@@ -315,7 +435,6 @@
     window.location.href = 'index.html';
   }
 
-  // Initial call
   document.addEventListener('DOMContentLoaded', updateNavbar);
 
   function openPackageModal(packageType) {
@@ -330,7 +449,6 @@
     if (Array.isArray(responseBody)) {
       return responseBody;
     }
-
     return responseBody?.content ?? [];
   }
 
@@ -339,7 +457,7 @@
 
   if (trackBtn) {
     trackBtn.addEventListener('click', () => {
-      locationDisplay.innerHTML = 'Fetching location...';
+      locationDisplay.innerHTML = '<span class="text-light">Fetching coordinates...</span>';
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
       } else {
@@ -352,12 +470,12 @@
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
     locationDisplay.innerHTML = `
-      <div class="d-flex align-items-center gap-3">
-        <div class="text-nowrap">
-          <strong>Latitude:</strong> ${latitude.toFixed(4)}<br>
-          <strong>Longitude:</strong> ${longitude.toFixed(4)}
+      <div class="d-flex align-items-center gap-3 mt-2">
+        <div class="text-start">
+          <small class="text-gold-light">Latitude:</small> ${latitude.toFixed(4)}<br>
+          <small class="text-gold-light">Longitude:</small> ${longitude.toFixed(4)}
         </div>
-        <a href="https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}#map=15/${latitude}/${longitude}" class="btn btn-success" target="_blank">View on Map</a>
+        <a href="https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}#map=15/${latitude}/${longitude}" class="btn btn-gold-outline text-white" target="_blank">View Map</a>
       </div>
     `;
   }
@@ -365,21 +483,20 @@
   function showError(error) {
     switch(error.code) {
       case error.PERMISSION_DENIED:
-        locationDisplay.innerHTML = "User denied the request for Geolocation."
+        locationDisplay.innerHTML = "User denied Geolocation request.";
         break;
       case error.POSITION_UNAVAILABLE:
-        locationDisplay.innerHTML = "Location information is unavailable."
+        locationDisplay.innerHTML = "Location unavailable.";
         break;
       case error.TIMEOUT:
-        locationDisplay.innerHTML = "The request to get user location timed out."
+        locationDisplay.innerHTML = "Location request timed out.";
         break;
       case error.UNKNOWN_ERROR:
-        locationDisplay.innerHTML = "An unknown error occurred."
+        locationDisplay.innerHTML = "An unknown error occurred.";
         break;
     }
   }
 
-  // Fetch and display packages from backend
   fetch('http://localhost:8082/api/packages')
     .then(response => response.json())
     .then(responseBody => {
@@ -387,15 +504,14 @@
       const packageCards = document.querySelectorAll('.package-card');
       packages.forEach((pkg, idx) => {
         if (packageCards[idx]) {
-          packageCards[idx].querySelector('.card-title').textContent = pkg.name;
-          packageCards[idx].querySelector('ul').innerHTML = pkg.description.split(',').map(item => `<li>${item.trim()}</li>`).join('');
-          packageCards[idx].querySelector('p strong').textContent = `₹${pkg.price}`;
+          packageCards[idx].querySelector('.package-title').textContent = pkg.name;
+          packageCards[idx].querySelector('ul').innerHTML = pkg.description.split(',').map(item => `<li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> ${item.trim()}</li>`).join('');
+          packageCards[idx].querySelector('.package-price-tag').textContent = `₹${pkg.price}`;
         }
       });
     })
     .catch(err => console.log('Could not fetch packages:', err));
 
-  // Update selectPackage to POST booking to backend
   function selectPackage(packageName) {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -408,12 +524,7 @@
       ? 'Luxury Package'
       : 'Ordinary Package';
 
-    // Store the selected package name
     localStorage.setItem('selectedPackage', resolvedPackageName);
-    
-    // We get the name and email from the backend during token validation anyway,
-    // but the backend requires Name for the DTO for now (or email).
-    // Let's pass a placeholder name or retrieve from localStorage.
     const name = localStorage.getItem('userName') || 'User';
 
     fetch('http://localhost:8082/api/bookings', {
@@ -422,7 +533,6 @@
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
       },
-      // Backend automatically sets the email from token, we send name and packageName
       body: JSON.stringify({ name, email: "dummy@example.com", packageName: resolvedPackageName })
     })
       .then(res => {
@@ -437,7 +547,6 @@
       })
       .then(data => {
         alert("Booking successful! Booking ID: " + (data.id || "Success"));
-        // Close all modals
         const modals = document.querySelectorAll('.modal');
         modals.forEach(modal => {
           const modalInstance = bootstrap.Modal.getInstance(modal);
@@ -445,7 +554,6 @@
             modalInstance.hide();
           }
         });
-        // Redirect to booking page
         window.location.href ='booking.html';
       })
       .catch(err => alert(err.message || 'Booking failed. Please try again.'));
