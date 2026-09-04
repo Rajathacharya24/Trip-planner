@@ -2,154 +2,215 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' http://localhost:8082 http://127.0.0.1:8082; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https://cdn.jsdelivr.net https://images.unsplash.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' http://localhost:8082 http://127.0.0.1:8082; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
   <meta http-equiv="Referrer-Policy" content="no-referrer">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <title>Explore Destinations - Trip Planner</title>
+  <title>Explore Destinations - TripPlanner</title>
+  <!-- Google Fonts & Bootstrap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.html">TripPlanner</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="brand-icon">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+      </svg>
+      TripPlanner
+    </a>
+    <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto" id="nav-links">
+      <ul class="navbar-nav ms-auto align-items-lg-center" id="nav-links">
         <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
         <li class="nav-item"><a class="nav-link active" href="#destinations">Destinations</a></li>
-        <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
-        <!-- Dynamic links will be injected here via JS -->
+        <li class="nav-item"><a class="nav-link" href="index.html#packages">Packages</a></li>
+        <!-- Dynamic Links injected via JS -->
       </ul>
+      <a href="booking.html" class="btn btn-nav-cta">Plan Your Trip</a>
     </div>
   </div>
 </nav>
 
-<!-- Hero Section -->
-<section id="hero" class="text-center p-5">
-  <div class="container">
-    <h1 class="display-4 mb-4">Explore Amazing Destinations</h1>
-    <p class="lead mb-4">Discover the world's most beautiful places and create unforgettable memories</p>
-    <a href="#destinations" class="btn btn-primary btn-lg">Start Exploring</a>
+<!-- Hero Section with Vignette -->
+<section id="hero" class="hero-vignette text-center">
+  <div class="hero-bg-overlay" style="background-image: url('images/pexels-manjose-19872.jpg');"></div>
+  <div class="hero-vignette-layer"></div>
+  <div class="container hero-content">
+    <span class="hero-tagline">Curated Travel Gazette</span>
+    <h1 class="hero-title">Discover Marvels of the World</h1>
+    <p class="hero-lead">Immerse yourself in rich cultures, ancient heritage, and breathtaking natural wonders.</p>
+    <a href="#destinations" class="btn btn-terracotta">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+      Start Exploring
+    </a>
   </div>
 </section>
 
+<!-- Section Divider -->
+<div class="container mt-5">
+  <div class="section-divider">
+    <span class="section-divider-icon">⚜ ⚜ ⚜</span>
+  </div>
+</div>
+
 <!-- Detailed Destinations -->
 <section id="destinations" class="container my-5">
-  <h2 class="text-center mb-5">Our Featured Destinations</h2>
+  <div class="section-header-wrap">
+    <h2 class="section-title">Featured Destinations</h2>
+    <div class="section-subtitle">handcrafted itineraries for the modern voyager</div>
+  </div>
   
   <!-- Dubai -->
-  <div class="destination-card mb-5" id="dubai">
-    <div class="row align-items-center">
-      <div class="col-md-7">
-        <img src="images/pexels-lina-12238221.jpg" class="img-fluid rounded destination-image" alt="Dubai">
-      </div>
-      <div class="col-md-5">
-        <div class="destination-content">
-          <h3>Dubai, UAE</h3>
-          <p class="destination-subtitle">Where tradition meets towering luxury</p>
-          <div class="destination-features">
-            <h5>Highlights:</h5>
-            <ul>
-              <li>🏗️ Burj Khalifa - World's tallest building</li>
-              <li>🏖️ Palm Jumeirah - Artificial island paradise</li>
-              <li>🛍️ Dubai Mall - Shopping extravaganza</li>
-              <li>🏜️ Desert Safari adventures</li>
-              <li>🕌 Historic mosques and culture</li>
-              <li>🌆 Modern skyline views</li>
-            </ul>
-          </div>
-          <div class="destination-info">
-            <div class="row">
-              <div class="col-6">
-                <strong>Best Time:</strong> Nov - Mar
-              </div>
-              <div class="col-6">
-                <strong>Duration:</strong> 5-7 days
-              </div>
-            </div>
-          </div>
-          <button class="btn btn-success mt-3" onclick="selectDestination('Dubai')">Choose Dubai</button>
+  <div class="editorial-card mb-5" id="dubai">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7">
+        <div class="editorial-img-frame">
+          <img src="images/pexels-lina-12238221.jpg" alt="Dubai skyline">
         </div>
+      </div>
+      <div class="col-lg-5">
+        <h3 class="font-serif display-6 text-navy">Dubai, UAE</h3>
+        <p class="section-subtitle mb-3">Where tradition meets towering luxury</p>
+        
+        <h5 class="font-serif h6 text-uppercase text-muted tracking-wider mb-2">Key Highlights</h5>
+        <ul class="package-features-list mb-3">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            Burj Khalifa & Skyline Observation Deck
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            Palm Jumeirah & Private Beach Excursions
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            Sunset Desert Safari & Bedouin Dining
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            Spice & Gold Souk Heritage Tours
+          </li>
+        </ul>
+
+        <div class="editorial-meta-box">
+          <div class="editorial-meta-item">
+            <small>Best Season</small>
+            <strong>Nov – Mar</strong>
+          </div>
+          <div class="editorial-meta-item">
+            <small>Suggested Stay</small>
+            <strong>5 – 7 Days</strong>
+          </div>
+        </div>
+
+        <button class="btn btn-terracotta w-100" onclick="selectDestination('Dubai')">Select Dubai Destination</button>
       </div>
     </div>
   </div>
 
   <!-- Northern China -->
-  <div class="destination-card mb-5" id="china">
-    <div class="row align-items-center">
-      <div class="col-md-7 order-md-2">
-        <img src="images/pexels-manjose-19872.jpg" class="img-fluid rounded destination-image" alt="Northern China">
-      </div>
-      <div class="col-md-5 order-md-1">
-        <div class="destination-content">
-          <h3>Northern China</h3>
-          <p class="destination-subtitle">Land of emperors and ancient wonders</p>
-          <div class="destination-features">
-            <h5>Highlights:</h5>
-            <ul>
-              <li>🏛️ Great Wall of China</li>
-              <li>🏮 Forbidden City exploration</li>
-              <li>🐉 Traditional Chinese culture</li>
-              <li>🍜 Authentic cuisine experiences</li>
-              <li>🌸 Cherry blossom seasons</li>
-              <li>🏯 Ancient temples and palaces</li>
-            </ul>
-          </div>
-          <div class="destination-info">
-            <div class="row">
-              <div class="col-6">
-                <strong>Best Time:</strong> Mar - May, Sep - Nov
-              </div>
-              <div class="col-6">
-                <strong>Duration:</strong> 7-10 days
-              </div>
-            </div>
-          </div>
-          <button class="btn btn-success mt-3" onclick="selectDestination('Northern China')">Choose Northern China</button>
+  <div class="editorial-card mb-5" id="china">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7 order-lg-2">
+        <div class="editorial-img-frame">
+          <img src="images/pexels-manjose-19872.jpg" alt="Northern China">
         </div>
+      </div>
+      <div class="col-lg-5 order-lg-1">
+        <h3 class="font-serif display-6 text-navy">Northern China</h3>
+        <p class="section-subtitle mb-3">Land of emperors and ancient wonders</p>
+        
+        <h5 class="font-serif h6 text-uppercase text-muted tracking-wider mb-2">Key Highlights</h5>
+        <ul class="package-features-list mb-3">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            Great Wall of China Hiking Expedition
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            Forbidden City Imperial Palace Tour
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            Authentic Cuisine & Tea Ceremonies
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            Terracotta Army & Ancient Temples
+          </li>
+        </ul>
+
+        <div class="editorial-meta-box">
+          <div class="editorial-meta-item">
+            <small>Best Season</small>
+            <strong>Mar – May, Sep – Nov</strong>
+          </div>
+          <div class="editorial-meta-item">
+            <small>Suggested Stay</small>
+            <strong>7 – 10 Days</strong>
+          </div>
+        </div>
+
+        <button class="btn btn-terracotta w-100" onclick="selectDestination('Northern China')">Select Northern China</button>
       </div>
     </div>
   </div>
 
   <!-- Kerala -->
-  <div class="destination-card mb-5" id="kerala">
-    <div class="row align-items-center">
-      <div class="col-md-7">
-        <img src="images/pexels-swastikarora-19743480.jpg" class="img-fluid rounded destination-image" alt="Kerala">
-      </div>
-      <div class="col-md-5">
-        <div class="destination-content">
-          <h3>Kerala, India</h3>
-          <p class="destination-subtitle">God's own country</p>
-          <div class="destination-features">
-            <h5>Highlights:</h5>
-            <ul>
-              <li>🚣 Backwater houseboat cruises</li>
-              <li>🌴 Coconut groves and beaches</li>
-              <li>🏔️ Western Ghats mountains</li>
-              <li>🍃 Ayurvedic wellness retreats</li>
-              <li>🎭 Traditional Kathakali performances</li>
-              <li>🌊 Arabian Sea coastline</li>
-            </ul>
-          </div>
-          <div class="destination-info">
-            <div class="row">
-              <div class="col-6">
-                <strong>Best Time:</strong> Oct - Mar
-              </div>
-              <div class="col-6">
-                <strong>Duration:</strong> 6-8 days
-              </div>
-            </div>
-          </div>
-          <button class="btn btn-success mt-3" onclick="selectDestination('Kerala')">Choose Kerala</button>
+  <div class="editorial-card mb-5" id="kerala">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7">
+        <div class="editorial-img-frame">
+          <img src="images/pexels-swastikarora-19743480.jpg" alt="Kerala, India">
         </div>
+      </div>
+      <div class="col-lg-5">
+        <h3 class="font-serif display-6 text-navy">Kerala, India</h3>
+        <p class="section-subtitle mb-3">God's own country</p>
+        
+        <h5 class="font-serif h6 text-uppercase text-muted tracking-wider mb-2">Key Highlights</h5>
+        <ul class="package-features-list mb-3">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            Alleppey Houseboat Backwater Cruise
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            Munnar Tea Gardens & Spice Plantations
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            Traditional Ayurvedic Wellness Sanctuary
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            Kathakali Performance & Arabian Sea Sunset
+          </li>
+        </ul>
+
+        <div class="editorial-meta-box">
+          <div class="editorial-meta-item">
+            <small>Best Season</small>
+            <strong>Oct – Mar</strong>
+          </div>
+          <div class="editorial-meta-item">
+            <small>Suggested Stay</small>
+            <strong>6 – 8 Days</strong>
+          </div>
+        </div>
+
+        <button class="btn btn-terracotta w-100" onclick="selectDestination('Kerala')">Select Kerala Destination</button>
       </div>
     </div>
   </div>
@@ -157,27 +218,36 @@
 
 <!-- Why Choose Us -->
 <section id="why-choose" class="container my-5">
-  <h2 class="text-center mb-5">Why Choose TripPlanner?</h2>
-  <div class="row">
-    <div class="col-md-4 mb-4">
-      <div class="feature-card text-center">
-        <div class="feature-icon">🌟</div>
+  <div class="section-header-wrap">
+    <h2 class="section-title">Why Travel With Us?</h2>
+    <div class="section-subtitle">unmatched elegance, expertise, and personalized touch</div>
+  </div>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="feature-box">
+        <div class="feature-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        </div>
         <h4>Expert Planning</h4>
-        <p>Our travel experts create personalized itineraries just for you.</p>
+        <p>Our travel specialists craft bespoke itineraries tailored to your unique travel desires.</p>
       </div>
     </div>
-    <div class="col-md-4 mb-4">
-      <div class="feature-card text-center">
-        <div class="feature-icon">💰</div>
-        <h4>Best Prices</h4>
-        <p>We guarantee the best rates and exclusive deals for our customers.</p>
+    <div class="col-md-4">
+      <div class="feature-box">
+        <div class="feature-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        </div>
+        <h4>Transparent Pricing</h4>
+        <p>We guarantee exceptional value, zero hidden fees, and transparent package costs.</p>
       </div>
     </div>
-    <div class="col-md-4 mb-4">
-      <div class="feature-card text-center">
-        <div class="feature-icon">🛡️</div>
-        <h4>Safe Travel</h4>
-        <p>Your safety is our priority with comprehensive travel insurance.</p>
+    <div class="col-md-4">
+      <div class="feature-box">
+        <div class="feature-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <h4>Protected Journeys</h4>
+        <p>Comprehensive travel insurance, emergency support, and verified safety standards.</p>
       </div>
     </div>
   </div>
@@ -185,28 +255,31 @@
 
 <!-- Call to Action -->
 <section id="cta" class="container my-5 text-center">
-  <div class="cta-content">
-    <h2>Ready to Start Your Adventure?</h2>
-    <p class="lead mb-4">Choose your destination and let us plan the perfect trip for you!</p>
-    <a href="index.html#booking" class="btn btn-primary btn-lg">Book Now</a>
+  <div class="location-widget">
+    <h2 class="font-serif display-6 text-gold-light mb-3">Ready to Begin Your Next Expedition?</h2>
+    <p class="lead text-light mb-4" style="opacity: 0.9;">Choose your preferred destination and let our concierge plan your perfect journey.</p>
+    <a href="booking.html" class="btn btn-terracotta px-5 py-3">Book Your Trip Now</a>
   </div>
 </section>
 
 <!-- Footer -->
 <footer>
   <div class="container">
-    <div class="row">
+    <div class="row g-4">
       <div class="col-md-6">
-        <h5>TripPlanner</h5>
-        <p>Making your travel dreams come true since 2025.</p>
+        <h5 class="d-flex align-items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+          TripPlanner
+        </h5>
+        <p>Curating timeless voyages, boutique itineraries, and classic wanderlust since 2025.</p>
       </div>
       <div class="col-md-6 text-md-end">
-        <h5>Contact Us</h5>
-        <p>📧 info@tripplanner.com<br>📞 +91 98765 43210</p>
+        <h5>Boutique Inquiries</h5>
+        <p>📧 concierge@tripplanner.com<br>📞 +91 98765 43210</p>
       </div>
     </div>
     <hr>
-    <p class="text-center mb-0">&copy; 2025 TripPlanner. All rights reserved.</p>
+    <p class="text-center mb-0">&copy; 2025 TripPlanner Agency. All rights reserved.</p>
   </div>
 </footer>
 
@@ -267,14 +340,10 @@
     window.location.href = 'index.html';
   }
 
-  // Initial call
   document.addEventListener('DOMContentLoaded', updateNavbar);
 
   function selectDestination(destination) {
-    // Store the selected destination
     localStorage.setItem('selectedDestination', destination);
-    
-    // Redirect to booking page
     window.location.href = 'booking.html';
   }
 </script>

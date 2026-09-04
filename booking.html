@@ -2,52 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' http://localhost:8082 http://127.0.0.1:8082; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https://cdn.jsdelivr.net https://images.unsplash.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' http://localhost:8082 http://127.0.0.1:8082; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
   <meta http-equiv="Referrer-Policy" content="no-referrer">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <title>Book Your Trip - Trip Planner</title>
+  <title>Plan Your Voyage - TripPlanner</title>
+  <!-- Google Fonts & Bootstrap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.html">TripPlanner</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="brand-icon">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+      </svg>
+      TripPlanner
+    </a>
+    <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto" id="nav-links">
+      <ul class="navbar-nav ms-auto align-items-lg-center" id="nav-links">
         <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="explore.html">Explore</a></li>
-        <!-- Dynamic links will be injected here via JS -->
+        <li class="nav-item"><a class="nav-link" href="index.html#packages">Packages</a></li>
+        <!-- Dynamic links injected via JS -->
       </ul>
+      <a href="booking.html" class="btn btn-nav-cta">Plan Your Trip</a>
     </div>
   </div>
 </nav>
 
 <!-- Interactive Hero Section -->
-<section id="booking-hero" class="text-center p-5">
-  <div class="container">
-    <h1 class="display-4 mb-4 animate-text">Book Your Trip</h1>
-    <p class="lead mb-4">Fill in your details and we'll plan your perfect vacation</p>
-    <div class="booking-progress">
-      <div class="progress-circle active" data-step="1">
-        <span>1</span>
-        <small>Personal</small>
+<section id="booking-hero" class="hero-vignette text-center">
+  <div class="hero-bg-overlay" style="background-image: url('images/pexels-swastikarora-19743480.jpg');"></div>
+  <div class="hero-vignette-layer"></div>
+  <div class="container hero-content">
+    <span class="hero-tagline">Boutique Booking Journal</span>
+    <h1 class="hero-title">Plan Your Bespoke Voyage</h1>
+    <p class="hero-lead">Fill in your travel preferences and our concierges will curate an unforgettable journey.</p>
+    
+    <div class="booking-progress-wrap">
+      <div class="progress-step-item active">
+        <div class="progress-circle">1</div>
+        <span class="progress-step-label d-none d-sm-inline">Personal Info</span>
       </div>
-      <div class="progress-line"></div>
-      <div class="progress-circle" data-step="2">
-        <span>2</span>
-        <small>Trip</small>
+      <div class="progress-connector"></div>
+      <div class="progress-step-item">
+        <div class="progress-circle">2</div>
+        <span class="progress-step-label d-none d-sm-inline">Trip Details</span>
       </div>
-      <div class="progress-line"></div>
-      <div class="progress-circle" data-step="3">
-        <span>3</span>
-        <small>Confirm</small>
+      <div class="progress-connector"></div>
+      <div class="progress-step-item">
+        <div class="progress-circle">3</div>
+        <span class="progress-step-label d-none d-sm-inline">Confirmation</span>
       </div>
     </div>
   </div>
@@ -56,154 +73,192 @@
 <!-- Interactive Booking Form -->
 <section id="booking-form" class="container my-5">
   <div class="row">
-    <div class="col-lg-8 mx-auto">
-      <div class="booking-card">
+    <div class="col-lg-9 mx-auto">
+      <div class="booking-journal-paper">
         
         <!-- Step 1: Personal Information -->
         <div class="booking-step active" id="step1">
-          <h4 class="section-title">Personal Information</h4>
-          <div class="row">
-            <div class="col-md-6 mb-3">
+          <div class="border-bottom pb-3 mb-4 d-flex align-items-center justify-content-between">
+            <h4 class="font-serif text-navy mb-0">1. Voyager Identification</h4>
+            <span class="text-muted" style="font-size:0.85rem;">Step 1 of 3</span>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6 mb-2">
               <label for="firstName" class="form-label">First Name *</label>
-              <input type="text" class="form-control interactive-input" id="firstName" required>
+              <input type="text" class="form-control interactive-input" id="firstName" placeholder="e.g. Eleanor" required>
               <div class="input-feedback"></div>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-2">
               <label for="lastName" class="form-label">Last Name *</label>
-              <input type="text" class="form-control interactive-input" id="lastName" required>
+              <input type="text" class="form-control interactive-input" id="lastName" placeholder="e.g. Vance" required>
               <div class="input-feedback"></div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="email" class="form-label">Email *</label>
-              <input type="email" class="form-control interactive-input" id="email" required>
+
+          <div class="row g-3 mt-1">
+            <div class="col-md-6 mb-2">
+              <label for="email" class="form-label">Email Address *</label>
+              <input type="email" class="form-control interactive-input" id="email" placeholder="eleanor@example.com" required>
               <div class="input-feedback"></div>
             </div>
-            <div class="col-md-6 mb-3">
-              <label for="phone" class="form-label">Phone *</label>
-              <input type="tel" class="form-control interactive-input" id="phone" required>
+            <div class="col-md-6 mb-2">
+              <label for="phone" class="form-label">Phone / Contact Number *</label>
+              <input type="tel" class="form-control interactive-input" id="phone" placeholder="+91 98765 43210" required>
               <div class="input-feedback"></div>
             </div>
           </div>
-          <div class="text-center mt-4">
-            <button class="btn btn-primary btn-lg" onclick="nextStep()" id="nextBtn1">Next Step</button>
+
+          <div class="text-end mt-4 pt-3 border-top">
+            <button class="btn btn-terracotta" onclick="nextStep()" id="nextBtn1">Continue to Trip Details &rarr;</button>
           </div>
         </div>
 
         <!-- Step 2: Trip Details -->
         <div class="booking-step" id="step2">
-          <h4 class="section-title">Trip Details</h4>
-          <div class="row mb-4">
-            <div class="col-md-6 mb-3">
-              <label for="selectedPackageName" class="form-label">Package *</label>
-              <input type="text" id="selectedPackageName" class="form-control" readonly placeholder="Select a package below">
+          <div class="border-bottom pb-3 mb-4 d-flex align-items-center justify-content-between">
+            <h4 class="font-serif text-navy mb-0">2. Itinerary & Travelers</h4>
+            <span class="text-muted" style="font-size:0.85rem;">Step 2 of 3</span>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label for="selectedPackageName" class="form-label">Selected Package *</label>
+              <input type="text" id="selectedPackageName" class="form-control" readonly placeholder="Choose a package below">
             </div>
-            <div class="col-md-6 mb-3">
-              <label for="selectedDestination" class="form-label">Destination *</label>
-              <input type="text" id="selectedDestination" class="form-control" readonly placeholder="Derived from the selected package">
+            <div class="col-md-6">
+              <label for="selectedDestination" class="form-label">Selected Destination *</label>
+              <input type="text" id="selectedDestination" class="form-control" readonly placeholder="Derived from package or explore page">
             </div>
           </div>
 
-          <!-- Backend-driven Package Selection -->
+          <!-- Package Selection Cards -->
           <div class="mb-4">
-            <label class="form-label">Select Your Package *</label>
-            <div class="package-selector" id="packageSelector">
-              <div class="text-muted">Loading packages...</div>
+            <label class="form-label mb-2">Select Voyage Tier *</label>
+            <div class="row g-3" id="packageSelector">
+              <div class="col-md-6">
+                <div class="package-ticket-card package-card" onclick="selectPackage('Ordinary Package')" style="cursor:pointer;" data-package="Ordinary Package">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="font-serif mb-0">Ordinary Package</h5>
+                    <span class="badge bg-secondary">₹15,000</span>
+                  </div>
+                  <small class="text-muted">Hotel stay, basic transport & 2 meals daily</small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="package-ticket-card luxury package-card" onclick="selectPackage('Luxury Package')" style="cursor:pointer;" data-package="Luxury Package">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="font-serif mb-0" style="color:var(--navy-deep);">Luxury Package</h5>
+                    <span class="badge" style="background-color: var(--terracotta);">₹35,000</span>
+                  </div>
+                  <small class="text-muted">5-Star hotel, private chauffeur & all meals</small>
+                </div>
+              </div>
             </div>
           </div>
 
           <!-- Travel Dates -->
-          <div class="row">
-            <div class="col-md-6 mb-3">
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
               <label for="departureDate" class="form-label">Departure Date *</label>
               <input type="date" class="form-control interactive-input" id="departureDate" required>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6">
               <label for="returnDate" class="form-label">Return Date *</label>
               <input type="date" class="form-control interactive-input" id="returnDate" required>
             </div>
           </div>
 
-          <!-- Travelers -->
-          <div class="row">
-            <div class="col-md-4 mb-3">
-              <label for="adults" class="form-label">Adults *</label>
+          <!-- Traveler Numbers -->
+          <div class="row g-3 mb-3">
+            <div class="col-md-4">
+              <label for="adults" class="form-label">Adults (12+ yrs) *</label>
               <div class="number-selector">
                 <button type="button" class="btn-number" onclick="changeNumber('adults', -1)">-</button>
-                <input type="number" class="form-control" id="adults" value="2" min="1" max="10" readonly>
+                <input type="number" id="adults" value="2" min="1" max="10" readonly>
                 <button type="button" class="btn-number" onclick="changeNumber('adults', 1)">+</button>
               </div>
             </div>
-            <div class="col-md-4 mb-3">
-              <label for="children" class="form-label">Children</label>
+            <div class="col-md-4">
+              <label for="children" class="form-label">Children (2-11 yrs)</label>
               <div class="number-selector">
                 <button type="button" class="btn-number" onclick="changeNumber('children', -1)">-</button>
-                <input type="number" class="form-control" id="children" value="0" min="0" max="8" readonly>
+                <input type="number" id="children" value="0" min="0" max="8" readonly>
                 <button type="button" class="btn-number" onclick="changeNumber('children', 1)">+</button>
               </div>
             </div>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4">
               <label for="rooms" class="form-label">Rooms *</label>
               <div class="number-selector">
                 <button type="button" class="btn-number" onclick="changeNumber('rooms', -1)">-</button>
-                <input type="number" class="form-control" id="rooms" value="1" min="1" max="5" readonly>
+                <input type="number" id="rooms" value="1" min="1" max="5" readonly>
                 <button type="button" class="btn-number" onclick="changeNumber('rooms', 1)">+</button>
               </div>
             </div>
           </div>
 
-          <!-- Trip Summary -->
-          <div class="trip-summary" id="tripSummary">
-            <h5>Trip Summary</h5>
-            <div class="summary-content">
-              <p><strong>Duration:</strong> <span id="tripDuration">Select dates</span></p>
-              <p><strong>Total Travelers:</strong> <span id="totalTravelers">2</span></p>
-              <p><strong>Estimated Cost:</strong> <span id="estimatedCost">₹30,000</span></p>
+          <!-- Summary Box -->
+          <div class="trip-summary-box" id="tripSummary">
+            <h5 class="font-serif text-navy mb-2">Estimated Itinerary Summary</h5>
+            <div class="row text-center g-2 mt-2">
+              <div class="col-4 border-end">
+                <small class="text-muted d-block">Duration</small>
+                <strong id="tripDuration" class="font-serif text-navy">Select dates</strong>
+              </div>
+              <div class="col-4 border-end">
+                <small class="text-muted d-block">Travelers</small>
+                <strong id="totalTravelers" class="font-serif text-navy">2</strong>
+              </div>
+              <div class="col-4">
+                <small class="text-muted d-block">Est. Total Cost</small>
+                <strong id="estimatedCost" class="font-serif text-terracotta" style="color:var(--terracotta);">₹30,000</strong>
+              </div>
             </div>
           </div>
 
-          <div class="text-center mt-4">
-            <button class="btn btn-secondary btn-lg me-3" onclick="prevStep()">Previous</button>
-            <button class="btn btn-primary btn-lg" onclick="nextStep()" id="nextBtn2">Next Step</button>
+          <div class="d-flex justify-content-between mt-4 pt-3 border-top">
+            <button class="btn btn-gold-outline" onclick="prevStep()">&larr; Previous</button>
+            <button class="btn btn-terracotta" onclick="nextStep()" id="nextBtn2">Review & Confirm &rarr;</button>
           </div>
         </div>
 
         <!-- Step 3: Confirmation -->
         <div class="booking-step" id="step3">
-          <h4 class="section-title">Confirm Your Booking</h4>
-          
-          <div class="booking-summary-card">
+          <div class="border-bottom pb-3 mb-4 d-flex align-items-center justify-content-between">
+            <h4 class="font-serif text-navy mb-0">3. Review & Confirm Booking</h4>
+            <span class="text-muted" style="font-size:0.85rem;">Step 3 of 3</span>
+          </div>
+
+          <div class="trip-summary-box mb-4">
             <div id="finalBookingSummary"></div>
           </div>
 
           <!-- Special Requests -->
-          <div class="form-section mb-4">
-            <h5>Special Requests (Optional)</h5>
-            <textarea class="form-control" id="specialRequests" rows="3" placeholder="Tell us about any special requirements..."></textarea>
+          <div class="mb-4">
+            <label for="specialRequests" class="form-label">Special Requests & Dietary Preferences (Optional)</label>
+            <textarea class="form-control" id="specialRequests" rows="3" placeholder="Dietary restrictions, anniversary surprises, quiet room preference..."></textarea>
           </div>
 
-          <div class="text-center mt-4">
-            <button class="btn btn-secondary btn-lg me-3" onclick="prevStep()">Previous</button>
-            <button class="btn btn-success btn-lg" onclick="confirmBooking()">Confirm Booking</button>
+          <div class="d-flex justify-content-between mt-4 pt-3 border-top">
+            <button class="btn btn-gold-outline" onclick="prevStep()">&larr; Previous</button>
+            <button class="btn btn-terracotta px-4" onclick="confirmBooking()">Confirm Voyage Booking</button>
           </div>
         </div>
 
         <!-- Success Message -->
-        <div id="successMessage" class="alert alert-success mt-4 d-none">
-          <div class="text-center">
-            <div class="success-animation">
-              <div class="checkmark">✓</div>
-            </div>
-            <h4>🎉 Booking Confirmed!</h4>
-            <p>Thank you for choosing TripPlanner. We'll contact you soon with your travel details.</p>
-            <div class="booking-summary mt-3">
-              <h5>Booking Summary:</h5>
+        <div id="successMessage" class="alert alert-success mt-4 d-none" style="background-color: var(--bg-paper); border-color: var(--gold-muted); color: var(--navy-deep);">
+          <div class="text-center py-3">
+            <div class="mb-3" style="font-size: 3rem; color: var(--gold-muted);">⚜</div>
+            <h3 class="font-serif text-navy">🎉 Voyage Booking Confirmed!</h3>
+            <p>Thank you for choosing TripPlanner. Our boutique concierge will reach out to confirm your custom travel documents.</p>
+            <div class="trip-summary-box mt-3 text-start">
+              <h5 class="font-serif mb-2">Booking Summary:</h5>
               <div id="bookingSummary"></div>
             </div>
-            <a href="index.html" class="btn btn-primary mt-3">Back to Home</a>
+            <a href="index.html" class="btn btn-terracotta mt-4">Return to Home</a>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -211,51 +266,51 @@
 
 <!-- Admin Dashboard View -->
 <section id="admin-dashboard-section" class="container my-5 d-none">
-  <div class="card shadow p-4">
-    <h2 class="text-center mb-4">Admin Dashboard</h2>
+  <div class="booking-journal-paper">
+    <h2 class="font-serif text-center mb-4">Admin Concierge Dashboard</h2>
     <div class="row g-4 mb-4 text-center">
       <div class="col-md-3">
         <div class="bg-white border rounded p-3 shadow-sm">
-          <h6 class="text-muted">Total Users</h6>
-          <h3 id="dash-total-users">0</h3>
+          <small class="text-muted">Total Users</small>
+          <h3 id="dash-total-users" class="font-serif text-navy mb-0">0</h3>
         </div>
       </div>
       <div class="col-md-3">
         <div class="bg-white border rounded p-3 shadow-sm">
-          <h6 class="text-muted">Total Packages</h6>
-          <h3 id="dash-total-packages">0</h3>
+          <small class="text-muted">Total Packages</small>
+          <h3 id="dash-total-packages" class="font-serif text-navy mb-0">0</h3>
         </div>
       </div>
       <div class="col-md-3">
         <div class="bg-white border rounded p-3 shadow-sm">
-          <h6 class="text-muted">Total Bookings</h6>
-          <h3 id="dash-total-bookings">0</h3>
+          <small class="text-muted">Total Bookings</small>
+          <h3 id="dash-total-bookings" class="font-serif text-navy mb-0">0</h3>
         </div>
       </div>
       <div class="col-md-3">
         <div class="bg-white border rounded p-3 shadow-sm">
-          <h6 class="text-muted">Total Revenue</h6>
-          <h3 id="dash-total-revenue">₹0</h3>
+          <small class="text-muted">Total Revenue</small>
+          <h3 id="dash-total-revenue" class="font-serif text-terracotta mb-0">₹0</h3>
         </div>
       </div>
     </div>
 
     <div class="d-flex flex-wrap gap-2 justify-content-center mb-4">
-      <a class="btn btn-outline-primary" href="#manage-packages">Manage Packages</a>
-      <a class="btn btn-outline-primary" href="#manage-bookings">Manage Bookings</a>
+      <a class="btn btn-gold-outline" href="#manage-packages">Manage Packages</a>
+      <a class="btn btn-gold-outline" href="#manage-bookings">Manage Bookings</a>
     </div>
 
     <div id="manage-packages" class="mb-4">
-      <h4>Manage Packages</h4>
+      <h4 class="font-serif text-navy">Manage Packages</h4>
       <p class="text-muted mb-0">Use the package APIs to create, edit, and delete packages.</p>
     </div>
 
     <div id="manage-bookings" class="mb-3">
-      <h4>Manage Bookings</h4>
+      <h4 class="font-serif text-navy">Manage Bookings</h4>
     </div>
     <div class="table-responsive">
       <table class="table table-hover align-middle">
-        <thead class="table-dark">
+        <thead class="table-dark" style="background-color: var(--navy-deep);">
           <tr>
             <th>Booking ID</th>
             <th>Name</th>
@@ -278,18 +333,21 @@
 <!-- Footer -->
 <footer>
   <div class="container">
-    <div class="row">
+    <div class="row g-4">
       <div class="col-md-6">
-        <h5>DreamPlanner</h5>
-        <p>Making your travel dreams come true since 2025.</p>
+        <h5 class="d-flex align-items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+          TripPlanner
+        </h5>
+        <p>Curating timeless voyages, boutique itineraries, and classic wanderlust since 2025.</p>
       </div>
       <div class="col-md-6 text-md-end">
-        <h5>Contact Us</h5>
-        <p>📧 info@tripplanner.com<br>📞 +91 98765 43210</p>
+        <h5>Boutique Inquiries</h5>
+        <p>📧 concierge@tripplanner.com<br>📞 +91 98765 43210</p>
       </div>
     </div>
     <hr>
-    <p class="text-center mb-0">&copy; 2025 TripPlanner. All rights reserved.</p>
+    <p class="text-center mb-0">&copy; 2025 TripPlanner Agency. All rights reserved.</p>
   </div>
 </footer>
 
@@ -355,14 +413,12 @@
     window.location.href = 'index.html';
   }
 
-  // Initial call
   document.addEventListener('DOMContentLoaded', updateNavbar);
 
   function resolvePackages(responseBody) {
     if (Array.isArray(responseBody)) {
       return responseBody;
     }
-
     return responseBody?.content ?? [];
   }
 
@@ -384,15 +440,12 @@
 
   function normalizePackageName(packageName) {
     const lowerCaseName = String(packageName).toLowerCase();
-
     if (lowerCaseName.includes('luxury')) {
       return 'Luxury Package';
     }
-
     if (lowerCaseName.includes('ordinary') || lowerCaseName.includes('simple')) {
       return 'Ordinary Package';
     }
-
     return packageName;
   }
 
@@ -400,7 +453,6 @@
     return allPackages.find(pkg => pkg.name.toLowerCase() === String(selectedPackage).toLowerCase());
   }
 
-  // Auto-fill destination if coming from explore page
   window.addEventListener('load', function() {
     const storedDestination = localStorage.getItem('selectedDestination');
     if (storedDestination) {
@@ -414,12 +466,10 @@
       localStorage.removeItem('selectedPackage');
     }
 
-    // Add interactive input listeners
     addInteractiveListeners();
     updateTripSummary();
   });
 
-  // Fetch all packages from backend on page load
   window.addEventListener('DOMContentLoaded', async function() {
     try {
       const response = await fetch('http://localhost:8082/api/packages');
@@ -432,18 +482,15 @@
   });
 
   function addInteractiveListeners() {
-    // Real-time validation for inputs
     document.querySelectorAll('.interactive-input').forEach(input => {
       input.addEventListener('input', function() {
         validateInput(this);
       });
-      
       input.addEventListener('blur', function() {
         validateInput(this);
       });
     });
 
-    // Date change listeners
     document.getElementById('departureDate').addEventListener('change', updateTripSummary);
     document.getElementById('returnDate').addEventListener('change', updateTripSummary);
   }
@@ -456,17 +503,17 @@
     if (input.type === 'email') {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       isValid = emailRegex.test(input.value);
-      message = isValid ? '✓ Valid email' : '✗ Please enter a valid email';
+      message = isValid ? '✓ Valid email format' : '✗ Please enter a valid email';
     } else if (input.type === 'tel') {
       const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
       isValid = phoneRegex.test(input.value);
-      message = isValid ? '✓ Valid phone number' : '✗ Please enter a valid phone number';
+      message = isValid ? '✓ Valid contact number' : '✗ Please enter a valid phone number';
     } else if (input.required && input.value.trim() === '') {
       isValid = false;
       message = '✗ This field is required';
     } else if (input.value.trim() !== '') {
       isValid = true;
-      message = '✓ Valid input';
+      message = '✓ Valid';
     }
 
     input.classList.toggle('is-valid', isValid && input.value.trim() !== '');
@@ -474,39 +521,40 @@
     
     if (feedback) {
       feedback.textContent = message;
-      feedback.className = `input-feedback ${isValid ? 'valid' : 'invalid'}`;
+      feedback.className = `input-feedback ${isValid ? 'text-success' : 'text-danger'}`;
+      feedback.style.fontSize = '0.8rem';
     }
   }
 
   function selectDestination(destination) {
     selectedDestination = destination;
-    
-    // Remove active class from all destination cards
-    document.querySelectorAll('.destination-card').forEach(card => {
-      card.classList.remove('active');
-    });
-    
-    // Add active class to selected destination
-    const selectedCard = document.querySelector(`[data-destination="${destination}"]`);
-    if (selectedCard) {
-      selectedCard.classList.add('active');
-    }
-    
+    const destInput = document.getElementById('selectedDestination');
+    if (destInput) destInput.value = destination;
     updateTripSummary();
   }
 
   function selectPackage(packageType) {
     selectedPackage = normalizePackageName(packageType);
     localStorage.setItem('selectedPackage', selectedPackage);
-    // Remove active class from all package cards
-    document.querySelectorAll('.package-card').forEach(card => {
-      card.classList.remove('active');
+    const pkgInput = document.getElementById('selectedPackageName');
+    if (pkgInput) pkgInput.value = selectedPackage;
+    
+    document.querySelectorAll('#packageSelector .package-card').forEach(card => {
+      if (card.dataset.package === packageType || (packageType.toLowerCase().includes('luxury') && card.dataset.package === 'Luxury Package')) {
+        card.style.borderColor = 'var(--terracotta)';
+        card.style.boxShadow = 'var(--shadow-elevated)';
+      } else {
+        card.style.borderColor = 'var(--gold-border)';
+        card.style.boxShadow = 'var(--shadow-soft)';
+      }
     });
-    // Add active class to selected package
-    const selectedCard = document.querySelector(`[data-package="${packageType}"]`);
-    if (selectedCard) {
-      selectedCard.classList.add('active');
+
+    if (!selectedDestination) {
+      selectedDestination = selectedPackage.includes('Luxury') ? 'Dubai, UAE' : 'Kerala, India';
+      const destInput = document.getElementById('selectedDestination');
+      if (destInput) destInput.value = selectedDestination;
     }
+
     updateTripSummary();
   }
 
@@ -524,10 +572,9 @@
   function updateTripSummary() {
     const departureDate = document.getElementById('departureDate').value;
     const returnDate = document.getElementById('returnDate').value;
-    const adults = parseInt(document.getElementById('adults').value);
-    const children = parseInt(document.getElementById('children').value);
+    const adults = parseInt(document.getElementById('adults').value) || 1;
+    const children = parseInt(document.getElementById('children').value) || 0;
     
-    // Calculate duration
     let duration = 'Select dates';
     if (departureDate && returnDate) {
       const start = new Date(departureDate);
@@ -537,12 +584,9 @@
       duration = `${diffDays} days`;
     }
     
-    // Calculate total travelers
     const totalTravelers = adults + children;
-    
-    // Calculate estimated cost
     const selectedPackageDetails = getSelectedPackageDetails();
-    const baseCost = selectedPackageDetails ? selectedPackageDetails.price : 15000;
+    const baseCost = selectedPackageDetails ? selectedPackageDetails.price : (selectedPackage.includes('Luxury') ? 35000 : 15000);
     let estimatedCost = baseCost * adults + (baseCost * 0.7 * children);
     
     document.getElementById('tripDuration').textContent = duration;
@@ -553,17 +597,10 @@
   function nextStep() {
     if (validateCurrentStep()) {
       if (currentStep < 3) {
-        // Hide current step
         document.getElementById(`step${currentStep}`).classList.remove('active');
-        
-        // Show next step
         currentStep++;
         document.getElementById(`step${currentStep}`).classList.add('active');
-        
-        // Update progress
         updateProgress();
-        
-        // If moving to confirmation step, update summary
         if (currentStep === 3) {
           updateFinalSummary();
         }
@@ -573,14 +610,9 @@
 
   function prevStep() {
     if (currentStep > 1) {
-      // Hide current step
       document.getElementById(`step${currentStep}`).classList.remove('active');
-      
-      // Show previous step
       currentStep--;
       document.getElementById(`step${currentStep}`).classList.add('active');
-      
-      // Update progress
       updateProgress();
     }
   }
@@ -597,11 +629,10 @@
           isValid = false;
         }
       });
-      
       return isValid;
     } else if (currentStep === 2) {
-      if (!selectedDestination || !selectedPackage) {
-        alert('Please select both destination and package');
+      if (!selectedPackage) {
+        alert('Please select a travel package');
         return false;
       }
       
@@ -609,23 +640,20 @@
       const returnDate = document.getElementById('returnDate').value;
       
       if (!departureDate || !returnDate) {
-        alert('Please select both departure and return dates');
+        alert('Please select departure and return dates');
         return false;
       }
-      
       return true;
     }
-    
     return true;
   }
 
   function updateProgress() {
-    // Update progress circles
-    document.querySelectorAll('.progress-circle').forEach((circle, index) => {
+    document.querySelectorAll('.progress-step-item').forEach((item, index) => {
       if (index + 1 <= currentStep) {
-        circle.classList.add('active');
+        item.classList.add('active');
       } else {
-        circle.classList.remove('active');
+        item.classList.remove('active');
       }
     });
   }
@@ -642,20 +670,19 @@
     const rooms = sanitizeField(document.getElementById('rooms').value);
 
     const summary = `
-      <div class="row">
-        <div class="col-md-6">
-          <h5>Personal Details</h5>
-          <p><strong>Name:</strong> ${firstName} ${lastName}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Phone:</strong> ${phone}</p>
+      <div class="row g-3">
+        <div class="col-md-6 border-end">
+          <h6 class="font-serif text-navy">Personal Details</h6>
+          <p class="mb-1"><strong>Name:</strong> ${firstName} ${lastName}</p>
+          <p class="mb-1"><strong>Email:</strong> ${email}</p>
+          <p class="mb-1"><strong>Phone:</strong> ${phone}</p>
         </div>
         <div class="col-md-6">
-          <h5>Trip Details</h5>
-          <p><strong>Destination:</strong> ${escapeHtml(selectedDestination)}</p>
-          <p><strong>Package:</strong> ${escapeHtml(selectedPackage)}</p>
-          <p><strong>Dates:</strong> ${departureDate} to ${returnDate}</p>
-          <p><strong>Travelers:</strong> ${adults} adults, ${children} children</p>
-          <p><strong>Rooms:</strong> ${rooms}</p>
+          <h6 class="font-serif text-navy">Trip Details</h6>
+          <p class="mb-1"><strong>Destination:</strong> ${escapeHtml(selectedDestination || 'Boutique Selection')}</p>
+          <p class="mb-1"><strong>Package:</strong> ${escapeHtml(selectedPackage)}</p>
+          <p class="mb-1"><strong>Dates:</strong> ${departureDate} to ${returnDate}</p>
+          <p class="mb-1"><strong>Travelers:</strong> ${adults} adults, ${children} children (${rooms} rooms)</p>
         </div>
       </div>
     `;
@@ -664,99 +691,79 @@
   }
 
   function confirmBooking() {
-  const specialRequests = sanitizeField(document.getElementById('specialRequests').value);
-  const firstName = sanitizeField(document.getElementById('firstName').value);
-  const lastName = sanitizeField(document.getElementById('lastName').value);
-  const email = sanitizeField(document.getElementById('email').value);
-  const packageName = sanitizeField(selectedPackage);
+    const specialRequests = sanitizeField(document.getElementById('specialRequests').value);
+    const firstName = sanitizeField(document.getElementById('firstName').value);
+    const lastName = sanitizeField(document.getElementById('lastName').value);
+    const email = sanitizeField(document.getElementById('email').value);
+    const packageName = sanitizeField(selectedPackage);
 
-  // Show loading state
-  const confirmBtn = document.querySelector('button[onclick="confirmBooking()"]');
-  const originalText = confirmBtn.textContent;
-  confirmBtn.textContent = 'Processing...';
-  confirmBtn.disabled = true;
+    const confirmBtn = document.querySelector('button[onclick="confirmBooking()"]');
+    const originalText = confirmBtn.textContent;
+    confirmBtn.textContent = 'Processing...';
+    confirmBtn.disabled = true;
 
-  // Check for authentication token
-  const token = localStorage.getItem('token');
-  if (!token) {
-    alert("Session expired or not logged in. Please login to continue.");
-    window.location.href = "login.html";
-    return;
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert("Session expired or not logged in. Please login to continue.");
+      window.location.href = "login.html";
+      return;
+    }
+
+    fetch('http://localhost:8082/api/bookings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({
+        name: firstName + ' ' + lastName,
+        email: email || "dummy@example.com",
+        phone: "1234567890",
+        packageName: packageName || "Ordinary Package"
+      })
+    })
+    .then(response => {
+      if (!response.ok) {
+        if (response.status === 401 || response.status === 403) {
+          logoutUser();
+          throw new Error('Session expired. Please login again.');
+        }
+        return response.json().then(err => {
+          throw new Error(err.message || 'Failed to create booking');
+        });
+      }
+      return response.json();
+    })
+    .then(data => {
+      const bookingSummary = `
+        <div class="row">
+          <div class="col-md-6">
+            <p class="mb-1"><strong>Booking Ref:</strong> #${data.id}</p>
+            <p class="mb-1"><strong>Voyager Name:</strong> ${firstName} ${lastName}</p>
+            <p class="mb-1"><strong>Email:</strong> ${email}</p>
+          </div>
+          <div class="col-md-6">
+            <p class="mb-1"><strong>Selected Package:</strong> ${packageName ? packageName : 'N/A'}</p>
+            <p class="mb-1"><strong>Destination:</strong> ${selectedDestination || 'Boutique Trip'}</p>
+          </div>
+        </div>
+        ${specialRequests ? `<div class="mt-2"><small class="text-muted">Special Requests:</small><br>${specialRequests}</div>` : ''}
+      `;
+      document.getElementById('bookingSummary').innerHTML = bookingSummary;
+      document.querySelector('.booking-journal-paper').classList.add('d-none');
+      document.getElementById('successMessage').classList.remove('d-none');
+      document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+    })
+    .catch(error => {
+      alert('Error: ' + error.message);
+    })
+    .finally(() => {
+      confirmBtn.textContent = originalText;
+      confirmBtn.disabled = false;
+    });
   }
 
-  // Send booking to Java backend (flat object)
-  fetch('http://localhost:8082/api/bookings', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token
-    },
-    body: JSON.stringify({
-      name: firstName + ' ' + lastName,
-      email: email || "dummy@example.com",
-      phone: "1234567890",
-      packageName: packageName || "Custom Package"
-    })
-  })
-  .then(response => {
-    if (!response.ok) {
-      if (response.status === 401 || response.status === 403) {
-        logoutUser();
-        throw new Error('Session expired. Please login again.');
-      }
-      return response.json().then(err => {
-        throw new Error(err.message || 'Failed to create booking');
-      });
-    }
-    return response.json();
-  })
-  .then(data => {
-    // Create booking summary
-    const bookingSummary = `
-      <div class="row">
-        <div class="col-md-6">
-          <p><strong>Booking ID:</strong> #${data.id}</p>
-          <p><strong>Name:</strong> ${firstName} ${lastName}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Destination:</strong> ${selectedDestination}</p>
-        </div>
-        <div class="col-md-6">
-          <p><strong>Package:</strong> ${packageName ? packageName : 'N/A'}</p>
-        </div>
-      </div>
-      ${specialRequests ? `<div class="mt-3"><strong>Special Requests:</strong> ${specialRequests}</div>` : ''}
-    `;
-    // Display booking summary
-    document.getElementById('bookingSummary').innerHTML = bookingSummary;
-    // Hide form and show success message
-    document.querySelector('.booking-card').classList.add('d-none');
-    document.getElementById('successMessage').classList.remove('d-none');
-    // Scroll to success message
-    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
-  })
-  .catch(error => {
-    alert('Error: ' + error.message);
-  })
-  .finally(() => {
-    // Reset button
-    confirmBtn.textContent = originalText;
-    confirmBtn.disabled = false;
-  });
-}
-  // Add click listeners for destination and package selection
   document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.destination-card').forEach(card => {
-      card.addEventListener('click', function() {
-        selectDestination(this.dataset.destination);
-      });
-    });
-    
-    document.querySelectorAll('.package-card').forEach(card => {
-      card.addEventListener('click', function() {
-        selectPackage(this.dataset.package);
-      });
-    });
-
     checkAdminView();
   });
 
@@ -768,18 +775,11 @@
     const hash = window.location.hash;
 
     if (token && role === 'ADMIN' && (hash === '#admin-dashboard' || hash === '#manage-packages' || hash === '#manage-bookings' || hash === '#')) {
-      // Show admin dashboard, hide booking wizard
       document.getElementById('booking-hero').classList.add('d-none');
       document.getElementById('booking-form').classList.add('d-none');
       document.getElementById('admin-dashboard-section').classList.remove('d-none');
       loadAdminDashboard();
-      if (hash === '#manage-packages') {
-        document.getElementById('manage-packages').scrollIntoView({ behavior: 'smooth' });
-      } else if (hash === '#manage-bookings') {
-        document.getElementById('manage-bookings').scrollIntoView({ behavior: 'smooth' });
-      }
     } else {
-      // Show normal wizard if logged in as USER
       document.getElementById('booking-hero').classList.remove('d-none');
       document.getElementById('booking-form').classList.remove('d-none');
       document.getElementById('admin-dashboard-section').classList.add('d-none');
@@ -789,90 +789,20 @@
   function loadAdminDashboard() {
     const token = localStorage.getItem('token');
     fetch('http://localhost:8082/api/admin/dashboard', {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
+      headers: { 'Authorization': 'Bearer ' + token }
     })
     .then(res => {
       if (!res.ok) throw new Error("Failed to load dashboard stats");
       return res.json();
     })
     .then(stats => {
-      document.getElementById('dash-total-users').textContent = stats.totalUsers ?? 0;
-      document.getElementById('dash-total-packages').textContent = stats.totalPackages ?? 0;
-      document.getElementById('dash-total-bookings').textContent = stats.totalBookings ?? 0;
-      document.getElementById('dash-total-revenue').textContent = '₹' + Number(stats.totalRevenue ?? 0).toLocaleString();
-
-      return fetch('http://localhost:8082/api/bookings', {
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      });
+      if (document.getElementById('dash-total-users')) document.getElementById('dash-total-users').textContent = stats.totalUsers || 0;
+      if (document.getElementById('dash-total-packages')) document.getElementById('dash-total-packages').textContent = stats.totalPackages || 0;
+      if (document.getElementById('dash-total-bookings')) document.getElementById('dash-total-bookings').textContent = stats.totalBookings || 0;
+      if (document.getElementById('dash-total-revenue')) document.getElementById('dash-total-revenue').textContent = `₹${(stats.totalRevenue || 0).toLocaleString()}`;
     })
-    .then(res => {
-      if (!res.ok) throw new Error("Failed to load dashboard bookings");
-      return res.json();
-    })
-    .then(data => {
-      const bookings = data.content || data || [];
-      const listContainer = document.getElementById('admin-bookings-list');
-      listContainer.innerHTML = '';
-
-      if (bookings.length === 0) {
-        listContainer.innerHTML = `<tr><td colspan="6" class="text-center text-muted">No bookings found.</td></tr>`;
-        return;
-      }
-
-      bookings.forEach(b => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><strong>#${b.id}</strong></td>
-          <td>${escapeHtml(b.name)}</td>
-          <td>${escapeHtml(b.email)}</td>
-          <td>${escapeHtml(b.packageName)}</td>
-          <td>
-            <span class="badge ${b.status === 'CONFIRMED' ? 'bg-success' : b.status === 'CANCELLED' ? 'bg-danger' : 'bg-warning'}">
-              ${escapeHtml(b.status || 'PENDING')}
-            </span>
-          </td>
-          <td>
-            <select class="form-select form-select-sm d-inline-block w-auto me-2" onchange="changeBookingStatus(${b.id}, this.value)">
-              <option value="PENDING" ${b.status === 'PENDING' ? 'selected' : ''}>PENDING</option>
-              <option value="CONFIRMED" ${b.status === 'CONFIRMED' ? 'selected' : ''}>CONFIRMED</option>
-              <option value="CANCELLED" ${b.status === 'CANCELLED' ? 'selected' : ''}>CANCELLED</option>
-              <option value="COMPLETED" ${b.status === 'COMPLETED' ? 'selected' : ''}>COMPLETED</option>
-            </select>
-          </td>
-        `;
-        listContainer.appendChild(tr);
-      });
-    })
-    .catch(err => {
-      console.error(err);
-      document.getElementById('admin-bookings-list').innerHTML = `<tr><td colspan="6" class="text-center text-danger">Error loading data.</td></tr>`;
-    });
+    .catch(err => console.error("Admin dash load error:", err));
   }
-
-  function changeBookingStatus(id, newStatus) {
-    const token = localStorage.getItem('token');
-    fetch(`http://localhost:8082/api/bookings/${id}/status`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      body: JSON.stringify({ status: newStatus })
-    })
-    .then(res => {
-      if (!res.ok) throw new Error("Status update failed");
-      alert("Booking status updated successfully!");
-      loadAdminDashboard();
-    })
-    .catch(err => {
-      alert("Error: " + err.message);
-    });
-  }
-
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
