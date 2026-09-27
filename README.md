@@ -153,6 +153,4 @@ Tests include domain service logic validation, input parameter checks, and full 
 
 ---
 
-## 📜 License
 
-Distributed under the MIT License. See `LICENSE` for details.
